@@ -11,12 +11,12 @@
 
   const featuredOrder = [
     "zoande-brokersim",
-    "dh-brokersim",
     "zoande-call-of-idk",
     "dh-swapspot",
     "dh-citybuilder",
     "dh-polymarket-bot",
     "dh-studymaster",
+    "dh-task-sorter-app",
     "zoande-ahhh"
   ];
 

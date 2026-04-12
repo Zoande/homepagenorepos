@@ -1,89 +1,9 @@
 (function () {
-  const projects = window.PROJECTS || [];
-  const pageId = document.body.dataset.projectId;
-  const launchMap = {
-    "zoande-brokersim": {
-      type: "play",
-      label: "Play Project",
-      href: "../play/zoande-brokersim/",
-      note: "Static build is bundled in this workspace."
-    },
-    "zoande-ahhh": {
-      type: "play",
-      label: "Play Project",
-      href: "../play/zoande-ahhh/",
-      note: "Static build is bundled in this workspace."
-    },
-    "zoande-onlineagent": {
-      type: "run",
-      label: "Run Project",
-      href: "http://localhost:4310",
-      note: "Run mode uses local Node server on port 4310."
-    },
-    "zoande-call-of-idk": {
-      type: "play",
-      label: "Play Project",
-      href: "../play/zoande-call-of-idk/",
-      note: "Static build is bundled in this workspace."
-    },
-    "dh-polymarket-bot": {
-      type: "play",
-      label: "Play Project",
-      href: "../play/dh-polymarket-bot/",
-      note: "Static build is bundled in this workspace."
-    },
-    "dh-typing-platformer": {
-      type: "run",
-      label: "Run Project",
-      href: "http://localhost:4311",
-      note: "Run mode uses local Next server on port 4311."
-    },
-    "dh-brokersim": {
-      type: "play",
-      label: "Play Project",
-      href: "../play/dh-brokersim/",
-      note: "Static build is bundled in this workspace."
-    },
-    "dh-citybuilder": {
-      type: "play",
-      label: "Play Project",
-      href: "../play/dh-citybuilder/index.html",
-      note: "Static project is copied directly from source."
-    },
-    "dh-task-sorter-app": {
-      type: "run",
-      label: "Run Project",
-      href: "http://localhost:4313",
-      note: "Run mode uses local Next server on port 4313."
-    },
-    "dh-isrlo-ibdp-subject": {
-      type: "play",
-      label: "Play Project",
-      href: "../play/dh-isrlo-ibdp-subject/index.html",
-      note: "Static project is copied directly from source."
-    },
-    "dh-sticky-notes-app": {
-      type: "run",
-      label: "Run Project",
-      href: "http://localhost:4312",
-      note: "Run mode uses local Next server on port 4312."
-    },
-    "dh-studymaster": {
-      type: "play",
-      label: "Play Project",
-      href: "../play/dh-studymaster/",
-      note: "Static build is bundled in this workspace."
-    },
-    "dh-swapspot": {
-      type: "play",
-      label: "Play Project",
-      href: "../play/dh-swapspot/",
-      note: "Static build is bundled in this workspace."
-    }
-  };
+  const projects = Array.isArray(window.PROJECTS) ? window.PROJECTS : [];
+  const pageId = document.body && document.body.dataset ? document.body.dataset.projectId : "";
 
   const project = projects.find((item) => item.id === pageId);
-  const launch = launchMap[pageId];
+  const liveUrl = project && typeof project.liveUrl === "string" ? project.liveUrl.trim() : "";
 
   if (!project) {
     const root = document.getElementById("project-page");
@@ -108,54 +28,71 @@
   const localPathEl = document.getElementById("project-local-path");
   const actionsWrap = document.querySelector(".project-hero .actions");
 
-  if (titleEl) titleEl.textContent = project.title;
-  if (ownerEl) ownerEl.textContent = project.owner;
-  if (summaryEl) summaryEl.textContent = project.summary;
-  if (stageEl) stageEl.textContent = project.stage;
-  if (statusEl) statusEl.textContent = project.status;
+  if (titleEl) titleEl.textContent = project.title || "Untitled project";
+  if (ownerEl) ownerEl.textContent = project.owner || "Unknown owner";
+  if (summaryEl) summaryEl.textContent = project.summary || "Summary coming soon.";
+  if (stageEl) stageEl.textContent = project.stage || "Stage not set";
+  if (statusEl) statusEl.textContent = project.status || "Status details coming soon.";
 
   if (repoLinkEl) {
-    repoLinkEl.href = project.repoUrl;
+    repoLinkEl.href = project.repoUrl || "#";
+    if (!project.repoUrl) {
+      repoLinkEl.setAttribute("aria-disabled", "true");
+    }
   }
 
   if (repoLinkEl2) {
-    repoLinkEl2.href = project.repoUrl;
-    repoLinkEl2.textContent = 'Visit Repository ->';
+    repoLinkEl2.href = project.repoUrl || "#";
+    if (!project.repoUrl) {
+      repoLinkEl2.setAttribute("aria-disabled", "true");
+    }
+    repoLinkEl2.textContent = "Visit Repository ->";
   }
 
   if (localPathEl) {
-    localPathEl.textContent = project.localPath;
+    localPathEl.textContent = project.localPath || "Not provided";
   }
 
   if (techEl) {
-    techEl.innerHTML = project.tech.map((item) => `<span class="chip">${item}</span>`).join("");
+    const tech = Array.isArray(project.tech) ? project.tech : [];
+    techEl.innerHTML = tech.map((item) => `<span class="chip">${item}</span>`).join("");
   }
 
   if (detailsEl) {
-    detailsEl.innerHTML = project.details.map((item) => `<li>${item}</li>`).join("");
+    const details = Array.isArray(project.details) ? project.details : [];
+    detailsEl.innerHTML = details.map((item) => `<li>${item}</li>`).join("");
   }
 
   if (stepsEl) {
-    stepsEl.innerHTML = project.deliverableSteps.map((item) => `<li>${item}</li>`).join("");
+    const deliverableSteps = Array.isArray(project.deliverableSteps) ? project.deliverableSteps : [];
+    stepsEl.innerHTML = deliverableSteps.map((item) => `<li>${item}</li>`).join("");
   }
 
-  if (launch && actionsWrap) {
-    const launchLink = document.createElement("a");
-    launchLink.className = "button launch-button";
-    if (launch.type === "run") {
-      launchLink.classList.add("run");
+  if (actionsWrap) {
+    if (liveUrl) {
+      const launchLink = document.createElement("a");
+      launchLink.className = "button launch-button";
+      launchLink.href = liveUrl;
+      launchLink.target = "_blank";
+      launchLink.rel = "noopener noreferrer";
+      launchLink.textContent = "Open Live App";
+      actionsWrap.insertBefore(launchLink, actionsWrap.firstChild);
+    } else {
+      const launchButton = document.createElement("button");
+      launchButton.type = "button";
+      launchButton.className = "button launch-button";
+      launchButton.disabled = true;
+      launchButton.setAttribute("aria-disabled", "true");
+      launchButton.title = "Live deployment is not configured yet.";
+      launchButton.textContent = "Live App (Soon)";
+      actionsWrap.insertBefore(launchButton, actionsWrap.firstChild);
     }
-    launchLink.href = launch.href;
-    launchLink.target = "_blank";
-    launchLink.rel = "noopener noreferrer";
-    launchLink.textContent = launch.label;
-    actionsWrap.insertBefore(launchLink, actionsWrap.firstChild);
   }
 
-  if (launch && localPathEl && localPathEl.parentElement) {
+  if (!liveUrl && localPathEl && localPathEl.parentElement) {
     const launchNote = document.createElement("p");
     launchNote.className = "small-note launch-note";
-    launchNote.textContent = launch.note;
+    launchNote.textContent = "Live app link is not configured yet.";
     localPathEl.parentElement.appendChild(launchNote);
   }
 })();
@@ -167,35 +104,18 @@ document.addEventListener('DOMContentLoaded', function() {
     projectTab.classList.add('active');
   }
 
-  const canUseAOS = typeof window.AOS !== 'undefined' && typeof window.AOS.refresh === 'function';
   const projectHero = document.querySelector('.project-hero');
   const panels = document.querySelectorAll('.panel');
 
-  if (canUseAOS) {
-    if (projectHero && !projectHero.hasAttribute('data-aos')) {
-      projectHero.setAttribute('data-aos', 'fade-up');
-      projectHero.setAttribute('data-aos-duration', '550');
-    }
-
-    panels.forEach((panel, index) => {
-      if (!panel.hasAttribute('data-aos')) {
-        panel.setAttribute('data-aos', 'fade-up');
-        panel.setAttribute('data-aos-duration', '550');
-        panel.setAttribute('data-aos-delay', String(Math.min(index * 100, 320)));
-      }
-    });
-
-    window.AOS.refresh();
-    return;
-  }
-
-  // Fallback: if AOS is unavailable, keep project content visible.
+  // Keep project content visible regardless of AOS state.
   [projectHero, ...panels].forEach((el) => {
     if (!el) {
       return;
     }
 
     el.removeAttribute('data-aos');
+    el.removeAttribute('data-aos-duration');
+    el.removeAttribute('data-aos-delay');
     el.style.opacity = '1';
     el.style.transform = 'none';
   });
