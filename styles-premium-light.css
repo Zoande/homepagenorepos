@@ -214,15 +214,23 @@ body {
 
 .nav-logo {
   display: inline-block !important;
-  width: 40px;
-  height: 40px;
-  flex: 0 0 40px;
-  background: url('small_logo_nobg.png') center / contain no-repeat !important;
+  width: 120px;
+  height: 78px;
+  flex: 0 0 120px;
+  background: url('full_logo_nobg.png') center / contain no-repeat !important;
   text-decoration: none;
   font-size: 0 !important;
   line-height: 0 !important;
   color: transparent !important;
   overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .nav-logo {
+    width: 96px;
+    height: 62px;
+    flex-basis: 96px;
+  }
 }
 
 .nav-item a {
