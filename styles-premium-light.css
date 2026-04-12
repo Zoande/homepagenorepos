@@ -166,6 +166,7 @@ body {
   max-width: var(--page-max) !important;
   margin: 0 auto !important;
   padding: 0.95rem 1.2rem !important;
+  gap: clamp(0.5rem, 1.8vw, 1.5rem) !important;
 }
 
 /* Full Width Wrappers */
@@ -214,9 +215,9 @@ body {
 
 .nav-logo {
   display: inline-block !important;
-  width: 120px;
-  height: 78px;
-  flex: 0 0 120px;
+  width: clamp(82px, 12vw, 120px);
+  height: clamp(52px, 7.8vw, 78px);
+  flex: 0 0 clamp(82px, 12vw, 120px);
   background: url('full_logo_nobg.png') center / contain no-repeat !important;
   text-decoration: none;
   font-size: 0 !important;
@@ -225,26 +226,57 @@ body {
   overflow: hidden;
 }
 
+/* Keep nav items visible on tighter viewports by shrinking spacing first. */
+.nav-menu {
+  gap: clamp(0.45rem, 1.8vw, 1.6rem) !important;
+}
+
 @media (max-width: 768px) {
+  .nav-container {
+    padding: 0.8rem 0.9rem !important;
+    gap: clamp(0.35rem, 1.6vw, 0.8rem) !important;
+  }
+
+  .nav-menu {
+    gap: clamp(0.3rem, 1.4vw, 0.7rem) !important;
+  }
+
   .nav-logo {
-    width: 96px;
-    height: 62px;
-    flex-basis: 96px;
+    width: clamp(74px, 20vw, 92px);
+    height: clamp(48px, 13vw, 60px);
+    flex-basis: clamp(74px, 20vw, 92px);
   }
 }
 
 .nav-item a {
   color: #555 !important;
-  letter-spacing: 0.02em;
+  letter-spacing: clamp(0em, 0.06vw, 0.02em);
+  font-size: clamp(0.76rem, 1.35vw, 0.95rem) !important;
+  white-space: nowrap;
 }
 .nav-item a:hover {
   color: #000 !important;
+}
+
+@media (max-width: 420px) {
+  .nav-container {
+    padding: 0.7rem 0.6rem !important;
+  }
+
+  .nav-menu {
+    gap: 0.3rem !important;
+  }
+
+  .nav-item a {
+    font-size: 0.68rem !important;
+  }
 }
 
 /* --- 5. MODERNISTIC TYPOGRAPHY --- */
 h1 {
   background: linear-gradient(135deg, #000 0%, #444 100%) !important;
   -webkit-background-clip: text !important;
+  background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   font-weight: 800 !important;
   letter-spacing: -0.04em !important;
@@ -675,6 +707,10 @@ main,
 }
 
 @media (max-width: 900px) {
+  .cube-container {
+    opacity: 0.32 !important;
+  }
+
   .site-header {
     min-height: auto !important;
     padding: 2rem 1rem 1.25rem !important;
