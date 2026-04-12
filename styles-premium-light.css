@@ -516,7 +516,6 @@ p.lead {
   border-radius: 999px !important;
   flex-direction: row !important;
   animation: none !important;
-  transform-style: flat !important;
   will-change: auto !important;
 }
 
