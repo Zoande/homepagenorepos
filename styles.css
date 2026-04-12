@@ -1788,25 +1788,31 @@ main,
 }
 
 .chip {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: rgba(255,255,255,0.82);
   border: 1.5px solid rgba(155,107,168,0.10);
-  border-radius: 22px;
-  padding: 2.7rem 2.2rem 2.2rem 2.2rem;
+  border-radius: 999px;
+  padding: 0.35rem 0.75rem;
   text-align: center;
-  box-shadow: 0 8px 48px 0 rgba(155,107,168,0.13), 0 1.5px 0 rgba(255,255,255,0.18) inset;
+  box-shadow: 0 1.5px 0 rgba(255,255,255,0.18) inset;
   transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
   position: relative;
-  overflow: visible;
-  min-height: 450px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  transform-style: preserve-3d;
-  animation: builderFloat 7s cubic-bezier(0.45,0,0.55,1) infinite alternate;
-  will-change: transform;
+  overflow: hidden;
+  min-height: auto;
+  flex-direction: row;
+  transform-style: flat;
+  animation: none;
+  will-change: auto;
   border-color: var(--primary);
   color: var(--primary-dark);
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .card-actions {
