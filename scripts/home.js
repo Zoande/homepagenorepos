@@ -3,20 +3,43 @@
   const grid = document.getElementById("project-grid");
   const totalEl = document.getElementById("project-total");
   const ownersEl = document.getElementById("project-owners");
+  const sectionLead = document.querySelector(".section-title-wrap p");
 
   if (!grid) {
     return;
   }
 
-  const owners = Array.from(new Set(projects.map((p) => p.owner)));
+  const featuredOrder = [
+    "zoande-brokersim",
+    "dh-brokersim",
+    "zoande-call-of-idk",
+    "dh-swapspot",
+    "dh-citybuilder",
+    "dh-polymarket-bot",
+    "dh-studymaster",
+    "zoande-ahhh"
+  ];
+
+  const byId = new Map(projects.map((project) => [project.id, project]));
+  const featured = featuredOrder
+    .map((id) => byId.get(id))
+    .filter(Boolean);
+
+  const visibleProjects = featured.slice(0, 8);
+
+  const owners = Array.from(new Set(visibleProjects.map((p) => p.owner)));
   if (totalEl) {
-    totalEl.textContent = String(projects.length);
+    totalEl.textContent = String(visibleProjects.length);
   }
   if (ownersEl) {
     ownersEl.textContent = String(owners.length);
   }
 
-  grid.innerHTML = projects
+  if (sectionLead) {
+    sectionLead.textContent = `Curated top ${visibleProjects.length} projects selected for polish, playability, and technical depth.`;
+  }
+
+  grid.innerHTML = visibleProjects
     .map((project, index) => {
       const tech = project.tech.slice(0, 3).map((item) => `<span class="chip">${item}</span>`).join("");
       // Stagger animation delays for cards

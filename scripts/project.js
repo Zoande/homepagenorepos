@@ -120,6 +120,7 @@
 
   if (repoLinkEl2) {
     repoLinkEl2.href = project.repoUrl;
+    repoLinkEl2.textContent = 'Visit Repository ->';
   }
 
   if (localPathEl) {
@@ -161,24 +162,41 @@
 
 // Add AOS attributes to elements for smooth animations
 document.addEventListener('DOMContentLoaded', function() {
+  const projectTab = document.querySelector('.nav-menu a[href*="#projects"]');
+  if (projectTab) {
+    projectTab.classList.add('active');
+  }
+
+  const canUseAOS = typeof window.AOS !== 'undefined' && typeof window.AOS.refresh === 'function';
   const projectHero = document.querySelector('.project-hero');
   const panels = document.querySelectorAll('.panel');
-  
-  if (projectHero && !projectHero.hasAttribute('data-aos')) {
-    projectHero.setAttribute('data-aos', 'fade-up');
-    projectHero.setAttribute('data-aos-duration', '700');
-  }
-  
-  panels.forEach((panel, index) => {
-    if (!panel.hasAttribute('data-aos')) {
-      panel.setAttribute('data-aos', 'fade-up');
-      panel.setAttribute('data-aos-duration', '700');
-      panel.setAttribute('data-aos-delay', String(Math.min(index * 150, 450)));
+
+  if (canUseAOS) {
+    if (projectHero && !projectHero.hasAttribute('data-aos')) {
+      projectHero.setAttribute('data-aos', 'fade-up');
+      projectHero.setAttribute('data-aos-duration', '550');
     }
-  });
-  
-  // Reinitialize AOS to pick up the new attributes
-  if (typeof AOS !== 'undefined') {
-    AOS.refresh();
+
+    panels.forEach((panel, index) => {
+      if (!panel.hasAttribute('data-aos')) {
+        panel.setAttribute('data-aos', 'fade-up');
+        panel.setAttribute('data-aos-duration', '550');
+        panel.setAttribute('data-aos-delay', String(Math.min(index * 100, 320)));
+      }
+    });
+
+    window.AOS.refresh();
+    return;
   }
+
+  // Fallback: if AOS is unavailable, keep project content visible.
+  [projectHero, ...panels].forEach((el) => {
+    if (!el) {
+      return;
+    }
+
+    el.removeAttribute('data-aos');
+    el.style.opacity = '1';
+    el.style.transform = 'none';
+  });
 });

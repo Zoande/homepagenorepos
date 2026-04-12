@@ -31,6 +31,7 @@ body::after {
   
   --transition-premium: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-bounce: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  --page-max: min(1160px, 92vw);
 }
 
 /* Base body background for brightness */
@@ -41,14 +42,15 @@ body {
     radial-gradient(circle at 85% 30%, rgba(0, 255, 255, 0.05), transparent 40%);
   background-attachment: fixed;
   color: #111; /* Sharper contrast */
+  font-size: 15px;
 }
 
 /* --- 3. AMBIENT FLUID BACKGROUND MESH (NO MORE LAG) --- */
 /* Removing expensive filter: blur() and mix-blend-modes for smooth CSS radial gradients */
 .bg-shape, .premium-shape {
   filter: none !important;
-  opacity: 0.8 !important;
-  mix-blend-mode: color-dodge !important;
+  opacity: 0.68 !important;
+  mix-blend-mode: normal !important;
   will-change: transform;
   transform: translateZ(0); /* Force hardware accel */
 }
@@ -88,7 +90,7 @@ body {
   background: linear-gradient(135deg, rgba(0, 255, 255, 0.4), rgba(255, 0, 128, 0.4));
   border: 1px solid rgba(255, 255, 255, 0.8);
   box-shadow: 0 0 20px rgba(0, 255, 255, 0.5), inset 0 0 20px rgba(255, 0, 128, 0.5);
-  backdrop-filter: blur(4px);
+  backdrop-filter: none;
 }
 
 /* Small Cube Details (100px) */
@@ -161,21 +163,24 @@ body {
 }
 
 .nav-container {
-  max-width: 100% !important; /* Full width */
-  padding: 1.2rem 4vw !important; /* Proper horizontal padding */
+  max-width: var(--page-max) !important;
+  margin: 0 auto !important;
+  padding: 0.95rem 1.2rem !important;
 }
 
 /* Full Width Wrappers */
 .site-header, .project-grid, .section-title-wrap, .builders-grid {
-  max-width: 100% !important;
-  padding-left: 4vw !important;
-  padding-right: 4vw !important;
+  max-width: var(--page-max) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
 .cta-section {
-  max-width: calc(100% - 8vw) !important;
-  margin-left: 4vw !important;
-  margin-right: 4vw !important;
+  max-width: var(--page-max) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 .nav-logo {
@@ -208,6 +213,7 @@ h1 {
 .hero-text-3d h1 {
   color: #000 !important; /* Override the color */
   -webkit-text-fill-color: initial !important; /* Remove gradient for the 3D */
+  font-size: clamp(2.1rem, 6.5vw, 3.4rem) !important;
 }
 
 h2, h3, h4, h5, h6 {
@@ -230,8 +236,8 @@ p.lead {
 /* Optimized backdrop-filter usage for faster rendering while keeping luxury look */
 .project-card, .feature-card, .builder-card, .team-card, .about-item, .panel {
   background: linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.6) 100%) !important;
-  backdrop-filter: blur(8px) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
   border: 1px solid var(--border-glass) !important;
   box-shadow: 
     0 10px 40px rgba(0,0,0,0.02), 
@@ -245,12 +251,88 @@ p.lead {
 
 /* Luminous hover */
 .project-card:hover, .feature-card:hover, .builder-card:hover, .team-card:hover, .about-item:hover, .panel:hover {
-  transform: translateY(-8px) scale(1.02) translateZ(30px) !important;
+  transform: translateY(-6px) scale(1.01) translateZ(18px) !important;
   box-shadow: 
-    0 25px 50px rgba(0,0,0,0.04), 
-    0 0 30px var(--glow-primary),
+    0 18px 30px rgba(0,0,0,0.04), 
+    0 0 22px var(--glow-primary),
     inset 0 1px 0 rgba(255,255,255,1) !important;
   border: 1px solid rgba(255,255,255,0.9) !important;
+}
+
+.project-grid {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
+  gap: 1.2rem !important;
+  margin-bottom: 4rem !important;
+  padding: 0 1.2rem !important;
+}
+
+.project-card {
+  padding: 1.35rem !important;
+  gap: 0.95rem !important;
+}
+
+.project-card h3 {
+  font-size: 1.12rem !important;
+}
+
+.summary {
+  font-size: 0.9rem !important;
+  min-height: 2.8em !important;
+}
+
+.card-actions {
+  gap: 0.6rem !important;
+  padding-top: 1rem !important;
+}
+
+.card-actions .button {
+  font-size: 0.74rem !important;
+  padding: 0.7rem 0.85rem !important;
+}
+
+.project-card {
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover {
+    transform: translateY(-6px) scale(1.01) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) !important;
+  }
+}
+
+.builders-section {
+  padding: 2.7rem 1.4rem !important;
+}
+
+.builders-grid {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important;
+  gap: 1.25rem !important;
+  max-width: 980px !important;
+  padding: 0 1.2rem !important;
+}
+
+.builder-card {
+  min-height: 370px !important;
+  padding: 1.65rem !important;
+  animation: none !important;
+  transition: transform 0.62s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.62s ease, border-color 0.45s ease !important;
+}
+
+.builder-card:hover {
+  transform: translateY(-14px) scale(1.055) rotateX(2deg) translateZ(32px) !important;
+  box-shadow: 0 22px 45px rgba(0,0,0,0.1), 0 0 26px rgba(74, 155, 159, 0.22) !important;
+}
+
+.builder-avatar {
+  width: 96px !important;
+  height: 96px !important;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease !important;
+  animation: none !important;
+}
+
+.builder-card:hover .builder-avatar {
+  transform: scale(1.14) rotateZ(2deg) !important;
 }
 
 .project-card::before, .feature-card::before, .builder-card::before, .team-card::before, .about-item::before {
@@ -323,14 +405,14 @@ p.lead {
   border: 1px solid rgba(255,255,255,0.6) !important;
   border-radius: 20px !important;
   box-shadow: 0 10px 30px rgba(0,0,0,0.02), inset 0 1px 0 rgba(255,255,255,0.8) !important;
-  padding: 3rem 1.5rem !important;
+  padding: 2.2rem 1.1rem !important;
 }
 .stats article span {
   background: linear-gradient(135deg, #111 0%, #444 100%) !important;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   background-clip: text !important;
-  font-size: 4rem !important;
+  font-size: 3.2rem !important;
   text-shadow: none !important;
 }
 .stats article p {
@@ -360,17 +442,18 @@ p.lead {
 .site-footer {
   background: #ffffff !important; /* Solid bright white */
   border-top: 1px solid rgba(0,0,0,0.05) !important;
-  padding: 8rem 2rem 4rem !important;
+  padding: 5rem 2rem 3rem !important;
   position: relative;
   z-index: 10;
   box-shadow: 0 -20px 40px rgba(0,0,0,0.01) !important;
-  margin-top: 5rem !important;
+  margin-top: 3rem !important;
 }
 
 /* Footer layout to match full-width container */
 .footer-content {
-  max-width: 100% !important;
-  padding: 0 4vw !important;
+  max-width: var(--page-max) !important;
+  margin: 0 auto !important;
+  padding: 0 1.2rem !important;
 }
 
 .footer-grid {
@@ -459,4 +542,55 @@ p.lead {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(0,0,0,0.3);
+}
+
+/* Keep WebGL background visible above page paint layers. */
+.canvas-3d-container {
+  z-index: 1 !important;
+  opacity: 1 !important;
+}
+
+.site-header,
+main,
+.site-footer {
+  position: relative;
+  z-index: 2;
+}
+
+#mouse-glow {
+  width: 300px !important;
+  height: 300px !important;
+  opacity: 0.85;
+}
+
+@media (max-width: 900px) {
+  .site-header {
+    min-height: auto !important;
+    padding: 2rem 1rem 1.25rem !important;
+  }
+
+  .project-grid,
+  .builders-grid,
+  .section-title-wrap,
+  .cta-section,
+  .footer-content {
+    max-width: 96vw !important;
+    padding-left: 0.7rem !important;
+    padding-right: 0.7rem !important;
+  }
+
+  #mouse-glow {
+    display: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cube,
+  .premium-shape,
+  .project-card,
+  .builder-card,
+  .builder-avatar {
+    animation: none !important;
+    transition: none !important;
+  }
 }
