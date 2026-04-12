@@ -138,29 +138,6 @@ window.PROJECTS = [
     ]
   },
   {
-    id: "dh-brokersim",
-    title: "BrokerSIM",
-    owner: "DH4410",
-    repoUrl: "https://github.com/DH4410/BrokerSIM",
-    localPath: "repos/DH4410__BrokerSIM",
-    tech: ["TypeScript", "Vite", "Browser Game"],
-    stage: "Playable prototype",
-    summary:
-      "Companion BrokerSIM branch with the same deal-desk and warehouse simulation direction.",
-    details: [
-      "Includes Vite + TS project structure and assets.",
-      "README describes identical gameplay vertical slice goals.",
-      "Useful as alternate branch/history of the same concept."
-    ],
-    status:
-      "Functional prototype branch; can be consolidated with Zoande version for single source of truth.",
-    deliverableSteps: [
-      "Diff both BrokerSIM branches and merge best components.",
-      "Normalize asset paths and config conventions.",
-      "Choose canonical repository for deployment."
-    ]
-  },
-  {
     id: "dh-citybuilder",
     title: "CityBuilder",
     owner: "DH4410",
