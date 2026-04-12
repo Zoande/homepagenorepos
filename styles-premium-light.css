@@ -177,6 +177,35 @@ body {
   padding-right: 0 !important;
 }
 
+.builders-section {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 100% !important;
+  max-width: min(1600px, 100%) !important;
+  align-self: stretch;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 4vw !important;
+  padding-right: 4vw !important;
+}
+
+.builders-grid {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  grid-template-columns: repeat(2, minmax(340px, 1fr)) !important;
+  gap: clamp(1.25rem, 2vw, 2rem) !important;
+}
+
+.project-grid {
+  width: 100% !important;
+  max-width: 100% !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: clamp(1.25rem, 1.6vw, 2rem) !important;
+}
+
 .cta-section {
   max-width: var(--page-max) !important;
   margin-left: auto !important;
@@ -220,6 +249,21 @@ h2, h3, h4, h5, h6 {
   color: #111 !important;
   font-weight: 700 !important;
   letter-spacing: -0.03em !important;
+}
+
+.builders-section .section-subtitle {
+  color: #111 !important;
+  -webkit-text-fill-color: #111 !important;
+  opacity: 1 !important;
+  position: relative;
+  z-index: 12;
+}
+
+.builders-section .builder-card h4,
+.builders-section .builder-role,
+.builders-section .builder-bio {
+  -webkit-text-fill-color: currentColor !important;
+  opacity: 1 !important;
 }
 
 p, li, span.chip, .owner, .small-note, .builder-tags span {
@@ -339,6 +383,23 @@ p.lead {
   display: none !important; /* Remove legacy colored top borders */
 }
 
+.builder-card {
+  animation: none !important;
+  transform: translateY(0) scale(1) !important;
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.45s ease !important;
+}
+
+.builder-card:hover {
+  transform: translateY(-5px) scale(1.01) !important;
+  box-shadow:
+    0 16px 32px rgba(0,0,0,0.06),
+    0 0 24px var(--glow-primary),
+    inset 0 1px 0 rgba(255,255,255,1) !important;
+}
+
 /* --- 7. TACTILE METALLIC BUTTONS --- */
 .button {
   background: #0d0d0d !important;
@@ -432,6 +493,19 @@ p.lead {
   border-radius: 6px !important;
   font-weight: 600 !important;
 }
+
+.project-card .chip-row {
+  gap: 0.45rem !important;
+}
+
+.project-card .chip {
+  font-size: 0.62rem !important;
+  padding: 0.3rem 0.6rem !important;
+  letter-spacing: 0.01em !important;
+  text-transform: none !important;
+  border-radius: 999px !important;
+}
+
 .chip:hover, .builder-tags span:hover {
   background: rgba(0,0,0,0.08) !important;
   color: #111 !important;
@@ -513,6 +587,14 @@ p.lead {
 }
 
 @media (max-width: 1024px) {
+  .project-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .builders-grid {
+    grid-template-columns: 1fr !important;
+  }
+
   .footer-grid {
     grid-template-columns: 1fr 1fr !important;
     gap: 3rem;
@@ -520,6 +602,10 @@ p.lead {
 }
 
 @media (max-width: 768px) {
+  .project-grid {
+    grid-template-columns: 1fr !important;
+  }
+
   .footer-grid {
     grid-template-columns: 1fr !important;
   }
