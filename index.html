@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EliteDevs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&family=Bebas+Neue&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Animate.css for smooth animations -->
+    <link 
+      rel="stylesheet" 
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <!-- AOS (Animate On Scroll) for scroll-triggered animations -->
+    <link 
+      rel="stylesheet" 
+      href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
+    />
+    <!-- Three.js for stunning 3D effects -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="stylesheet" href="styles-premium-light.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="site-nav">
+      <div class="nav-container">
+        <a href="index.html" class="nav-logo">ELITEDEVS</a>
+        <ul class="nav-menu">
+          <li class="nav-item"><a href="index.html" class="active">Home</a></li>
+          <li class="nav-item"><a href="#projects">Projects</a></li>
+          <li class="nav-item"><a href="about.html">About</a></li>
+          <li class="nav-item"><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Decorative Shapes -->
+    <!-- Animated 3D CSS Cubes -->
+    <div class="cube-container" style="top: 15%; left: 10%; width: 250px; height: 250px;">
+      <div class="cube large">
+        <div class="cube-face front"></div>
+        <div class="cube-face back"></div>
+        <div class="cube-face right"></div>
+        <div class="cube-face left"></div>
+        <div class="cube-face top"></div>
+        <div class="cube-face bottom"></div>
+      </div>
+    </div>
+    
+    <div class="cube-container" style="top: 40%; right: 15%; width: 100px; height: 100px;">
+      <div class="cube small">
+        <div class="cube-face front"></div>
+        <div class="cube-face back"></div>
+        <div class="cube-face right"></div>
+        <div class="cube-face left"></div>
+        <div class="cube-face top"></div>
+        <div class="cube-face bottom"></div>
+      </div>
+    </div>
+
+    <div class="cube-container" style="bottom: 20%; left: 20%; width: 180px; height: 180px;">
+      <div class="cube medium">
+        <div class="cube-face front"></div>
+        <div class="cube-face back"></div>
+        <div class="cube-face right"></div>
+        <div class="cube-face left"></div>
+        <div class="cube-face top"></div>
+        <div class="cube-face bottom"></div>
+      </div>
+    </div>
+
+    <!-- Premium glassmorphic elements -->
+    <div class="premium-shape p1"></div>
+    <div class="premium-shape p2"></div>
+    <div class="premium-shape p3"></div>
+    <div class="premium-shape p4"></div>
+
+    <!-- 3D Hero Canvas -->
+    <div id="canvas-3d" class="canvas-3d-container"></div>
+
+    <header class="site-header">
+      <div class="hero-text-3d">
+        <p class="eyebrow" data-aos="fade-up" data-aos-duration="500">Building the Future</p>
+        <h1 data-aos="fade-up" data-aos-duration="500" data-aos-delay="100">Advanced Projects Showcase</h1>
+        <p class="lead" data-aos="fade-up" data-aos-duration="500" data-aos-delay="200">
+          A collection of ambitious, transformative projects pushing the boundaries of technology. From algorithmic trading systems and procedurally-generated worlds to real-time multiplayer platforms—these aren't just applications, they're solutions reshaping how we interact with software.
+        </p>
+      </div>
+      <div class="stats" data-aos="fade-up" data-aos-duration="500" data-aos-delay="300">
+        <article>
+          <span id="project-total">0</span>
+          <p>Active Projects</p>
+        </article>
+        <article>
+          <span id="project-owners">0</span>
+          <p>Builders</p>
+        </article>
+        <article>
+          <span>∞</span>
+          <p>Potential</p>
+        </article>
+      </div>
+      <div class="cta-actions" style="margin-top: 3rem; justify-content: center; gap: 1.5rem;" data-aos="fade-up" data-aos-duration="500" data-aos-delay="400">
+        <a href="#projects" class="button">Explore Projects</a>
+        <a href="contact.html" class="button ghost">Get In Touch</a>
+      </div>
+
+      <!-- Builders Section -->
+      <section class="builders-section depth-glow" data-aos="fade-up" data-aos-duration="500" data-aos-delay="500">
+        <h3 class="section-subtitle">Meet the Builders</h3>
+        <div class="builders-grid">
+          <div class="builder-card" data-aos="scale-in" data-aos-duration="500" data-aos-delay="550">
+            <div class="builder-avatar">
+              <div class="avatar-placeholder">DH</div>
+            </div>
+            <h4>DH4410</h4>
+            <p class="builder-role">Full-Stack Innovator</p>
+            <p class="builder-bio">Building premium experiences with modern tech stacks. Specialized in trading systems, UI frameworks, and procedural generation.</p>
+            <div class="builder-tags">
+              <span>React</span>
+              <span>Vite</span>
+              <span>3D Graphics</span>
+            </div>
+          </div>
+
+          <div class="builder-card" data-aos="scale-in" data-aos-duration="500" data-aos-delay="600">
+            <div class="builder-avatar zoande">
+              <div class="avatar-placeholder">ZD</div>
+            </div>
+            <h4>Zoande</h4>
+            <p class="builder-role">Creative Technologist</p>
+            <p class="builder-bio">Crafting immersive worlds and intelligent systems. Expert in game development, AI integration, and real-time multiplayer platforms.</p>
+            <div class="builder-tags">
+              <span>Three.js</span>
+              <span>Game Dev</span>
+              <span>AI/ML</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </header>
+
+    <main>
+      <!-- Projects Section -->
+      <section id="projects" class="section-title-wrap" data-parallax="0.2" data-aos="fade-up" data-aos-duration="500" style="margin-top: 5rem;">
+        <h2>Featured Projects</h2>
+        <p>Click into any project to see its architecture, current status, and technical foundation.</p>
+      </section>
+      <section id="project-grid" class="project-grid" aria-live="polite" data-parallax="0.15"></section>
+
+      <!-- CTA Section -->
+      <section class="cta-section" data-aos="fade-up" data-aos-duration="500">
+        <h2>Ready to Collaborate?</h2>
+        <p>Explore our portfolio, get inspired by our work, and let's build something extraordinary together.</p>
+        <div class="cta-actions">
+          <a href="contact.html" class="button">Start a Project</a>
+          <a href="about.html" class="button secondary">Learn More</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-content">
+        <div class="footer-grid">
+          <div class="footer-column">
+            <h4>EliteDevs</h4>
+            <p>An evolving ecosystem of innovation. We build technology that matters.</p>
+          </div>
+          <div class="footer-column">
+            <h4>Quick Links</h4>
+            <a href="index.html">Home</a>
+            <a href="#projects">Projects</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+          </div>
+          <div class="footer-column">
+            <h4>Connect</h4>
+            <a href="https://github.com" target="_blank">GitHub</a>
+            <a href="https://twitter.com" target="_blank">Twitter</a>
+            <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+          </div>
+          <div class="footer-column">
+            <h4>Resources</h4>
+            <a href="#privacy">Privacy Policy</a>
+            <a href="#terms">Terms of Service</a>
+            <a href="contact.html">Get Support</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 EliteDevs. Crafted with premium attention to detail. | elitedevs.org</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 500,
+        easing: 'ease-in-out-cubic',
+        once: false,
+        mirror: true,
+        offset: 100
+      });
+
+      // Add smooth page transitions
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+
+      // Update active nav link
+      function updateActiveNav() {
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-item a');
+        
+        window.addEventListener('scroll', () => {
+          let current = '';
+          sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (scrollY >= sectionTop - 200) {
+              current = section.getAttribute('id');
+            }
+          });
+          
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + current) {
+              link.classList.add('active');
+            }
+          });
+        });
+      }
+      updateActiveNav();
+    </script>
+    <script src="data/projects.js"></script>
+    <script src="scripts/home.js"></script>
+    <!-- 3D Effects Scripts -->
+    <script src="scripts/3d-hero.js"></script>
+    <script src="scripts/3d-effects.js"></script>
+    <!-- Premium Mouse Glow -->
+    <div id="mouse-glow" style="position: fixed; width: 400px; height: 400px; background: radial-gradient(circle, rgba(0, 255, 255, 0.25) 0%, transparent 60%); border-radius: 50%; pointer-events: none; z-index: 9998; top: 0; left: 0; transform: translate3d(calc(var(--mouseX, 0) - 50%), calc(var(--mouseY, 0) - 50%), 0); will-change: transform; transition: opacity 0.3s ease; opacity: 0;"></div>
+    <script>
+      const glow = document.getElementById('mouse-glow');
+      let isVisible = false;
+      document.addEventListener('mousemove', (e) => {
+        if (!isVisible) {
+          glow.style.opacity = '1';
+          isVisible = true;
+        }
+        glow.style.setProperty('--mouseX', e.clientX + 'px');
+        glow.style.setProperty('--mouseY', e.clientY + 'px');
+      }, { passive: true });
+      document.addEventListener('mouseleave', () => {
+        glow.style.opacity = '0';
+        isVisible = false;
+      });
+    </script>
+  </body>
+</html>

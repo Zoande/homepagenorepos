@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IB DP Subject Selector | ISRLO Netherlands</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --accent: #6366f1;
+            --danger: #ef4444;
+            --success: #22c55e;
+            --g1: #3b82f6; --g2: #60a5fa; --g3: #4d7c0f; --g4: #eab308; --g5: #f97316; --g6: #a855f7;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: var(--text-main); padding: 2rem; }
+        .container { max-width: 1400px; margin: 0 auto; }
+        header { margin-bottom: 2rem; border-bottom: 1px solid #e2e8f0; padding-bottom: 1.5rem; }
+        h1 { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; line-height: 1; }
+        
+        .main-layout { display: grid; grid-template-columns: 1fr 380px; gap: 2.5rem; }
+
+        .group-label { 
+            font-weight: 700; font-size: 0.8rem; text-transform: uppercase; 
+            letter-spacing: 1px; color: var(--text-muted); margin-bottom: 1rem;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .group-label::after { content: ""; height: 1px; background: #e2e8f0; flex: 1; }
+
+        .subject-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+
+        .subject-card {
+            background: var(--card-bg); border-radius: 12px; padding: 1rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05); border: 2px solid transparent;
+            transition: all 0.2s; position: relative;
+        }
+        .subject-card.selected { border-color: var(--accent); background: #f5f7ff; }
+        
+        /* Tooltip Logic */
+        .subject-card.disabled { opacity: 0.4; cursor: not-allowed; filter: grayscale(0.8); }
+        .subject-card::after {
+            content: attr(data-reason);
+            position: absolute; bottom: 105%; left: 50%; transform: translateX(-50%);
+            background: #1e293b; color: white; padding: 8px 12px; border-radius: 6px;
+            font-size: 0.75rem; width: 90%; text-align: center;
+            opacity: 0; visibility: hidden; transition: 0.2s; z-index: 10;
+            pointer-events: none; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3);
+        }
+        .subject-card.disabled:hover::after { opacity: 1; visibility: visible; }
+
+        .subject-name { font-weight: 700; font-size: 1rem; }
+        .level-row { display: flex; gap: 0.4rem; margin-top: 0.8rem; }
+        .level-btn {
+            flex: 1; padding: 0.4rem; border: 1px solid #e2e8f0; background: white;
+            border-radius: 6px; font-size: 0.8rem; font-weight: 600; cursor: pointer;
+            position: relative;
+        }
+        .level-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+        
+        /* Button Tooltip Logic */
+        .level-btn.blocked { background: #f1f5f9; color: #cbd5e1; cursor: not-allowed; text-decoration: line-through; }
+        .level-btn.blocked::after {
+            content: attr(data-reason);
+            position: absolute; top: 110%; left: 50%; transform: translateX(-50%);
+            background: #ef4444; color: white; padding: 4px 8px; border-radius: 4px;
+            font-size: 0.7rem; white-space: nowrap; opacity: 0; visibility: hidden; z-index: 20;
+        }
+        .level-btn.blocked:hover::after { opacity: 1; visibility: visible; }
+
+        /* Sidebar */
+        .sidebar { position: sticky; top: 2rem; }
+        .summary-card { background: #1e293b; color: white; border-radius: 20px; padding: 2rem; }
+        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+        .stat-box { background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 12px; text-align: center; }
+        .stat-val { font-size: 1.5rem; font-weight: 700; display: block; }
+        .stat-label { font-size: 0.7rem; color: #94a3b8; text-transform: uppercase; }
+
+        .v-item { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 0.85rem; }
+        .v-item.check { color: var(--success); }
+        .v-item.cross { color: #64748b; }
+
+        .reset-btn { width: 100%; padding: 0.8rem; border-radius: 10px; border: none; background: rgba(255,255,255,0.1); color: white; cursor: pointer; margin-top: 10px;}
+        .reset-btn:hover { background: rgba(255,255,255,0.2); }
+
+        @media (max-width: 1000px) { .main-layout { grid-template-columns: 1fr; } .sidebar { position: static; } }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>IB Diploma Pathbuilder</h1>
+        </header>
+
+        <div class="main-layout">
+            <div class="selection-area">
+                
+                <!-- Group 1 -->
+                <div class="group-container">
+                    <div class="group-label"><span style="color:var(--g1)">●</span> Group 1: Language A</div>
+                    <div class="subject-grid">
+                        <div class="subject-card" data-subject="english_a" data-group="1">
+                            <span class="subject-name">English A L&L</span>
+                            <div class="level-row">
+                                <button class="level-btn" data-level="SL">SL</button>
+                                <button class="level-btn" data-level="HL">HL</button>
+                            </div>
+                        </div>
+                        <div class="subject-card" data-subject="dutch_a" data-group="1">
+                            <span class="subject-name">Dutch A LL</span>
+                            <div class="level-row">
+                                <button class="level-btn" data-level="SL">SL</button>
+                                <button class="level-btn" data-level="HL">HL</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Group 2 -->
+                <div class="group-container">
+                    <div class="group-label"><span style="color:var(--g2)">●</span> Group 2: Language B</div>
+                    <div class="subject-grid">
+                        <div class="subject-card" data-subject="dutch_b" data-group="2">
+                            <span class="subject-name">Dutch B</span>
+                            <div class="level-row">
+                                <button class="level-btn" data-level="SL">SL</button>
+                                <button class="level-btn" data-level="HL">HL</button>
+                            </div>
+                        </div>
+                        <div class="subject-card" data-subject="spanish_b" data-group="2">
+                            <span class="subject-name">Spanish B</span>
+                            <div class="level-row">
+                                <button class="level-btn" data-level="SL">SL</button>
+                                <button class="level-btn" data-level="HL">HL</button>
+                            </div>
+                        </div>
+                        <div class="subject-card" data-subject="french_b" data-group="2">
+                            <span class="subject-name">French B</span>
+                            <div class="level-row">
+                                <button class="level-btn" data-level="SL">SL</button>
+                                <button class="level-btn" data-level="HL">HL</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Group 3 -->
+                <div class="group-container">
+                    <div class="group-label"><span style="color:var(--g3)">●</span> Group 3: Individuals & Societies</div>
+                    <div class="subject-grid">
+                        <div class="subject-card" data-subject="history" data-group="3">
+                            <span class="subject-name">History</span>
+                            <div class="level-row">
+                                <button class="level-btn" data-level="SL">SL</button>
+                                <button class="level-btn" data-level="HL">HL</button>
+                            </div>
+                        </div>
+                        <div class="subject-card" data-subject="economics" data-group="3">
+                            <span class="subject-name">Economics</span>
+                            <div class="level-row">
+                                <button class="level-btn" data-level="SL">SL</button>
+                                <button class="level-btn" data-level="HL">HL</button>
+                            </div>
+                        </div>
+                        <div class="subject-card" data-subject="business" data-group="3">
+                            <span class="subject-name">Business Mgmt</span>
+                            <div class="level-row">
+                                <button class="level-btn" data-level="HL">HL Only</button>
+                            </div>
+                        </div>
+                        <div class="subject-card" data-subject="geography" data-group="3">
+                            <span class="subject-name">Geography</span>
+                            <div class="level-row">
+                                <button class="level-btn" data-level="SL">SL</button>
+                                <button class="level-btn" data-level="HL">HL</button>
+                            </div>
+                        </div>
+                        <div class="subject-card" data-subject="ess" data-group="34">
+                            <span class="subject-name">ESS (Environmental)</span>
+                            <div class="level-row">
+                                <button class="level-btn" data-level="SL">SL Only</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Group 4 -->
+                <div class="group-container">
+                    <div class="group-label"><span style="color:var(--g4)">●</span> Group 4: Sciences</div>
+                    <div class="subject-grid">
+                        <div class="subject-card" data-subject="biology" data-group="4">
+                            <span class="subject-name">Biology</span>
+                            <div class="level-row">
+                                <button class="level-btn" data-level="SL">SL</button>
+                                <button class="level-btn" data-level="HL">HL</button>
+                            </div>
+                        </div>
+                        <div class="subject-card" data-subject="physics" data-group="4">
+                            <span class="subject-name">Physics</span>
+                            <div class="level-row">
+                                <button class="level-btn" data-level="SL">SL</button>
+                                <button class="level-btn" data-level="HL">HL</button>
+                            </div>
+                        </div>
+                        <div class="subject-card" data-subject="chemistry" data-group="4">
+                            <span class="subject-name">Chemistry</span>
+                            <div class="level-row">
+                                <button class="level-btn" data-level="SL">SL</button>
+                                <button class="level-btn" data-level="HL">HL</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Group 5 -->
+                <div class="group-container">
+                    <div class="group-label"><span style="color:var(--g5)">●</span> Group 5: Mathematics</div>
+                    <div class="subject-grid">
+                        <div class="subject-card" data-subject="math_aa" data-group="5">
+                            <span class="subject-name">Math AA</span>
+                            <div class="level-row">
+                                <button class="level-btn" data-level="SL">SL</button>
+                                <button class="level-btn" data-level="HL">HL</button>
+                            </div>
+                        </div>
+                        <div class="subject-card" data-subject="math_ai" data-group="5">
+                            <span class="subject-name">Math AI</span>
+                            <div class="level-row">
+                                <button class="level-btn" data-level="SL">SL Only</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Group 6 -->
+                <div class="group-container">
+                    <div class="group-label"><span style="color:var(--g6)">●</span> Group 6: The Arts</div>
+                    <div class="subject-grid">
+                        <div class="subject-card" data-subject="music" data-group="6">
+                            <span class="subject-name">Music</span>
+                            <div class="level-row">
+                                <button class="level-btn" data-level="SL">SL</button>
+                                <button class="level-btn" data-level="HL">HL</button>
+                            </div>
+                        </div>
+                        <div class="subject-card" data-subject="visual_arts" data-group="6">
+                            <span class="subject-name">Visual Arts</span>
+                            <div class="level-row">
+                                <button class="level-btn" data-level="SL">SL</button>
+                                <button class="level-btn" data-level="HL">HL</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="summary-card">
+                    <h2 style="font-family:'Bebas Neue'; font-size: 2rem; margin-bottom: 1rem;">Package Summary</h2>
+                    <div class="stat-grid">
+                        <div class="stat-box"><span class="stat-val" id="total-val">0</span><span class="stat-label">Subjects</span></div>
+                        <div class="stat-box"><span class="stat-val" id="hl-val">0</span><span class="stat-label">HL Units</span></div>
+                    </div>
+                    <div id="selection-list" style="margin-bottom: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem;"></div>
+                    <div class="validation-list" id="val-list"></div>
+                    <button class="reset-btn" onclick="resetAll()">Clear Selection</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const selection = new Map();
+
+        function updateLogic() {
+            // Reset UI
+            document.querySelectorAll('.subject-card').forEach(c => {
+                c.classList.remove('disabled', 'selected');
+                c.removeAttribute('data-reason');
+                c.querySelectorAll('.level-btn').forEach(b => {
+                    b.classList.remove('active', 'blocked');
+                    b.removeAttribute('data-reason');
+                });
+            });
+
+            // Mark current selections
+            selection.forEach((lvl, id) => {
+                const card = document.querySelector(`[data-subject="${id}"]`);
+                if (card) {
+                    card.classList.add('selected');
+                    card.querySelector(`[data-level="${lvl}"]`).classList.add('active');
+                }
+            });
+
+            const has = (id) => selection.has(id);
+            const getLvl = (id) => selection.get(id);
+
+            // --- APPLY CLASHES WITH REASONS ---
+
+            // 1. Math AA HL / History HL / Business HL Clash
+            if (getLvl('math_aa') === 'HL') {
+                disableLevel('history', 'HL', 'Clash with Math AA HL');
+                disableLevel('business', 'HL', 'Clash with Math AA HL');
+            }
+            if (getLvl('history') === 'HL') {
+                disableLevel('math_aa', 'HL', 'Clash with History HL');
+                disableLevel('business', 'HL', 'Clash with History HL');
+            }
+            if (getLvl('business') === 'HL') {
+                disableLevel('math_aa', 'HL', 'Clash with Business HL');
+                disableLevel('history', 'HL', 'Clash with Business HL');
+            }
+
+            // 2. Economics vs Music
+            if (has('economics')) disableSubject('music', 'Clashes with Economics');
+            if (has('music')) disableSubject('economics', 'Clashes with Music');
+
+            // 3. Chemistry vs Visual Arts
+            if (has('chemistry')) disableSubject('visual_arts', 'Clashes with Chemistry');
+            if (has('visual_arts')) disableSubject('chemistry', 'Clashes with Visual Arts');
+
+            // 4. Spanish/French B vs Science SL Block
+            const hasLangB = has('spanish_b') || has('french_b');
+            const hasScienceSL = getLvl('biology') === 'SL' || getLvl('physics') === 'SL';
+            
+            if (hasLangB) {
+                const trigger = has('spanish_b') ? 'Spanish B' : 'French B';
+                disableLevel('biology', 'SL', `Clash with ${trigger}`);
+                disableLevel('physics', 'SL', `Clash with ${trigger}`);
+                if (has('spanish_b')) disableSubject('french_b', 'Clash with Spanish B');
+                if (has('french_b')) disableSubject('spanish_b', 'Clash with French B');
+            }
+            if (hasScienceSL) {
+                const trigger = getLvl('biology') === 'SL' ? 'Biology SL' : 'Physics SL';
+                disableSubject('spanish_b', `Clash with ${trigger}`);
+                disableSubject('french_b', `Clash with ${trigger}`);
+            }
+
+            // 5. ESS vs Science HL Block
+            if (has('ess')) {
+                disableLevel('biology', 'HL', 'ESS clashes with Science HL');
+                disableLevel('physics', 'HL', 'ESS clashes with Science HL');
+            }
+            if (getLvl('biology') === 'HL' || getLvl('physics') === 'HL') {
+                disableSubject('ess', 'Clash with Science HL');
+            }
+
+            // 6. Biology vs Physics (Mutual)
+            if (has('biology')) disableSubject('physics', 'Clash with Biology');
+            if (has('physics')) disableSubject('biology', 'Clash with Physics');
+
+            // 7. Max 7 Subjects
+            if (selection.size >= 7) {
+                document.querySelectorAll('.subject-card:not(.selected)').forEach(c => {
+                    c.classList.add('disabled');
+                    c.setAttribute('data-reason', 'Max 7 subjects reached');
+                });
+            }
+
+            renderSummary();
+        }
+
+        function disableSubject(id, reason) {
+            const el = document.querySelector(`[data-subject="${id}"]`);
+            if (el && !selection.has(id)) {
+                el.classList.add('disabled');
+                el.setAttribute('data-reason', reason);
+            }
+        }
+
+        function disableLevel(id, level, reason) {
+            const btn = document.querySelector(`[data-subject="${id}"] [data-level="${level}"]`);
+            if (btn && selection.get(id) !== level) {
+                btn.classList.add('blocked');
+                btn.setAttribute('data-reason', reason);
+            }
+        }
+
+        function renderSummary() {
+            const count = selection.size;
+            const hlCount = Array.from(selection.values()).filter(v => v === 'HL').length;
+            document.getElementById('total-val').innerText = count;
+            document.getElementById('hl-val').innerText = hlCount;
+
+            const listEl = document.getElementById('selection-list');
+            listEl.innerHTML = count === 0 ? '<p style="color:#94a3b8; font-size:0.8rem;">Pick 6 subjects</p>' : 
+                Array.from(selection.entries()).map(([id, lvl]) => {
+                    const name = document.querySelector(`[data-subject="${id}"] .subject-name`).innerText;
+                    return `<div style="font-size:0.85rem; margin-bottom:4px;">${name} <span style="color:#64748b">— ${lvl}</span></div>`;
+                }).join('');
+
+            const groups = new Set();
+            selection.forEach((lvl, id) => {
+                const g = document.querySelector(`[data-subject="${id}"]`).dataset.group;
+                if (g === "34") { groups.add("3"); groups.add("4"); } else groups.add(g);
+            });
+            const langACount = Array.from(selection.keys()).filter(id => document.querySelector(`[data-subject="${id}"]`).dataset.group === '1').length;
+
+            const checks = [
+                { label: '6 or 7 Subjects', passed: count >= 6 },
+                { label: '3-4 HL Subjects', passed: hlCount >= 3 && hlCount <= 4 },
+                { label: 'Group 1 (Lang A)', passed: groups.has('1') },
+                { label: 'Group 2 (or 2nd Lang A)', passed: groups.has('2') || langACount >= 2 },
+                { label: 'Group 3 (Individuals)', passed: groups.has('3') },
+                { label: 'Group 4 (Sciences)', passed: groups.has('4') },
+                { label: 'Group 5 (Math)', passed: groups.has('5') }
+            ];
+
+            document.getElementById('val-list').innerHTML = checks.map(c => `
+                <div class="v-item ${c.passed ? 'check' : 'cross'}">${c.passed ? '✓' : '○'} ${c.label}</div>
+            `).join('');
+        }
+
+        document.addEventListener('click', (e) => {
+            const btn = e.target.closest('.level-btn');
+            if (btn && !btn.classList.contains('blocked')) {
+                const id = btn.closest('.subject-card').dataset.subject;
+                const level = btn.dataset.level;
+                if (selection.get(id) === level) selection.delete(id);
+                else selection.set(id, level);
+                updateLogic();
+            }
+        });
+
+        function resetAll() { selection.clear(); updateLogic(); }
+        updateLogic();
+    </script>
+</body>
+</html>

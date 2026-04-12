@@ -1,0 +1,462 @@
+/* =========================================================================
+   ULTRA-PREMIUM LUXURY UI OVERRIDES (PERFORMANCE OPTIMIZED)
+   Brings a brilliant, glowing modernistic Apple/Vercel-like luxury feel.
+   Zero lag. Maximum polish.
+   ========================================================================= */
+
+@import url('styles.css');
+
+/* --- 1. THE IMPOSSIBLE NOISE OVERLAY (NOW ZERO LAG) --- */
+/* Switched from expensive SVG feTurbulence mix-blend-mode to a clean base64 tile */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  transform: translateZ(0); /* Force GPU */
+}
+
+/* --- 2. BRIGHT, MODERNISTIC LUXURY PALETTE --- */
+:root {
+  --bg-primary: #FAFAFC;
+  --bg-white: rgba(255, 255, 255, 0.85);
+  --border-glass: rgba(255, 255, 255, 0.8);
+  --border-highlight: rgba(255, 255, 255, 1);
+  --glow-primary: rgba(107, 157, 197, 0.15);
+  --glow-secondary: rgba(224, 120, 86, 0.1);
+  
+  --transition-premium: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-bounce: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Base body background for brightness */
+body {
+  background-color: var(--bg-primary);
+  background-image: 
+    radial-gradient(circle at 15% 50%, rgba(255, 0, 128, 0.05), transparent 40%),
+    radial-gradient(circle at 85% 30%, rgba(0, 255, 255, 0.05), transparent 40%);
+  background-attachment: fixed;
+  color: #111; /* Sharper contrast */
+}
+
+/* --- 3. AMBIENT FLUID BACKGROUND MESH (NO MORE LAG) --- */
+/* Removing expensive filter: blur() and mix-blend-modes for smooth CSS radial gradients */
+.bg-shape, .premium-shape {
+  filter: none !important;
+  opacity: 0.8 !important;
+  mix-blend-mode: color-dodge !important;
+  will-change: transform;
+  transform: translateZ(0); /* Force hardware accel */
+}
+
+/* Vibrantly colorful background shapes */
+.premium-shape.p1 { background: radial-gradient(circle, rgba(255, 0, 128, 0.25) 0%, transparent 60%) !important; }
+.premium-shape.p2 { background: radial-gradient(circle, rgba(0, 255, 255, 0.25) 0%, transparent 60%) !important; }
+.premium-shape.p3 { background: radial-gradient(circle, rgba(255, 221, 0, 0.2) 0%, transparent 60%) !important; }
+.premium-shape.p4 { background: radial-gradient(circle, rgba(138, 43, 226, 0.25) 0%, transparent 60%) !important; }
+
+/* Hide the old CSS shapes that stacked heavily */
+.shape-circle, .shape-square, .shape-rect, .bg-shape {
+  display: none !important; 
+}
+
+/* =======================================================
+   ANIMATED 3D HOLOGRAPHIC SCATTERED CUBES
+   ======================================================= */
+.cube-container {
+  display: block !important;
+  position: absolute;
+  perspective: 1200px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Base properties for all cubes */
+.cube {
+  position: relative;
+  transform-style: preserve-3d;
+  width: 100%;
+  height: 100%;
+}
+
+.cube-face {
+  position: absolute;
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.4), rgba(255, 0, 128, 0.4));
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.5), inset 0 0 20px rgba(255, 0, 128, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+/* Small Cube Details (100px) */
+.cube.small { animation: rotateCubeSmall 12s infinite linear; }
+.cube.small .cube-face { width: 100px; height: 100px; }
+.cube.small .front  { transform: rotateY(0deg) translateZ(50px); }
+.cube.small .back   { transform: rotateY(180deg) translateZ(50px); }
+.cube.small .right  { transform: rotateY(90deg) translateZ(50px); }
+.cube.small .left   { transform: rotateY(-90deg) translateZ(50px); }
+.cube.small .top    { transform: rotateX(90deg) translateZ(50px); }
+.cube.small .bottom { transform: rotateX(-90deg) translateZ(50px); }
+
+@keyframes rotateCubeSmall {
+  0% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+  100% { transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg); }
+}
+
+/* Medium Cube Details (180px) */
+.cube.medium { animation: rotateCubeMedium 16s infinite linear reverse; }
+.cube.medium .cube-face { 
+  width: 180px; height: 180px; 
+  background: linear-gradient(135deg, rgba(255, 221, 0, 0.3), rgba(255, 0, 128, 0.3));
+  box-shadow: 0 0 20px rgba(255, 221, 0, 0.4), inset 0 0 20px rgba(255, 0, 128, 0.4);
+}
+.cube.medium .front  { transform: rotateY(0deg) translateZ(90px); }
+.cube.medium .back   { transform: rotateY(180deg) translateZ(90px); }
+.cube.medium .right  { transform: rotateY(90deg) translateZ(90px); }
+.cube.medium .left   { transform: rotateY(-90deg) translateZ(90px); }
+.cube.medium .top    { transform: rotateX(90deg) translateZ(90px); }
+.cube.medium .bottom { transform: rotateX(-90deg) translateZ(90px); }
+
+@keyframes rotateCubeMedium {
+  0% { transform: rotateX(360deg) rotateY(180deg) rotateZ(0deg); }
+  100% { transform: rotateX(0deg) rotateY(-180deg) rotateZ(-360deg); }
+}
+
+/* Large Floating Cube Details (250px) */
+.cube.large { animation: rotateCubeLarge 22s infinite linear; }
+.cube.large .cube-face { 
+  width: 250px; height: 250px; 
+  background: linear-gradient(135deg, rgba(138, 43, 226, 0.2), rgba(0, 255, 255, 0.2));
+  box-shadow: 0 0 30px rgba(138, 43, 226, 0.3), inset 0 0 30px rgba(0, 255, 255, 0.3);
+}
+.cube.large .front  { transform: rotateY(0deg) translateZ(125px); }
+.cube.large .back   { transform: rotateY(180deg) translateZ(125px); }
+.cube.large .right  { transform: rotateY(90deg) translateZ(125px); }
+.cube.large .left   { transform: rotateY(-90deg) translateZ(125px); }
+.cube.large .top    { transform: rotateX(90deg) translateZ(125px); }
+.cube.large .bottom { transform: rotateX(-90deg) translateZ(125px); }
+
+@keyframes rotateCubeLarge {
+  0% { transform: rotateX(0deg) rotateY(360deg) rotateZ(0deg); }
+  100% { transform: rotateX(360deg) rotateY(0deg) rotateZ(360deg); }
+}
+
+/* --- 4. ULTRA-CRISP NAVIGATION (FULL WIDTH) --- */
+.site-nav {
+  background: rgba(250, 250, 252, 0.7) !important;
+  backdrop-filter: blur(20px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(150%) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.8) !important;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02) !important;
+  transform: translateZ(0);
+}
+
+.site-header {
+  backdrop-filter: none !important; /* Stop hero blur! Allow cubes to shine through */
+  -webkit-backdrop-filter: none !important;
+  background: transparent !important;
+}
+
+.nav-container {
+  max-width: 100% !important; /* Full width */
+  padding: 1.2rem 4vw !important; /* Proper horizontal padding */
+}
+
+/* Full Width Wrappers */
+.site-header, .project-grid, .section-title-wrap, .builders-grid {
+  max-width: 100% !important;
+  padding-left: 4vw !important;
+  padding-right: 4vw !important;
+}
+
+.cta-section {
+  max-width: calc(100% - 8vw) !important;
+  margin-left: 4vw !important;
+  margin-right: 4vw !important;
+}
+
+.nav-logo {
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  background: #000 !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+.nav-item a {
+  color: #555 !important;
+  letter-spacing: 0.02em;
+}
+.nav-item a:hover {
+  color: #000 !important;
+}
+
+/* --- 5. MODERNISTIC TYPOGRAPHY --- */
+h1 {
+  background: linear-gradient(135deg, #000 0%, #444 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.04em !important;
+  text-shadow: 0 10px 30px rgba(0,0,0,0.03);
+}
+
+.hero-text-3d h1 {
+  color: #000 !important; /* Override the color */
+  -webkit-text-fill-color: initial !important; /* Remove gradient for the 3D */
+}
+
+h2, h3, h4, h5, h6 {
+  color: #111 !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.03em !important;
+}
+
+p, li, span.chip, .owner, .small-note, .builder-tags span {
+  color: #555 !important;
+}
+
+p.lead {
+  color: #555 !important;
+  font-weight: 500 !important;
+}
+
+
+/* --- 6. BRILLIANT GLASS CARDS --- */
+/* Optimized backdrop-filter usage for faster rendering while keeping luxury look */
+.project-card, .feature-card, .builder-card, .team-card, .about-item, .panel {
+  background: linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.6) 100%) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  border: 1px solid var(--border-glass) !important;
+  box-shadow: 
+    0 10px 40px rgba(0,0,0,0.02), 
+    inset 0 1px 0 var(--border-highlight) !important;
+  border-radius: 20px !important;
+  transition: var(--transition-bounce) !important;
+  will-change: transform, box-shadow;
+  transform: translateZ(0); /* GPU acceleration */
+  color: #111 !important; /* Ensure internal text remains visible */
+}
+
+/* Luminous hover */
+.project-card:hover, .feature-card:hover, .builder-card:hover, .team-card:hover, .about-item:hover, .panel:hover {
+  transform: translateY(-8px) scale(1.02) translateZ(30px) !important;
+  box-shadow: 
+    0 25px 50px rgba(0,0,0,0.04), 
+    0 0 30px var(--glow-primary),
+    inset 0 1px 0 rgba(255,255,255,1) !important;
+  border: 1px solid rgba(255,255,255,0.9) !important;
+}
+
+.project-card::before, .feature-card::before, .builder-card::before, .team-card::before, .about-item::before {
+  display: none !important; /* Remove legacy colored top borders */
+}
+
+/* --- 7. TACTILE METALLIC BUTTONS --- */
+.button {
+  background: #0d0d0d !important;
+  color: #fff !important;
+  border: 1px solid rgba(255,255,255,0.2) !important;
+  box-shadow: 
+    0 8px 20px rgba(0,0,0,0.06), 
+    inset 0 1px 0 rgba(255,255,255,0.15) !important;
+  border-radius: 100px !important;
+  padding: 1rem 2.8rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.05em !important;
+  transition: var(--transition-premium) !important;
+  text-transform: none !important;
+}
+
+.button:hover {
+  background: #000 !important;
+  transform: translateY(-3px) scale(1.02) !important;
+  box-shadow: 
+    0 15px 30px rgba(0,0,0,0.12), 
+    inset 0 1px 0 rgba(255,255,255,0.2) !important;
+}
+
+.button.ghost {
+  background: rgba(255,255,255,0.8) !important;
+  backdrop-filter: blur(10px) !important;
+  color: #111 !important;
+  border: 1px solid rgba(0,0,0,0.05) !important;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.02) !important;
+}
+
+.button.ghost:hover {
+  background: #fff !important;
+  border-color: rgba(0,0,0,0.1) !important;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.06) !important;
+}
+
+/* --- 8. CTA SECTION: BRIGHT RADIANCE --- */
+.cta-section {
+  background: linear-gradient(135deg, rgba(255, 0, 128, 0.15) 0%, rgba(0, 255, 255, 0.15) 50%, rgba(255, 221, 0, 0.15) 100%) !important;
+  border: 1px solid rgba(255,255,255,0.8) !important;
+  background-size: cover !important;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.02), inset 0 1px 0 rgba(255,255,255,1) !important;
+  animation: none !important; /* Stop expensive background animations */
+  border-radius: 20px !important;
+  margin-top: 5rem !important;
+}
+.cta-section h2 {
+  color: #111 !important;
+  font-size: clamp(2.5rem, 8vw, 4rem) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.04em !important;
+}
+.cta-section p {
+  color: #555 !important;
+}
+
+/* --- 9. PRISMATIC STATS CARDS --- */
+.stats article {
+  background: rgba(255,255,255,0.85) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(255,255,255,0.6) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.02), inset 0 1px 0 rgba(255,255,255,0.8) !important;
+  padding: 3rem 1.5rem !important;
+}
+.stats article span {
+  background: linear-gradient(135deg, #111 0%, #444 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  font-size: 4rem !important;
+  text-shadow: none !important;
+}
+.stats article p {
+  color: #666 !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  font-size: 0.8rem !important;
+}
+
+/* --- 10. CLEAN CHIPS / TAGS --- */
+.chip, .builder-tags span {
+  background: rgba(0,0,0,0.04) !important;
+  border: 1px solid rgba(0,0,0,0.03) !important;
+  color: #444 !important;
+  box-shadow: none !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+}
+.chip:hover, .builder-tags span:hover {
+  background: rgba(0,0,0,0.08) !important;
+  color: #111 !important;
+  transform: translateY(-1px);
+}
+
+/* --- 11. REDESIGNED FOOTER (THE BOTTOM ELEVATION) --- */
+.site-footer {
+  background: #ffffff !important; /* Solid bright white */
+  border-top: 1px solid rgba(0,0,0,0.05) !important;
+  padding: 8rem 2rem 4rem !important;
+  position: relative;
+  z-index: 10;
+  box-shadow: 0 -20px 40px rgba(0,0,0,0.01) !important;
+  margin-top: 5rem !important;
+}
+
+/* Footer layout to match full-width container */
+.footer-content {
+  max-width: 100% !important;
+  padding: 0 4vw !important;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 4rem;
+  border-bottom: 1px solid rgba(0,0,0,0.06) !important;
+  padding-bottom: 5rem !important;
+  margin-bottom: 3rem !important;
+}
+
+.footer-column h4 {
+  color: #000 !important;
+  font-size: 0.85rem !important;
+  letter-spacing: 0.25em !important;
+  font-weight: 800 !important;
+  margin-bottom: 2rem !important;
+  text-transform: uppercase;
+}
+
+.footer-column p {
+  color: #777 !important;
+  font-size: 1.1rem !important;
+  font-weight: 400 !important;
+  line-height: 1.8 !important;
+  max-width: 400px;
+}
+
+.footer-column a {
+  color: #666 !important;
+  font-size: 0.95rem !important;
+  font-weight: 500 !important;
+  transition: color 0.3s ease !important;
+  display: block;
+  padding: 0.4rem 0 !important;
+}
+
+.footer-column a:hover {
+  color: #000 !important;
+  text-decoration: underline !important;
+  text-underline-offset: 4px;
+}
+
+.footer-bottom {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-bottom p {
+  color: #999 !important;
+  font-weight: 500 !important;
+  font-size: 0.9rem !important;
+  margin: 0 !important;
+}
+
+@media (max-width: 1024px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .footer-bottom {
+    justify-content: center !important;
+    text-align: center !important;
+  }
+}
+
+/* Base Body scrollbar fix */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.1);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0,0,0,0.3);
+}
