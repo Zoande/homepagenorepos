@@ -707,6 +707,10 @@ main,
 }
 
 @media (max-width: 900px) {
+  .cube-container {
+    opacity: 0.32 !important;
+  }
+
   .site-header {
     min-height: auto !important;
     padding: 2rem 1rem 1.25rem !important;

@@ -1,5 +1,6 @@
 (function () {
   const projects = window.PROJECTS || [];
+  const aosActive = window.__AOS_ACTIVE__ === true;
   const grid = document.getElementById("project-grid");
   const totalEl = document.getElementById("project-total");
   const ownersEl = document.getElementById("project-owners");
@@ -44,13 +45,14 @@
       const tech = project.tech.slice(0, 3).map((item) => `<span class="chip">${item}</span>`).join("");
       // Stagger animation delays for cards
       const aosDelay = Math.min(index * 75, 450);
+      const cardAosAttrs = aosActive
+        ? `data-aos="fade-up" data-aos-duration="500" data-aos-delay="${aosDelay}"`
+        : "";
       return `
         <article 
           class="project-card" 
           aria-label="${project.title}"
-          data-aos="fade-up"
-          data-aos-duration="500"
-          data-aos-delay="${aosDelay}"
+          ${cardAosAttrs}
         >
           <p class="owner">${project.owner}</p>
           <h3>${project.title}</h3>
@@ -64,4 +66,8 @@
       `;
     })
     .join("");
+
+  if (aosActive && window.AOS && typeof window.AOS.refreshHard === "function") {
+    window.AOS.refreshHard();
+  }
 })();
