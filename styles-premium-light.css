@@ -506,6 +506,19 @@ p.lead {
   border-radius: 999px !important;
 }
 
+.project-hero .chip {
+  display: inline-block !important;
+  min-height: auto !important;
+  padding: 0.3rem 0.75rem !important;
+  font-size: 0.75rem !important;
+  letter-spacing: 0.01em !important;
+  text-transform: none !important;
+  border-radius: 999px !important;
+  flex-direction: row !important;
+  animation: none !important;
+  will-change: auto !important;
+}
+
 .chip:hover, .builder-tags span:hover {
   background: rgba(0,0,0,0.08) !important;
   color: #111 !important;
