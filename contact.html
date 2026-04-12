@@ -114,7 +114,7 @@
               <div class="info-icon">📧</div>
               <h3>Email</h3>
               <p>Reach us directly for inquiries and collaboration opportunities.</p>
-              <a href="mailto:hello@portfolio.dev" class="info-link">hello@portfolio.dev</a>
+              <a href="mailto:Dima@elitedevs.org" class="info-link">Dima@elitedevs.org</a>
             </div>
 
             <div class="info-card" data-aos="fade-up" data-aos-duration="700" data-aos-delay="200">
@@ -122,9 +122,9 @@
               <h3>Social</h3>
               <p>Connect with us on social media for updates and insights.</p>
               <div class="social-links">
-                <a href="https://github.com" target="_blank" class="social-link">GitHub</a>
-                <a href="https://twitter.com" target="_blank" class="social-link">Twitter</a>
-                <a href="https://linkedin.com" target="_blank" class="social-link">LinkedIn</a>
+                <a href="https://github.com/Zoande/homepagenorepos" target="_blank" class="social-link">GitHub</a>
+                <span class="social-link" style="cursor: default; opacity: 0.6;">Twitter (Coming Soon)</span>
+                <span class="social-link" style="cursor: default; opacity: 0.6;">LinkedIn (Coming Soon)</span>
               </div>
             </div>
 
@@ -138,7 +138,7 @@
               <div class="info-icon">🎯</div>
               <h3>Collaboration</h3>
               <p>Interested in technical partnerships? Let's discuss opportunities.</p>
-              <a href="mailto:partners@portfolio.dev" class="info-link">partners@portfolio.dev</a>
+              <a href="mailto:Dima@elitedevs.org" class="info-link">Dima@elitedevs.org</a>
             </div>
           </section>
         </div>
@@ -171,9 +171,9 @@
           </div>
           <div class="footer-column">
             <h4>Connect</h4>
-            <a href="https://github.com" target="_blank">GitHub</a>
-            <a href="https://twitter.com" target="_blank">Twitter</a>
-            <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+            <a href="https://github.com/Zoande/homepagenorepos" target="_blank">GitHub</a>
+            <span style="cursor: default; opacity: 0.6;">Twitter (Coming Soon)</span>
+            <span style="cursor: default; opacity: 0.6;">LinkedIn (Coming Soon)</span>
           </div>
           <div class="footer-column">
             <h4>Resources</h4>
@@ -213,8 +213,16 @@
       if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
           e.preventDefault();
-          // Show success message
-          alert('Thank you for your message! We\'ll get back to you soon.');
+          const name = document.getElementById('name').value;
+          const email = document.getElementById('email').value;
+          const subject = document.getElementById('subject').value;
+          const message = document.getElementById('message').value;
+          const projectType = document.getElementById('project-type').value;
+          const budget = document.getElementById('budget').value;
+
+          const body = `Name: ${name}\nEmail: ${email}\nProject Type: ${projectType}\nBudget: ${budget}\n\nMessage:\n${message}`;
+          const mailtoLink = `mailto:Dima@elitedevs.org?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+          window.location.href = mailtoLink;
           this.reset();
         });
       }
