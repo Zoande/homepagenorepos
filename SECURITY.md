@@ -2,20 +2,35 @@
 
 ## Supported Versions
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
+Security fixes are applied to the current default branch and latest production deployment.
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+| Version | Supported |
+| ------- | --------- |
+| Latest deployment | Yes |
+| Current default branch | Yes |
+| Older snapshots/forks | No |
 
 ## Reporting a Vulnerability
 
-Use this section to tell people how to report a vulnerability.
+Please do not disclose vulnerabilities publicly.
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+1. Use GitHub Private Vulnerability Reporting for this repository (Security tab).
+2. If private reporting is unavailable, contact maintainers directly through repository contact channels and include `[Security]` in the subject.
+
+Please include:
+
+- Affected URL, page, or file path.
+- Reproduction steps.
+- Expected vs actual behavior.
+- Potential impact.
+- Suggested remediation (if available).
+
+## Scope
+
+This policy covers first-party code in this repository, including:
+
+- Static pages and project detail pages.
+- Client scripts in `scripts/` and project data in `data/`.
+- Styling and deployment config.
+
+This does not cover vulnerabilities originating from third-party CDN services or external linked applications.

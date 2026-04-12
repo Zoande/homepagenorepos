@@ -245,6 +245,7 @@ body {
 h1 {
   background: linear-gradient(135deg, #000 0%, #444 100%) !important;
   -webkit-background-clip: text !important;
+  background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   font-weight: 800 !important;
   letter-spacing: -0.04em !important;
