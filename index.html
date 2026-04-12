@@ -198,47 +198,99 @@
 
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script>
-      AOS.init({
-        duration: 500,
-        easing: 'ease-in-out-cubic',
-        once: false,
-        mirror: true,
-        offset: 100
-      });
+      const hasAOS = typeof window.AOS !== 'undefined' && typeof window.AOS.init === 'function';
 
-      // Add smooth page transitions
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-          e.preventDefault();
-          const target = document.querySelector(this.getAttribute('href'));
-          if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
+      if (hasAOS) {
+        window.AOS.init({
+          duration: 460,
+          easing: 'ease-out-cubic',
+          once: true,
+          mirror: false,
+          offset: 80,
+          disable: window.innerWidth < 820
         });
-      });
-
-      // Update active nav link
-      function updateActiveNav() {
-        const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('.nav-item a');
-        
-        window.addEventListener('scroll', () => {
-          let current = '';
-          sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            if (scrollY >= sectionTop - 200) {
-              current = section.getAttribute('id');
-            }
-          });
-          
-          navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === '#' + current) {
-              link.classList.add('active');
-            }
-          });
+      } else {
+        document.querySelectorAll('[data-aos]').forEach((el) => {
+          el.removeAttribute('data-aos');
+          el.style.opacity = '1';
+          el.style.transform = 'none';
         });
       }
+
+      const getNavOffset = () => {
+        const nav = document.querySelector('.site-nav');
+        return nav ? nav.offsetHeight + 14 : 70;
+      };
+
+      const scrollToHash = (hash) => {
+        const target = document.querySelector(hash);
+        if (!target) {
+          return;
+        }
+
+        const top = target.getBoundingClientRect().top + window.scrollY - getNavOffset();
+        window.scrollTo({ top, behavior: 'smooth' });
+      };
+
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener('click', function(e) {
+          const href = this.getAttribute('href');
+          if (!href || href === '#') {
+            return;
+          }
+
+          const target = document.querySelector(href);
+          if (!target) {
+            return;
+          }
+
+          e.preventDefault();
+          scrollToHash(href);
+        });
+      });
+
+      function updateActiveNav() {
+        const sections = Array.from(document.querySelectorAll('section[id]'));
+        const navLinks = Array.from(document.querySelectorAll('.nav-item a'));
+        let ticking = false;
+
+        const refresh = () => {
+          const currentY = window.scrollY + getNavOffset() + 12;
+          let current = '';
+
+          sections.forEach((section) => {
+            if (currentY >= section.offsetTop) {
+              current = section.getAttribute('id') || '';
+            }
+          });
+
+          navLinks.forEach((link) => {
+            const href = link.getAttribute('href');
+            const isSectionLink = href === '#' + current || href === 'index.html#' + current;
+            const isHome = !current && (href === 'index.html' || href === '/');
+            link.classList.toggle('active', isSectionLink || isHome);
+          });
+        };
+
+        window.addEventListener('scroll', () => {
+          if (ticking) {
+            return;
+          }
+
+          ticking = true;
+          requestAnimationFrame(() => {
+            refresh();
+            ticking = false;
+          });
+        }, { passive: true });
+
+        refresh();
+      }
+
+      if (window.location.hash && document.querySelector(window.location.hash)) {
+        requestAnimationFrame(() => scrollToHash(window.location.hash));
+      }
+
       updateActiveNav();
     </script>
     <script src="data/projects.js"></script>

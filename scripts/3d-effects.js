@@ -5,58 +5,61 @@
 class CardTilt3D {
   constructor() {
     this.cards = document.querySelectorAll('.project-card');
-    this.init();
+    this.isEnabled =
+      this.cards.length > 0 &&
+      window.innerWidth > 980 &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches &&
+      (navigator.hardwareConcurrency || 8) >= 6;
+
+    this.cardState = new WeakMap();
+
+    if (this.isEnabled) {
+      this.init();
+    }
   }
 
   init() {
     this.cards.forEach(card => {
-      card.addEventListener('mousemove', (e) => this.onMouseMove(e, card));
-      card.addEventListener('mouseleave', (e) => this.onMouseLeave(e, card));
+      this.cardState.set(card, { x: 0.5, y: 0.5, ticking: false });
+      card.style.setProperty('--tilt-x', '0deg');
+      card.style.setProperty('--tilt-y', '0deg');
+
+      card.addEventListener('mousemove', (e) => this.onMouseMove(e, card), { passive: true });
+      card.addEventListener('mouseleave', () => this.onMouseLeave(card));
     });
   }
 
   onMouseMove(e, card) {
+    const state = this.cardState.get(card);
+    if (!state) {
+      return;
+    }
+
     const rect = card.getBoundingClientRect();
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-    
-    // Calculate angle for 3D rotation
-    const rotateY = ((mouseX - centerX) / centerX) * 15;
-    const rotateX = ((centerY - mouseY) / centerY) * 15;
-    
-    // Store mouse position for light reflection
-    const percentX = (mouseX / rect.width) * 100;
-    const percentY = (mouseY / rect.height) * 100;
-    
-    card.style.setProperty('--mouse-x', percentX + '%');
-    card.style.setProperty('--mouse-y', percentY + '%');
-    card.style.setProperty('--rotateX', rotateX + 'deg');
-    card.style.setProperty('--rotateY', rotateY + 'deg');
+    state.x = (e.clientX - rect.left) / rect.width;
+    state.y = (e.clientY - rect.top) / rect.height;
 
-    // Add glow effect
-    const distance = Math.sqrt(
-      Math.pow(mouseX - centerX, 2) + 
-      Math.pow(mouseY - centerY, 2)
-    );
-    const maxDistance = Math.sqrt(centerX * centerX + centerY * centerY);
-    const intensity = 1 - (distance / maxDistance);
+    if (state.ticking) {
+      return;
+    }
 
-    card.style.boxShadow = `
-      0 0 ${20 + intensity * 40}px rgba(155, 107, 168, ${0.2 + intensity * 0.3}),
-      0 ${intensity * 20}px ${40 + intensity * 20}px rgba(0, 0, 0, ${0.1 + intensity * 0.2})
-    `;
+    state.ticking = true;
+    requestAnimationFrame(() => {
+      const rotateY = (state.x - 0.5) * 7;
+      const rotateX = (0.5 - state.y) * 7;
+      card.style.setProperty('--mouse-x', `${(state.x * 100).toFixed(1)}%`);
+      card.style.setProperty('--mouse-y', `${(state.y * 100).toFixed(1)}%`);
+      card.style.setProperty('--tilt-x', `${rotateX.toFixed(2)}deg`);
+      card.style.setProperty('--tilt-y', `${rotateY.toFixed(2)}deg`);
+      state.ticking = false;
+    });
   }
 
-  onMouseLeave(e, card) {
-    card.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(0px)';
-    card.style.boxShadow = '';
+  onMouseLeave(card) {
     card.style.setProperty('--mouse-x', '50%');
     card.style.setProperty('--mouse-y', '50%');
-    card.style.setProperty('--rotateX', '0deg');
-    card.style.setProperty('--rotateY', '0deg');
+    card.style.setProperty('--tilt-x', '0deg');
+    card.style.setProperty('--tilt-y', '0deg');
   }
 }
 
@@ -68,17 +71,36 @@ class ParallaxDepth {
   constructor() {
     this.layers = document.querySelectorAll('[data-parallax]');
     this.window = window;
+    this.ticking = false;
+    this.isEnabled =
+      this.layers.length > 0 &&
+      window.innerWidth > 980 &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches &&
+      (navigator.hardwareConcurrency || 8) >= 6;
     
-    if (this.layers.length > 0) {
-      this.window.addEventListener('scroll', () => this.onScroll());
+    if (this.isEnabled) {
+      this.window.addEventListener('scroll', () => this.onScroll(), { passive: true });
+      this.onScroll();
     }
   }
 
   onScroll() {
+    if (this.ticking) {
+      return;
+    }
+
+    this.ticking = true;
+    requestAnimationFrame(() => {
+      this.onScrollFrame();
+      this.ticking = false;
+    });
+  }
+
+  onScrollFrame() {
     this.layers.forEach(layer => {
       const depth = parseFloat(layer.getAttribute('data-parallax')) || 0.5;
-      const offset = this.window.scrollY * depth;
-      layer.style.transform = `translateY(${offset}px)`;
+      const offset = this.window.scrollY * Math.min(depth, 0.08);
+      layer.style.transform = `translate3d(0, ${offset}px, 0)`;
     });
   }
 }
@@ -91,18 +113,34 @@ class TextPerspective {
   constructor() {
     this.textElements = document.querySelectorAll('.hero-text-3d');
     this.mouse = { x: 0, y: 0 };
+    this.ticking = false;
+    this.isEnabled =
+      this.textElements.length > 0 &&
+      window.innerWidth > 980 &&
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!this.isEnabled) {
+      return;
+    }
     
     document.addEventListener('mousemove', (e) => {
       this.mouse.x = e.clientX / window.innerWidth;
       this.mouse.y = e.clientY / window.innerHeight;
-      this.updatePerspective();
-    });
+
+      if (!this.ticking) {
+        this.ticking = true;
+        requestAnimationFrame(() => {
+          this.updatePerspective();
+          this.ticking = false;
+        });
+      }
+    }, { passive: true });
   }
 
   updatePerspective() {
     this.textElements.forEach(el => {
-      const rotX = (this.mouse.y - 0.5) * 10;
-      const rotY = (this.mouse.x - 0.5) * 10;
+      const rotX = (this.mouse.y - 0.5) * 6;
+      const rotY = (this.mouse.x - 0.5) * 6;
       
       el.style.transform = `
         perspective(1200px) 
