@@ -251,8 +251,8 @@ class ThreeDHero {
   animate() {
     requestAnimationFrame(() => this.animate());
 
-    // Smooth scroll lerp to prevent jerky layout - MUCH SMOOTHER TRANSITIONS
-    this.scroll += (this.targetScroll - this.scroll) * 0.12;
+    // Ultra-smooth scroll lerp for luxury feel
+    this.scroll += (this.targetScroll - this.scroll) * 0.22;
 
     // Rotate objects
     this.objects.forEach((obj, index) => {
@@ -280,13 +280,11 @@ class ThreeDHero {
       obj.mesh.position.x += (this.mouse.x * mouseInfluence - obj.mesh.position.x) * 0.015;
       obj.mesh.position.y += (this.mouse.y * mouseInfluence - obj.mesh.position.y) * 0.015;
 
-      // Parallax with scroll - ABSOLUTE position based on START position, not incremental
-      // MUCH slower to prevent overwhelming effect
-      const scrollParallax = this.scroll * 0.0003;
-      obj.mesh.position.z = obj.startPos.z + (scrollParallax * 0.15);
-      
-      // Gentle rotation based on scroll (VERY subtle now)
-      const rotationInfluence = scrollParallax * 0.015;
+      // Parallax with scroll - even gentler for luxury
+      const scrollParallax = this.scroll * 0.00018;
+      obj.mesh.position.z = obj.startPos.z + (scrollParallax * 0.09);
+      // Even gentler rotation based on scroll
+      const rotationInfluence = scrollParallax * 0.008;
       obj.mesh.rotation.x += rotationInfluence * 0.2;
       obj.mesh.rotation.y += rotationInfluence * 0.3;
     });
