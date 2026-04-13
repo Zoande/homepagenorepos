@@ -268,6 +268,7 @@ window.PROJECTS = [
     title: "Swapspot",
     owner: "DH4410",
     repoUrl: "https://github.com/DH4410/Swapspot",
+    liveUrl: "https://swapspot-lime.vercel.app/",
     localPath: "repos/DH4410__Swapspot",
     tech: ["React", "TypeScript", "Vite", "Tailwind"],
     stage: "Playable game prototype",
