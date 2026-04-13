@@ -4,6 +4,41 @@
 
   const project = projects.find((item) => item.id === pageId);
   const liveUrl = project && typeof project.liveUrl === "string" ? project.liveUrl.trim() : "";
+  const params = new URLSearchParams(window.location.search);
+  const fromParam = params.get("from");
+  const referrer = document.referrer || "";
+  const sourceKey = "elitedevs:return-source";
+  const explicitSource = fromParam === "projects" || fromParam === "home" ? fromParam : "";
+
+  let storedSource = "";
+  try {
+    storedSource = window.sessionStorage.getItem(sourceKey) || "";
+  } catch (_) {
+    storedSource = "";
+  }
+
+  let resolvedSource = explicitSource;
+  if (!resolvedSource) {
+    if (/\/projects\.html(?:[?#]|$)/i.test(referrer)) {
+      resolvedSource = "projects";
+    } else if (/\/index\.html(?:[?#]|$)/i.test(referrer) || /\/$/.test(referrer)) {
+      resolvedSource = "home";
+    } else if (storedSource === "projects" || storedSource === "home") {
+      resolvedSource = storedSource;
+    } else {
+      resolvedSource = "home";
+    }
+  }
+
+  try {
+    window.sessionStorage.setItem(sourceKey, resolvedSource);
+  } catch (_) {
+    // Ignore storage errors and continue.
+  }
+
+  const cameFromProjects = resolvedSource === "projects";
+  const returnHref = cameFromProjects ? "../projects.html" : "../index.html";
+  const returnLabel = cameFromProjects ? "Back to all projects" : "Back to home";
 
   if (!project) {
     const root = document.getElementById("project-page");
@@ -33,6 +68,24 @@
   if (summaryEl) summaryEl.textContent = project.summary || "Summary coming soon.";
   if (stageEl) stageEl.textContent = project.stage || "Stage not set";
   if (statusEl) statusEl.textContent = project.status || "Status details coming soon.";
+
+  const backLink = document.querySelector(".back-link");
+  if (backLink) {
+    backLink.href = returnHref;
+    backLink.textContent = returnLabel;
+  }
+
+  const viewAllButton = document.querySelector(".project-hero .actions .button.ghost");
+  if (viewAllButton) {
+    viewAllButton.href = returnHref;
+    viewAllButton.textContent = cameFromProjects ? "View All Projects" : "Back Home";
+  }
+
+  const navProjectsLink = document.querySelector('.nav-menu a[href*="#projects"]');
+  if (navProjectsLink) {
+    navProjectsLink.href = "../projects.html";
+    navProjectsLink.classList.add("active");
+  }
 
   if (repoLinkEl) {
     repoLinkEl.href = project.repoUrl || "#";

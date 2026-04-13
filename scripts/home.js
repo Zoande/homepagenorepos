@@ -60,7 +60,7 @@
           <div class="chip-row">${tech}</div>
           <div class="card-actions">
             <a class="button ghost" href="${project.repoUrl}" target="_blank" rel="noopener noreferrer">Repo</a>
-            <a class="button" href="projects/${project.id}.html">Open Page</a>
+            <a class="button" href="projects/${project.id}.html?from=home">Open Page</a>
           </div>
         </article>
       `;

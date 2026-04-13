@@ -39,7 +39,7 @@
     const type = projectTypes[project.id] || 'tool';
     const hasTech = Array.isArray(project.tech) && project.tech.length > 0;
     const detailItems = Array.isArray(project.details) ? project.details.slice(0, 2) : [];
-    const projectPageUrl = `projects/${project.id}.html`;
+    const projectPageUrl = `projects/${project.id}.html?from=projects`;
     
     return `
       <div class="project-card" data-type="${type}" data-aos="fade-up" data-aos-duration="500">
@@ -88,7 +88,7 @@
               </button>
             `}
 
-            <a href="${projectPageUrl}" class="action-btn action-btn-secondary action-btn-full">
+            <a href="${projectPageUrl}" class="action-btn action-btn-secondary action-btn-full project-page-link">
               📄 Project Page
             </a>
           </div>
@@ -125,6 +125,19 @@
         renderProjects(filtered);
       }
     });
+  });
+
+  grid.addEventListener('click', (event) => {
+    const link = event.target.closest('.project-page-link');
+    if (!link) {
+      return;
+    }
+
+    try {
+      window.sessionStorage.setItem('elitedevs:return-source', 'projects');
+    } catch (_) {
+      // Ignore storage errors and continue with query-param fallback.
+    }
   });
 
   // Initial render
