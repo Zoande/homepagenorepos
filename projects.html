@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="small_logo_nobg.png" />
+    <title>Projects - EliteDevs</title>
+    <script defer src="/_vercel/insights/script.js"></script>
+    <script>
+      window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/speed-insights/script.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&family=Bebas+Neue&display=swap"
+      rel="stylesheet"
+    />
+    <link 
+      rel="stylesheet" 
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link 
+      rel="stylesheet" 
+      href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="stylesheet" href="styles-premium-light.css" />
+    <style>
+      /* Projects Page Specific Styles */
+      .projects-canvas-bg {
+        position: fixed;
+        inset: 0;
+        z-index: -2;
+        pointer-events: none;
+        opacity: 0.42;
+      }
+
+      .projects-page {
+        color: #111827;
+      }
+
+      .projects-header {
+        position: relative;
+        padding: 6rem 2rem 4rem;
+        text-align: center;
+        overflow: hidden;
+      }
+
+      .projects-header h1 {
+        font-size: 3.5rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, #0f172a 0%, #0ea5e9 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 1rem;
+      }
+
+      .projects-header p {
+        font-size: 1.2rem;
+        color: #334155;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      /* Animated Background Orbs for Projects Page */
+      .orb-bg {
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(60px);
+        opacity: 0.08;
+        z-index: -1;
+      }
+
+      .orb-1 {
+        width: 400px;
+        height: 400px;
+        background: #00ffff;
+        top: -100px;
+        right: -50px;
+        animation: float-slow 15s ease-in-out infinite;
+      }
+
+      .orb-2 {
+        width: 300px;
+        height: 300px;
+        background: #ff0080;
+        bottom: 10%;
+        left: -100px;
+        animation: float-slow 20s ease-in-out infinite reverse;
+      }
+
+      .orb-3 {
+        width: 250px;
+        height: 250px;
+        background: #00ffff;
+        bottom: 20%;
+        right: 5%;
+        animation: float-slow 18s ease-in-out infinite;
+      }
+
+      @keyframes float-slow {
+        0%, 100% { transform: translate(0, 0); }
+        25% { transform: translate(30px, -30px); }
+        50% { transform: translate(-20px, 20px); }
+        75% { transform: translate(25px, 25px); }
+      }
+
+      /* Projects Grid */
+      .projects-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 4rem 2rem;
+      }
+
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+        gap: 3rem;
+        animation: fadeInUp 0.8s ease-out;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Project Card */
+      .project-card {
+        position: relative;
+        border-radius: 16px;
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.82);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+
+      .project-card:hover {
+        transform: translateY(-8px);
+        background: rgba(255, 255, 255, 0.94);
+        border-color: rgba(14, 165, 233, 0.4);
+        box-shadow: 0 20px 40px rgba(14, 165, 233, 0.14);
+      }
+
+      .project-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(0, 255, 255, 0.1) 0%, rgba(255, 0, 128, 0.05) 100%);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .project-card:hover::before {
+        opacity: 1;
+      }
+
+      /* Project Media */
+      .project-media {
+        width: 100%;
+        height: 240px;
+        background: linear-gradient(135deg, rgba(14, 165, 233, 0.16) 0%, rgba(244, 114, 182, 0.13) 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 4rem;
+        color: rgba(15, 23, 42, 0.6);
+        text-align: center;
+        padding: 2rem;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .project-media::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+        transition: left 0.6s ease;
+      }
+
+      .project-card:hover .project-media::after {
+        left: 100%;
+      }
+
+      .media-icon {
+        display: block;
+        animation: pulse-glow 2s ease-in-out infinite;
+      }
+
+      @keyframes pulse-glow {
+        0%, 100% { transform: scale(1); text-shadow: 0 0 10px rgba(0, 255, 255, 0.5); }
+        50% { transform: scale(1.05); text-shadow: 0 0 20px rgba(0, 255, 255, 0.8); }
+      }
+
+      /* Project Content */
+      .project-content {
+        padding: 2rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        z-index: 2;
+      }
+
+      .project-header {
+        margin-bottom: 1rem;
+      }
+
+      .project-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        background: linear-gradient(135deg, #0f172a 0%, #0284c7 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .project-owner {
+        font-size: 0.85rem;
+        color: #0c4a6e;
+        margin-bottom: 0.5rem;
+      }
+
+      .project-stage {
+        display: inline-block;
+        padding: 0.4rem 0.8rem;
+        background: rgba(14, 165, 233, 0.12);
+        border: 1px solid rgba(14, 165, 233, 0.35);
+        border-radius: 8px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #075985;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 1rem;
+      }
+
+      .project-summary {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        color: #334155;
+        margin-bottom: 1rem;
+      }
+
+      .project-details {
+        margin: 0 0 1rem;
+        padding-left: 1rem;
+        color: #334155;
+      }
+
+      .project-details li {
+        margin-bottom: 0.4rem;
+        font-size: 0.88rem;
+        line-height: 1.45;
+      }
+
+      .project-tech {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .tech-tag {
+        padding: 0.3rem 0.7rem;
+        background: rgba(15, 23, 42, 0.06);
+        border: 1px solid rgba(15, 23, 42, 0.16);
+        border-radius: 6px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: #334155;
+        transition: all 0.3s ease;
+      }
+
+      .tech-tag:hover {
+        background: rgba(0, 255, 255, 0.2);
+        border-color: rgba(0, 255, 255, 0.4);
+        color: #00ffff;
+      }
+
+      /* Action Buttons */
+      .project-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+        margin-top: auto;
+      }
+
+      .action-btn {
+        padding: 0.75rem 1.2rem;
+        border-radius: 8px;
+        border: none;
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        text-align: center;
+        white-space: nowrap;
+      }
+
+      .action-btn-primary {
+        background: linear-gradient(135deg, #00ffff 0%, #00ccff 100%);
+        color: #000;
+        border: none;
+      }
+
+      .action-btn-primary:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 20px rgba(0, 255, 255, 0.4);
+      }
+
+      .action-btn-secondary {
+        background: rgba(15, 23, 42, 0.05);
+        color: #0f172a;
+        border: 1px solid rgba(15, 23, 42, 0.15);
+      }
+
+      .action-btn-secondary:hover {
+        background: rgba(14, 165, 233, 0.15);
+        border-color: rgba(14, 165, 233, 0.4);
+        color: #075985;
+      }
+
+      .action-btn-full {
+        grid-column: 1 / -1;
+      }
+
+      /* Filter Section */
+      .filter-section {
+        text-align: center;
+        margin-bottom: 3rem;
+        padding: 2rem 0;
+      }
+
+      .filter-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 1.5rem;
+      }
+
+      .filter-btn {
+        padding: 0.6rem 1.5rem;
+        border: 2px solid rgba(15, 23, 42, 0.18);
+        background: rgba(255, 255, 255, 0.72);
+        color: #0f172a;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .filter-btn:hover,
+      .filter-btn.active {
+        border-color: #0284c7;
+        color: #075985;
+        background: rgba(14, 165, 233, 0.18);
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .projects-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .projects-header h1 {
+          font-size: 2.5rem;
+        }
+
+        .project-actions {
+          grid-template-columns: 1fr;
+        }
+
+        .action-btn-full {
+          grid-column: 1;
+        }
+      }
+    </style>
+  </head>
+  <body class="projects-page">
+    <!-- Navigation -->
+    <nav class="site-nav">
+      <div class="nav-container">
+        <a href="index.html" class="nav-logo">ELITEDEVS</a>
+        <ul class="nav-menu">
+          <li class="nav-item"><a href="index.html">Home</a></li>
+          <li class="nav-item"><a href="projects.html" class="active">Projects</a></li>
+          <li class="nav-item"><a href="about.html">About</a></li>
+          <li class="nav-item"><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Animated Background Orbs -->
+    <div id="projects-canvas-bg" class="projects-canvas-bg"></div>
+    <div class="orb-bg orb-1"></div>
+    <div class="orb-bg orb-2"></div>
+    <div class="orb-bg orb-3"></div>
+
+    <!-- Premium Mouse Glow -->
+    <div id="mouse-glow" style="position: fixed; width: 400px; height: 400px; background: radial-gradient(circle, rgba(0, 255, 255, 0.25) 0%, transparent 60%); border-radius: 50%; pointer-events: none; z-index: 9998; top: 0; left: 0; transform: translate3d(calc(var(--mouseX, 0) - 50%), calc(var(--mouseY, 0) - 50%), 0); will-change: transform; transition: opacity 0.3s ease; opacity: 0;"></div>
+
+    <!-- Header -->
+    <header class="projects-header">
+      <h1 data-aos="fade-up" data-aos-duration="600">Our Projects</h1>
+      <p data-aos="fade-up" data-aos-duration="600" data-aos-delay="100">
+        Explore the full portfolio of innovative software solutions. From cutting-edge web applications to immersive 3D experiences, each project showcases our commitment to excellence.
+      </p>
+    </header>
+
+    <!-- Main Content -->
+    <main class="projects-container">
+      <!-- Filter Section -->
+      <div class="filter-section" data-aos="fade-up" data-aos-duration="600">
+        <h3 style="opacity: 0.85; margin-bottom: 1rem;">Filter by Category</h3>
+        <div class="filter-buttons">
+          <button class="filter-btn active" data-filter="all">All Projects</button>
+          <button class="filter-btn" data-filter="game">Games</button>
+          <button class="filter-btn" data-filter="strategy">Strategy</button>
+          <button class="filter-btn" data-filter="tool">Tools & Apps</button>
+          <button class="filter-btn" data-filter="trading">Trading</button>
+        </div>
+      </div>
+
+      <!-- Projects Grid -->
+      <div class="projects-grid" id="projects-grid"></div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-content">
+        <div class="footer-grid">
+          <div class="footer-column">
+            <h4>EliteDevs</h4>
+            <p>An evolving ecosystem of innovation. We build technology that matters.</p>
+          </div>
+          <div class="footer-column">
+            <h4>Quick Links</h4>
+            <a href="index.html">Home</a>
+            <a href="projects.html">Projects</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+          </div>
+          <div class="footer-column">
+            <h4>Connect</h4>
+            <a href="https://github.com/Zoande/homepagenorepos" target="_blank">GitHub</a>
+            <span style="cursor: default; opacity: 0.6;">Twitter (Coming Soon)</span>
+            <span style="cursor: default; opacity: 0.6;">LinkedIn (Coming Soon)</span>
+          </div>
+          <div class="footer-column">
+            <h4>Resources</h4>
+            <span style="cursor: default; opacity: 0.6; display: block;">Privacy Policy (Coming Soon)</span>
+            <span style="cursor: default; opacity: 0.6; display: block;">Terms of Service (Coming Soon)</span>
+            <a href="contact.html">Get Support</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 EliteDevs. Crafted with premium attention to detail. | elitedevs.org</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+      const hasAOS = typeof window.AOS !== 'undefined' && typeof window.AOS.init === 'function';
+      const clearAOSState = () => {
+        document.querySelectorAll('[data-aos]').forEach((el) => {
+          el.removeAttribute('data-aos');
+          el.removeAttribute('data-aos-duration');
+          el.removeAttribute('data-aos-delay');
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+        });
+      };
+
+      window.__AOS_ACTIVE__ = hasAOS;
+
+      if (window.__AOS_ACTIVE__) {
+        window.AOS.init({
+          duration: 460,
+          easing: 'ease-out-cubic',
+          once: true,
+          mirror: false,
+          offset: 80,
+          disable: false
+        });
+      } else {
+        clearAOSState();
+      }
+
+      // Mouse Glow Effect
+      const glow = document.getElementById('mouse-glow');
+      let isVisible = false;
+      document.addEventListener('mousemove', (e) => {
+        if (!isVisible) {
+          glow.style.opacity = '1';
+          isVisible = true;
+        }
+        glow.style.setProperty('--mouseX', e.clientX + 'px');
+        glow.style.setProperty('--mouseY', e.clientY + 'px');
+      }, { passive: true });
+      document.addEventListener('mouseleave', () => {
+        glow.style.opacity = '0';
+        isVisible = false;
+      });
+
+      // Three.js particle-wave background for projects page (distinct from home hero effect)
+      (function initProjectsParticles() {
+        if (typeof window.THREE === 'undefined') {
+          return;
+        }
+
+        const container = document.getElementById('projects-canvas-bg');
+        if (!container) {
+          return;
+        }
+
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 70;
+
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        container.appendChild(renderer.domElement);
+
+        const pointsCount = 900;
+        const positions = new Float32Array(pointsCount * 3);
+        const seeds = new Float32Array(pointsCount);
+
+        for (let i = 0; i < pointsCount; i += 1) {
+          const i3 = i * 3;
+          const x = (Math.random() - 0.5) * 180;
+          const y = (Math.random() - 0.5) * 100;
+          const z = (Math.random() - 0.5) * 70;
+
+          positions[i3] = x;
+          positions[i3 + 1] = y;
+          positions[i3 + 2] = z;
+          seeds[i] = Math.random() * Math.PI * 2;
+        }
+
+        const geometry = new THREE.BufferGeometry();
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+        const material = new THREE.PointsMaterial({
+          color: 0x0891b2,
+          size: 0.8,
+          transparent: true,
+          opacity: 0.62,
+          blending: THREE.AdditiveBlending
+        });
+
+        const points = new THREE.Points(geometry, material);
+        scene.add(points);
+
+        let rafId = null;
+        const animate = (time) => {
+          const t = time * 0.001;
+          const pos = geometry.attributes.position.array;
+
+          for (let i = 0; i < pointsCount; i += 1) {
+            const i3 = i * 3;
+            const baseX = pos[i3];
+            pos[i3 + 1] += Math.sin(t * 0.8 + seeds[i] + baseX * 0.02) * 0.012;
+          }
+
+          geometry.attributes.position.needsUpdate = true;
+          points.rotation.y = t * 0.05;
+          points.rotation.x = Math.sin(t * 0.3) * 0.08;
+
+          renderer.render(scene, camera);
+          rafId = requestAnimationFrame(animate);
+        };
+
+        const onResize = () => {
+          camera.aspect = window.innerWidth / window.innerHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(window.innerWidth, window.innerHeight);
+        };
+
+        window.addEventListener('resize', onResize, { passive: true });
+
+        if (!reduceMotion) {
+          rafId = requestAnimationFrame(animate);
+        } else {
+          renderer.render(scene, camera);
+        }
+
+        window.addEventListener('beforeunload', () => {
+          if (rafId) {
+            cancelAnimationFrame(rafId);
+          }
+          window.removeEventListener('resize', onResize);
+          geometry.dispose();
+          material.dispose();
+          renderer.dispose();
+        });
+      })();
+    </script>
+
+    <script src="data/projects.js"></script>
+    <script src="scripts/projects-list.js"></script>
+  </body>
+</html>
