@@ -3,7 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="small_logo_nobg.png" />
     <title>Contact | EliteDevs</title>
+    <script defer src="/_vercel/insights/script.js"></script>
+    <!-- Vercel Speed Insights - Enhanced initialization -->
+    <script>
+      window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/speed-insights/script.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -18,104 +25,7 @@
       rel="stylesheet" 
       href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
     />
-    <link rel="stylesheet" href="styles.css" />
-
-    <!-- Custom spacing and background overrides for the Contact page -->
-    <style>
-      /* --- Dynamic Background --- */
-      body {
-        background: linear-gradient(-45deg, #f8f9fa, #eef2f5, #e0e7ee, #f3f0f5);
-        background-size: 400% 400%;
-        animation: gradientBG 15s ease infinite;
-        position: relative;
-      }
-
-      /* Subtle tech/developer grid pattern overlay */
-      body::before {
-        content: '';
-        position: fixed;
-        inset: 0;
-        background-image: 
-          linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
-        background-size: 40px 40px;
-        z-index: -1;
-        pointer-events: none;
-      }
-
-      @keyframes gradientBG {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-      }
-
-      /* Background Orbs (Blue/Orange mix for Contact) */
-      .bg-shape {
-        filter: blur(80px);
-        opacity: 0.5;
-        mix-blend-mode: multiply;
-        z-index: -1;
-      }
-      .bg-shape.s1 { background: rgba(107, 157, 197, 0.6); width: 400px; height: 400px; top: 10%; left: -5%; }
-      .bg-shape.s2 { background: rgba(224, 120, 86, 0.5); width: 500px; height: 500px; bottom: 5%; right: -5%; }
-
-      /* --- Layout Fixes --- */
-      .site-header.contact-header {
-        min-height: auto !important;
-        padding: 8rem 2rem 3rem !important;
-        background: transparent !important;
-        border-bottom: none;
-        text-align: center;
-      }
-
-      .contact-header h1 {
-        background: linear-gradient(135deg, #111 0%, #6B9DC5 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        font-size: clamp(2.5rem, 8vw, 4rem);
-      }
-
-      /* Glassmorphism for Form and Cards */
-      .glass-panel {
-        background: rgba(255, 255, 255, 0.8) !important;
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255,255,255,1) !important;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04) !important;
-        border-radius: 16px;
-      }
-
-      .contact-form-section {
-        padding: 2.5rem;
-      }
-
-      .info-card {
-        transition: transform 0.3s ease, box-shadow 0.3s ease !important;
-        border-top: 4px solid transparent !important;
-      }
-      
-      .info-card:hover {
-        transform: translateY(-5px) !important;
-        box-shadow: 0 12px 40px rgba(107, 157, 197, 0.15) !important;
-      }
-      
-      .info-card:nth-child(2) { border-top-color: #6B9DC5 !important; }
-      .info-card:nth-child(3) { border-top-color: #9B6BA8 !important; }
-      .info-card:nth-child(4) { border-top-color: #D97634 !important; }
-
-      /* Form input adjustments for glass look */
-      .form-group input, .form-group textarea, .form-group select {
-        background: rgba(255, 255, 255, 0.5) !important;
-      }
-      .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
-        background: #fff !important;
-      }
-
-      /* Tighten up spacing */
-      .contact-container {
-        margin-top: 1rem !important;
-        margin-bottom: 5rem !important;
-      }
-    </style>
+    <link rel="stylesheet" href="styles-premium-light.css" />
   </head>
   <body>
     <!-- Navigation -->
@@ -134,103 +44,129 @@
     <!-- Decorative Shapes -->
     <div class="bg-shape s1"></div>
     <div class="bg-shape s2"></div>
+    <div class="bg-shape s3"></div>
+    <div class="bg-shape s4"></div>
+    <div class="bg-shape s5"></div>
 
-    <header class="site-header contact-header">
-      <div data-aos="fade-up" data-aos-duration="500">
-        <h1>Contact Us</h1>
-        <p class="lead" style="margin: 0 auto; max-width: 600px;">
-          Interested in working together or have a question about our repositories? Drop us a message.
-        </p>
-      </div>
+    <header class="site-header">
+      <p class="eyebrow" data-aos="fade-up" data-aos-duration="500">Get In Touch</p>
+      <h1 data-aos="fade-up" data-aos-duration="500" data-aos-delay="100">Contact Us</h1>
+      <p class="lead" data-aos="fade-up" data-aos-duration="500" data-aos-delay="200">
+        Have a project in mind? Want to collaborate? We'd love to hear from you. Reach out and let's create something extraordinary together.
+      </p>
     </header>
 
     <main>
       <div class="contact-container" data-aos="fade-up" data-aos-duration="700">
         <div class="contact-content">
           <!-- Contact Form -->
-          <section class="glass-panel contact-form-section" data-aos="fade-right" data-aos-delay="100">
-            <h2 style="margin-top: 0; font-size: 1.8rem;">Send a Message</h2>
-            <form id="contact-form" class="contact-form" style="margin-top: 1.5rem;">
-              <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" required placeholder="John Doe">
+          <section class="contact-form-section">
+            <h2>Let's Talk</h2>
+            <form id="contact-form" class="contact-form">
+              <div class="form-group" data-aos="fade-up" data-aos-duration="600" data-aos-delay="100">
+                <label for="name">Full Name *</label>
+                <input type="text" id="name" name="name" required placeholder="Your name">
               </div>
 
-              <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required placeholder="john@example.com">
+              <div class="form-group" data-aos="fade-up" data-aos-duration="600" data-aos-delay="150">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" required placeholder="your@email.com">
               </div>
 
-              <div class="form-group">
-                <label for="project-type">Topic</label>
+              <div class="form-group" data-aos="fade-up" data-aos-duration="600" data-aos-delay="200">
+                <label for="subject">Subject *</label>
+                <input type="text" id="subject" name="subject" required placeholder="What's this about?">
+              </div>
+
+              <div class="form-group" data-aos="fade-up" data-aos-duration="600" data-aos-delay="250">
+                <label for="project-type">Project Type</label>
                 <select id="project-type" name="project-type">
-                  <option value="">What is this regarding?</option>
-                  <option value="project">New Project Inquiry</option>
-                  <option value="collab">Collaboration</option>
-                  <option value="repo">Question about a GitHub Repo</option>
+                  <option value="">Select a project type</option>
+                  <option value="web">Web Application</option>
+                  <option value="game">Game/Interactive</option>
+                  <option value="mobile">Mobile App</option>
+                  <option value="ai">AI/ML System</option>
                   <option value="other">Other</option>
                 </select>
               </div>
 
-              <div class="form-group">
-                <label for="message">Message</label>
-                <textarea id="message" name="message" rows="5" required placeholder="Tell us what's on your mind..."></textarea>
+              <div class="form-group" data-aos="fade-up" data-aos-duration="600" data-aos-delay="300">
+                <label for="message">Message *</label>
+                <textarea id="message" name="message" rows="6" required placeholder="Tell us about your project..."></textarea>
               </div>
 
-              <button type="submit" class="button" style="width: 100%; margin-top: 0.5rem;">
-                Send Message
+              <div class="form-group" data-aos="fade-up" data-aos-duration="600" data-aos-delay="350">
+                <label for="budget">Budget Range</label>
+                <select id="budget" name="budget">
+                  <option value="">Select budget range</option>
+                  <option value="under-5k">Under $5K</option>
+                  <option value="5-25k">$5K - $25K</option>
+                  <option value="25-50k">$25K - $50K</option>
+                  <option value="50k-plus">$50K+</option>
+                </select>
+              </div>
+
+              <button type="submit" class="button" style="width: 100%; margin-top: 1rem;" data-aos="fade-up" data-aos-duration="600" data-aos-delay="400">
+                Open in Outlook
               </button>
             </form>
           </section>
 
-          <!-- Contact Info Cards -->
+          <!-- Contact Info -->
           <section class="contact-info-section">
-            <h2 style="margin-top: 0; font-size: 1.8rem;" data-aos="fade-left" data-aos-delay="100">Direct Contact</h2>
+            <h2>Other Ways to Connect</h2>
             
-            <div class="info-card glass-panel" data-aos="fade-up" data-aos-delay="150" style="margin-top: 1.5rem;">
-              <div class="info-icon">📧</div>
-              <h3 style="margin-top: 0;">Email</h3>
-              <p>Prefer email over forms? Reach us directly for any inquiries.</p>
-              <a href="mailto:hello@elitedevs.org" class="info-link">hello@elitedevs.org</a>
+            <div class="info-card" data-aos="fade-up" data-aos-duration="700" data-aos-delay="150">
+              <div class="info-icon">ðŸ“§</div>
+              <h3>Email</h3>
+              <p>Reach us directly for inquiries and collaboration opportunities.</p>
+              <a href="mailto:Dima@elitedevs.org" class="info-link">Dima@elitedevs.org</a>
             </div>
 
-            <div class="info-card glass-panel" data-aos="fade-up" data-aos-delay="200">
-              <div class="info-icon">🔗</div>
-              <h3 style="margin-top: 0;">Network</h3>
-              <p>Check out our open-source code and professional updates.</p>
+            <div class="info-card" data-aos="fade-up" data-aos-duration="700" data-aos-delay="200">
+              <div class="info-icon">ðŸ”—</div>
+              <h3>Social</h3>
+              <p>Connect with us on social media for updates and insights.</p>
               <div class="social-links">
-                <a href="https://github.com" target="_blank" class="social-link">GitHub</a>
-                <a href="https://linkedin.com" target="_blank" class="social-link">LinkedIn</a>
+                <a href="https://github.com/Zoande/homepagenorepos" target="_blank" class="social-link">GitHub</a>
+                <span class="social-link" style="cursor: default; opacity: 0.6;">Twitter (Coming Soon)</span>
+                <span class="social-link" style="cursor: default; opacity: 0.6;">LinkedIn (Coming Soon)</span>
               </div>
             </div>
 
-            <div class="info-card glass-panel" data-aos="fade-up" data-aos-delay="250">
-              <div class="info-icon">⚡</div>
-              <h3 style="margin-top: 0;">Response Time</h3>
-              <p>We review all messages and typically reply within 24 hours.</p>
+            <div class="info-card" data-aos="fade-up" data-aos-duration="700" data-aos-delay="250">
+              <div class="info-icon">ðŸ’¬</div>
+              <h3>Response Time</h3>
+              <p>We typically respond within 24-48 hours. Thank you for your patience.</p>
+            </div>
+
+            <div class="info-card" data-aos="fade-up" data-aos-duration="700" data-aos-delay="300">
+              <div class="info-icon">ðŸŽ¯</div>
+              <h3>Collaboration</h3>
+              <p>Interested in technical partnerships? Let's discuss opportunities.</p>
+              <a href="mailto:Dima@elitedevs.org" class="info-link">Dima@elitedevs.org</a>
             </div>
           </section>
         </div>
       </div>
 
-      <!-- Minimized CTA Section (So it doesn't clutter the contact page) -->
-      <section class="glass-panel" data-aos="fade-up" style="max-width: 1200px; margin: 0 auto 5rem; padding: 2.5rem; text-align: center; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;">
-        <div style="text-align: left;">
-          <h2 style="margin: 0; font-size: 1.5rem;">Not ready to talk?</h2>
-          <p style="margin: 0.5rem 0 0; color: #555;">Browse our repository of active projects and full-stack builds.</p>
-        </div>
-        <div>
-          <a href="index.html#projects" class="button ghost">View Projects</a>
+      <!-- CTA Section -->
+      <section class="cta-section" data-aos="fade-up" data-aos-duration="700" style="margin-top: 6rem;">
+        <h2>Check Out Our Latest Projects</h2>
+        <p>Explore our portfolio to see the full range of projects and solutions we've created.</p>
+        <div class="cta-actions">
+          <a href="index.html#projects" class="button">View Projects</a>
+          <a href="about.html" class="button secondary">Learn More About Us</a>
         </div>
       </section>
     </main>
 
     <footer class="site-footer">
-      <div class="footer-content" style="max-width: 1200px; margin: 0 auto;">
+      <div class="footer-content">
         <div class="footer-grid">
           <div class="footer-column">
-            <h4>EliteDevs</h4>
-            <p>Two developers building high-performance software.</p>
+            <h4>Portfolio</h4>
+            <p>An evolving ecosystem of innovation. We build technology that matters.</p>
           </div>
           <div class="footer-column">
             <h4>Quick Links</h4>
@@ -241,36 +177,63 @@
           </div>
           <div class="footer-column">
             <h4>Connect</h4>
-            <a href="https://github.com" target="_blank">GitHub</a>
-            <a href="https://twitter.com" target="_blank">Twitter</a>
-            <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+            <a href="https://github.com/Zoande/homepagenorepos" target="_blank">GitHub</a>
+            <span style="cursor: default; opacity: 0.6;">Twitter (Coming Soon)</span>
+            <span style="cursor: default; opacity: 0.6;">LinkedIn (Coming Soon)</span>
+          </div>
+          <div class="footer-column">
+            <h4>Resources</h4>
+            <span style="cursor: default; opacity: 0.6;">Privacy Policy (Coming Soon)</span>
+            <span style="cursor: default; opacity: 0.6;">Terms of Service (Coming Soon)</span>
+            <a href="contact.html">Get Support</a>
           </div>
         </div>
         <div class="footer-bottom">
-          <p>&copy; 2026 EliteDevs. All rights reserved.</p>
+          <p>&copy; 2026 Portfolio. Crafted with premium attention to detail.</p>
         </div>
       </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script>
-      AOS.init({
-        duration: 600,
-        easing: 'ease-out-cubic',
-        once: true,
-        offset: 50
-      });
+      const hasAOS = typeof window.AOS !== 'undefined' && typeof window.AOS.init === 'function';
+      if (hasAOS) {
+        window.AOS.init({
+          duration: 500,
+          easing: 'ease-out-cubic',
+          once: true,
+          mirror: false,
+          offset: 80,
+          disable: window.innerWidth < 820
+        });
+      } else {
+        document.querySelectorAll('[data-aos]').forEach((el) => {
+          el.removeAttribute('data-aos');
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+        });
+      }
 
       // Handle form submission
       const contactForm = document.getElementById('contact-form');
       if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
           e.preventDefault();
-          // Show success message
-          alert('Thank you for your message! We\'ll get back to you soon.');
+          const name = document.getElementById('name').value;
+          const email = document.getElementById('email').value;
+          const subject = document.getElementById('subject').value;
+          const message = document.getElementById('message').value;
+          const projectType = document.getElementById('project-type').value;
+          const budget = document.getElementById('budget').value;
+
+          const body = `Name: ${name}\nEmail: ${email}\nProject Type: ${projectType}\nBudget: ${budget}\n\nMessage:\n${message}`;
+          const mailtoLink = `mailto:Dima@elitedevs.org?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+          window.location.href = mailtoLink;
           this.reset();
         });
       }
     </script>
   </body>
 </html>
+
+
