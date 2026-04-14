@@ -1263,7 +1263,21 @@ main,
   box-shadow: 0 12px 30px rgba(155, 107, 168, 0.4), 0 0 40px rgba(155, 107, 168, 0.25), inset -2px -2px 10px rgba(0, 0, 0, 0.2), inset 2px 2px 10px rgba(255, 255, 255, 0.3);
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   animation: avatarGlow 3s ease-in-out infinite, cube3dRotate 8s linear infinite;
-  transform-styl12px 30px rgba(74, 155, 159, 0.4), 0 0 40px rgba(74, 155, 159, 0.25), inset -2px -2px 10px rgba(0, 0, 0, 0.2), inset 2px 2px 10px rgba(255, 255, 255, 0.3);
+  transform-style: preserve-3d;
+}
+
+@keyframes avatarGlow {
+  0%, 100% {
+    box-shadow: 0 12px 30px rgba(155, 107, 168, 0.4), 0 0 40px rgba(155, 107, 168, 0.25), inset -2px -2px 10px rgba(0, 0, 0, 0.2), inset 2px 2px 10px rgba(255, 255, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 20px 50px rgba(155, 107, 168, 0.6), 0 0 80px rgba(155, 107, 168, 0.5), inset -2px -2px 20px rgba(0, 0, 0, 0.3), inset 2px 2px 20px rgba(255, 255, 255, 0.4);
+  }
+}
+
+.builder-avatar.zoande {
+  background: linear-gradient(135deg, var(--vibrant-teal), var(--vibrant-orange));
+  box-shadow: 0 12px 30px rgba(74, 155, 159, 0.4), 0 0 40px rgba(74, 155, 159, 0.25), inset -2px -2px 10px rgba(0, 0, 0, 0.2), inset 2px 2px 10px rgba(255, 255, 255, 0.3);
   animation: avatarGlowTeal 3s ease-in-out infinite, cube3dRotate 8s linear infinite reverse;
 }
 
@@ -1278,13 +1292,7 @@ main,
 
 .builder-card:hover .builder-avatar {
   transform: scale(1.15) rotateX(15deg) rotateY(15deg);
-  animation: none
-  0%, 100% {
-    box-shadow: 0 12px 30px rgba(155, 107, 168, 0.4), 0 0 40px rgba(155, 107, 168, 0.25), inset -2px -2px 10px rgba(0, 0, 0, 0.2), inset 2px 2px 10px rgba(255, 255, 255, 0.3);
-  }
-  50% {
-    box-shadow: 0 20px 50px rgba(155, 107, 168, 0.6), 0 0 80px rgba(75, 155, 159, 0.5), inset -2px -2px 20px rgba(0, 0, 0, 0.3), inset 2px 2px 20px rgba(255, 255, 255, 0.4);
-  }
+  animation: none;
 }
 
 @keyframes cube3dRotate {
@@ -1303,15 +1311,6 @@ main,
   100% {
     transform: rotateX(0deg) rotateY(0deg);
   }
-}
-
-.builder-avatar.zoande {
-  background: linear-gradient(135deg, var(--vibrant-teal), var(--vibrant-orange));
-  box-shadow: 0 8px 24px rgba(74, 155, 159, 0.3);
-}
-
-.builder-card:hover .builder-avatar {
-  transform: scale(1.1);
 }
 
 .avatar-placeholder {

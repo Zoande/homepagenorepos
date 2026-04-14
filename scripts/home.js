@@ -8,7 +8,19 @@
     return;
   }
 
+  // Pick most important projects to display (6 total)
+  const featuredIds = [
+    "zoande-brokersim",
+    "dh-swapspot",
+    "dh-citybuilder",
+    "dh-typing-platformer",
+    "dh-studymaster",
+    "dh-task-sorter-app"
+  ];
+  
+  const displayedProjects = projects.filter(p => featuredIds.includes(p.id));
   const owners = Array.from(new Set(projects.map((p) => p.owner)));
+  
   if (totalEl) {
     totalEl.textContent = String(projects.length);
   }
@@ -16,7 +28,7 @@
     ownersEl.textContent = String(owners.length);
   }
 
-  grid.innerHTML = projects
+  grid.innerHTML = displayedProjects
     .map((project, index) => {
       const tech = project.tech.slice(0, 3).map((item) => `<span class="chip">${item}</span>`).join("");
       // Stagger animation delays for cards
