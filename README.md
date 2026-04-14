@@ -41,8 +41,28 @@ Then open the shown local URL.
 
 1. Push this folder to a GitHub repository.
 2. Import that repository in Vercel.
-3. Keep default settings (static deployment).
+3. Add required environment variables from `.env.example` in Vercel Project Settings.
 4. Deploy.
+
+## Contact Form API Pipeline
+
+The contact page now posts to a same-origin Vercel serverless route:
+
+- `POST /api/contact-broker` (file: `api/contact-broker.js`)
+
+The broker performs request validation and rate limiting, then forwards payloads to the receiver endpoint (Cloudflare tunnel -> laptop/Pi FastAPI service).
+
+Required environment variables:
+
+- `RECEIVER_CONTACT_URL`: public receiver endpoint, for example `https://ingest-dev.yourdomain.com/api/contact`
+- `ALLOWED_ORIGIN`: your website origin, for example `https://elitedevs.org`
+
+Optional environment variables:
+
+- `RECEIVER_TOKEN`: shared token sent as `x-receiver-token`
+- `BROKER_RATE_LIMIT_MAX`: requests per IP in one window (default `6`)
+- `BROKER_RATE_LIMIT_WINDOW_MS`: rate-limit window duration (default `60000`)
+- `RECEIVER_TIMEOUT_MS`: upstream receiver timeout (default `7000`)
 
 ## Notes
 

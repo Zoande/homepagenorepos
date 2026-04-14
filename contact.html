@@ -115,6 +115,35 @@
         margin-top: 1rem !important;
         margin-bottom: 5rem !important;
       }
+
+      .visually-hidden {
+        position: absolute !important;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        border: 0;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+      }
+
+      .form-status {
+        margin-top: 0.75rem;
+        min-height: 1.25rem;
+        font-size: 0.95rem;
+      }
+
+      .form-status.info {
+        color: #0b4f6c;
+      }
+
+      .form-status.success {
+        color: #166534;
+      }
+
+      .form-status.error {
+        color: #b91c1c;
+      }
     </style>
   </head>
   <body>
@@ -151,6 +180,12 @@
           <section class="glass-panel contact-form-section" data-aos="fade-right" data-aos-delay="100">
             <h2 style="margin-top: 0; font-size: 1.8rem;">Send a Message</h2>
             <form id="contact-form" class="contact-form" style="margin-top: 1.5rem;">
+              <div class="visually-hidden" aria-hidden="true">
+                <label for="honeypot">Leave this field empty</label>
+                <input type="text" id="honeypot" name="honeypot" tabindex="-1" autocomplete="off">
+              </div>
+              <input type="hidden" id="clientTimestamp" name="clientTimestamp" value="">
+
               <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" id="name" name="name" required placeholder="John Doe">
@@ -177,9 +212,10 @@
                 <textarea id="message" name="message" rows="5" required placeholder="Tell us what's on your mind..."></textarea>
               </div>
 
-              <button type="submit" class="button" style="width: 100%; margin-top: 0.5rem;">
+              <button type="submit" id="contact-submit" class="button" style="width: 100%; margin-top: 0.5rem;">
                 Send Message
               </button>
+              <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
             </form>
           </section>
 
@@ -261,14 +297,88 @@
         offset: 50
       });
 
-      // Handle form submission
+      // Handle form submission through same-origin Vercel broker endpoint.
       const contactForm = document.getElementById('contact-form');
+      const submitButton = document.getElementById('contact-submit');
+      const statusEl = document.getElementById('form-status');
+      const timestampInput = document.getElementById('clientTimestamp');
+
+      function setFormStatus(type, message) {
+        if (!statusEl) {
+          return;
+        }
+
+        statusEl.classList.remove('info', 'success', 'error');
+        if (type) {
+          statusEl.classList.add(type);
+        }
+        statusEl.textContent = message;
+      }
+
+      function setSubmitting(isSubmitting) {
+        if (!submitButton) {
+          return;
+        }
+
+        submitButton.disabled = isSubmitting;
+        submitButton.textContent = isSubmitting ? 'Sending...' : 'Send Message';
+      }
+
       if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+        contactForm.addEventListener('submit', async function(e) {
           e.preventDefault();
-          // Show success message
-          alert('Thank you for your message! We\'ll get back to you soon.');
-          this.reset();
+
+          if (submitButton && submitButton.disabled) {
+            return;
+          }
+
+          const submittedAt = new Date().toISOString();
+          if (timestampInput) {
+            timestampInput.value = submittedAt;
+          }
+
+          const formData = new FormData(contactForm);
+          const payload = {
+            name: String(formData.get('name') || '').trim(),
+            email: String(formData.get('email') || '').trim(),
+            'project-type': String(formData.get('project-type') || '').trim(),
+            message: String(formData.get('message') || '').trim(),
+            honeypot: String(formData.get('honeypot') || '').trim(),
+            clientTimestamp: submittedAt,
+            source: 'website'
+          };
+
+          setSubmitting(true);
+          setFormStatus('info', 'Sending your message...');
+
+          try {
+            const response = await fetch('/api/contact-broker', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(payload)
+            });
+
+            const result = await response.json().catch(() => null);
+            if (!response.ok) {
+              const errorMessage =
+                result && typeof result.message === 'string'
+                  ? result.message
+                  : 'Unable to send your message right now. Please try again soon.';
+              throw new Error(errorMessage);
+            }
+
+            setFormStatus('success', 'Thanks, your message has been sent. We usually reply within 24 hours.');
+            contactForm.reset();
+            if (timestampInput) {
+              timestampInput.value = '';
+            }
+          } catch (error) {
+            setFormStatus('error', error.message || 'Unable to send your message right now. Please try again soon.');
+          } finally {
+            setSubmitting(false);
+          }
         });
       }
     </script>
