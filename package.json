@@ -1,0 +1,29 @@
+{
+  "name": "homepagenorepos",
+  "version": "1.0.0",
+  "description": "Unified static portfolio site for projects by DH4410 and Zoande.",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx http-server -p 3000",
+    "serve": "npx http-server -p 8080"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zoande/homepagenorepos.git"
+  },
+  "keywords": [
+    "portfolio",
+    "static-site",
+    "vercel",
+    "speed-insights"
+  ],
+  "author": "DH4410 & Zoande",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Zoande/homepagenorepos/issues"
+  },
+  "homepage": "https://github.com/Zoande/homepagenorepos#readme",
+  "dependencies": {
+    "@vercel/speed-insights": "^2.0.0"
+  }
+}

@@ -1,9 +1,16 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="../small_logo_nobg.png" />
     <title>Project | Project Hub</title>
+    <script defer src="/_vercel/insights/script.js"></script>
+    <!-- Vercel Speed Insights - Enhanced initialization -->
+    <script>
+      window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/speed-insights/script.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -26,10 +33,10 @@
     <!-- Navigation -->
     <nav class="site-nav">
       <div class="nav-container">
-        <a href="../index.html" class="nav-logo">PORTFOLIO</a>
+        <a href="../index.html" class="nav-logo">ELITEDEVS</a>
         <ul class="nav-menu">
           <li class="nav-item"><a href="../index.html">Home</a></li>
-          <li class="nav-item"><a href="../index.html#projects">Projects</a></li>
+          <li class="nav-item"><a href="../index.html#projects" class="active">Projects</a></li>
           <li class="nav-item"><a href="../about.html">About</a></li>
           <li class="nav-item"><a href="../contact.html">Contact</a></li>
         </ul>
@@ -52,7 +59,7 @@
         <div id="project-tech" class="chip-row" style="margin-top: 1.2rem"></div>
         <div class="actions">
           <a id="project-repo" class="button" href="#" target="_blank" rel="noopener noreferrer">Open GitHub Repo</a>
-          <a class="button ghost" href="../index.html">View All Projects</a>
+          <a class="button ghost" href="../projects.html">View All Projects</a>
         </div>
       </section>
 
@@ -69,7 +76,7 @@
           <p class="small-note">Local path</p>
           <p id="project-local-path" style="font-family: 'Courier New', monospace; font-size: 0.9rem; color: var(--accent); word-break: break-all;"></p>
           <p class="small-note" style="margin-top: 1rem;">GitHub</p>
-          <a id="project-repo-link" class="button ghost" href="#" target="_blank" rel="noopener noreferrer" style="margin-top: 0.5rem; width: fit-content;">Visit Repository →</a>
+          <a id="project-repo-link" class="button ghost" href="#" target="_blank" rel="noopener noreferrer" style="margin-top: 0.5rem; width: fit-content;">Visit Repository -></a>
         </article>
 
         <article class="panel">
@@ -86,15 +93,20 @@
 
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script>
-      AOS.init({
-        duration: 700,
-        easing: 'ease-in-out-cubic',
-        once: false,
-        mirror: true,
-        offset: 100
-      });
+      const hasAOS = typeof window.AOS !== 'undefined' && typeof window.AOS.init === 'function';
+      if (hasAOS) {
+        window.AOS.init({
+          duration: 500,
+          easing: 'ease-out-cubic',
+          once: true,
+          mirror: false,
+          offset: 80,
+          disable: window.innerWidth < 820
+        });
+      }
     </script>
     <script src="../data/projects.js"></script>
     <script src="../scripts/project.js"></script>
   </body>
 </html>
+

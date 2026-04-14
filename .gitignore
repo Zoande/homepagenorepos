@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Package manager lock files (keep package-lock.json for npm projects)
+# package-lock.json is intentionally NOT ignored
+yarn.lock
+pnpm-lock.yaml
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Editor directories and files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Vercel
+.vercel
+
+# Build outputs (if added in future)
+dist/
+build/

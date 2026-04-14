@@ -50,8 +50,8 @@ body {
 /* Removing expensive filter: blur() and mix-blend-modes for smooth CSS radial gradients */
 .bg-shape, .premium-shape {
   filter: none !important;
-  opacity: 0.8 !important;
-  mix-blend-mode: color-dodge !important;
+  opacity: 0.68 !important;
+  mix-blend-mode: normal !important;
   will-change: transform;
   transform: translateZ(0); /* Force hardware accel */
 }
@@ -91,7 +91,7 @@ body {
   background: linear-gradient(135deg, rgba(0, 255, 255, 0.4), rgba(255, 0, 128, 0.4));
   border: 1px solid rgba(255, 255, 255, 0.8);
   box-shadow: 0 0 20px rgba(0, 255, 255, 0.5), inset 0 0 20px rgba(255, 0, 128, 0.5);
-  backdrop-filter: blur(4px);
+  backdrop-filter: none;
 }
 
 /* Small Cube Details (100px) */
@@ -164,44 +164,120 @@ body {
 }
 
 .nav-container {
-  max-width: 100% !important; /* Full width */
-  padding: 1.2rem 4vw !important; /* Proper horizontal padding */
+  max-width: var(--page-max) !important;
+  margin: 0 auto !important;
+  padding: 0.95rem 1.2rem !important;
+  gap: clamp(0.5rem, 1.8vw, 1.5rem) !important;
 }
 
 /* Full Width Wrappers */
 .site-header, .project-grid, .section-title-wrap, .builders-grid {
-  max-width: 100% !important;
+  max-width: var(--page-max) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.builders-section {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 100% !important;
+  max-width: min(1600px, 100%) !important;
+  align-self: stretch;
+  margin-left: auto !important;
+  margin-right: auto !important;
   padding-left: 4vw !important;
   padding-right: 4vw !important;
 }
 
+.builders-grid {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  grid-template-columns: repeat(2, minmax(340px, 1fr)) !important;
+  gap: clamp(1.25rem, 2vw, 2rem) !important;
+}
+
+.project-grid {
+  width: 100% !important;
+  max-width: 100% !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: clamp(1.25rem, 1.6vw, 2rem) !important;
+}
+
 .cta-section {
-  max-width: calc(100% - 8vw) !important;
-  margin-left: 4vw !important;
-  margin-right: 4vw !important;
+  max-width: var(--page-max) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 
 .nav-logo {
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  background: #000 !important;
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
+  display: inline-block !important;
+  width: clamp(82px, 12vw, 120px);
+  height: clamp(52px, 7.8vw, 78px);
+  flex: 0 0 clamp(82px, 12vw, 120px);
+  background: url('full_logo_nobg.png') center / contain no-repeat !important;
+  text-decoration: none;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  color: transparent !important;
+  overflow: hidden;
+}
+
+/* Keep nav items visible on tighter viewports by shrinking spacing first. */
+.nav-menu {
+  gap: clamp(0.45rem, 1.8vw, 1.6rem) !important;
+}
+
+@media (max-width: 768px) {
+  .nav-container {
+    padding: 0.8rem 0.9rem !important;
+    gap: clamp(0.35rem, 1.6vw, 0.8rem) !important;
+  }
+
+  .nav-menu {
+    gap: clamp(0.3rem, 1.4vw, 0.7rem) !important;
+  }
+
+  .nav-logo {
+    width: clamp(74px, 20vw, 92px);
+    height: clamp(48px, 13vw, 60px);
+    flex-basis: clamp(74px, 20vw, 92px);
+  }
 }
 
 .nav-item a {
   color: #555 !important;
-  letter-spacing: 0.02em;
+  letter-spacing: clamp(0em, 0.06vw, 0.02em);
+  font-size: clamp(0.76rem, 1.35vw, 0.95rem) !important;
+  white-space: nowrap;
 }
 .nav-item a:hover {
   color: #000 !important;
+}
+
+@media (max-width: 420px) {
+  .nav-container {
+    padding: 0.7rem 0.6rem !important;
+  }
+
+  .nav-menu {
+    gap: 0.3rem !important;
+  }
+
+  .nav-item a {
+    font-size: 0.68rem !important;
+  }
 }
 
 /* --- 5. MODERNISTIC TYPOGRAPHY --- */
 h1 {
   background: linear-gradient(135deg, #000 0%, #444 100%) !important;
   -webkit-background-clip: text !important;
+  background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   font-weight: 800 !important;
   letter-spacing: -0.04em !important;
@@ -211,12 +287,28 @@ h1 {
 .hero-text-3d h1 {
   color: #000 !important; /* Override the color */
   -webkit-text-fill-color: initial !important; /* Remove gradient for the 3D */
+  font-size: clamp(2.1rem, 6.5vw, 3.4rem) !important;
 }
 
 h2, h3, h4, h5, h6 {
   color: #111 !important;
   font-weight: 700 !important;
   letter-spacing: -0.03em !important;
+}
+
+.builders-section .section-subtitle {
+  color: #111 !important;
+  -webkit-text-fill-color: #111 !important;
+  opacity: 1 !important;
+  position: relative;
+  z-index: 12;
+}
+
+.builders-section .builder-card h4,
+.builders-section .builder-role,
+.builders-section .builder-bio {
+  -webkit-text-fill-color: currentColor !important;
+  opacity: 1 !important;
 }
 
 p, li, span.chip, .owner, .small-note, .builder-tags span {
@@ -233,8 +325,8 @@ p.lead {
 /* Optimized backdrop-filter usage for faster rendering while keeping luxury look */
 .project-card, .feature-card, .builder-card, .team-card, .about-item, .panel {
   background: linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.6) 100%) !important;
-  backdrop-filter: blur(8px) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
   border: 1px solid var(--border-glass) !important;
   box-shadow: 
     0 10px 40px rgba(0,0,0,0.02), 
@@ -248,10 +340,10 @@ p.lead {
 
 /* Luminous hover */
 .project-card:hover, .feature-card:hover, .builder-card:hover, .team-card:hover, .about-item:hover, .panel:hover {
-  transform: translateY(-8px) scale(1.02) translateZ(30px) !important;
+  transform: translateY(-6px) scale(1.01) translateZ(18px) !important;
   box-shadow: 
-    0 25px 50px rgba(0,0,0,0.04), 
-    0 0 30px var(--glow-primary),
+    0 18px 30px rgba(0,0,0,0.04), 
+    0 0 22px var(--glow-primary),
     inset 0 1px 0 rgba(255,255,255,1) !important;
   border: 1px solid rgba(255,255,255,0.9) !important;
 }
@@ -266,6 +358,23 @@ p.lead {
 
 .project-card::before, .feature-card::before, .builder-card::before, .team-card::before, .about-item::before {
   display: none !important; /* Remove legacy colored top borders */
+}
+
+.builder-card {
+  animation: none !important;
+  transform: translateY(0) scale(1) !important;
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.45s ease !important;
+}
+
+.builder-card:hover {
+  transform: translateY(-5px) scale(1.01) !important;
+  box-shadow:
+    0 16px 32px rgba(0,0,0,0.06),
+    0 0 24px var(--glow-primary),
+    inset 0 1px 0 rgba(255,255,255,1) !important;
 }
 
 /* --- 7. TACTILE METALLIC BUTTONS --- */
@@ -334,14 +443,14 @@ p.lead {
   border: 1px solid rgba(255,255,255,0.6) !important;
   border-radius: 20px !important;
   box-shadow: 0 10px 30px rgba(0,0,0,0.02), inset 0 1px 0 rgba(255,255,255,0.8) !important;
-  padding: 3rem 1.5rem !important;
+  padding: 2.2rem 1.1rem !important;
 }
 .stats article span {
   background: linear-gradient(135deg, #111 0%, #444 100%) !important;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   background-clip: text !important;
-  font-size: 4rem !important;
+  font-size: 3.2rem !important;
   text-shadow: none !important;
 }
 .stats article p {
@@ -361,6 +470,32 @@ p.lead {
   border-radius: 6px !important;
   font-weight: 600 !important;
 }
+
+.project-card .chip-row {
+  gap: 0.45rem !important;
+}
+
+.project-card .chip {
+  font-size: 0.62rem !important;
+  padding: 0.3rem 0.6rem !important;
+  letter-spacing: 0.01em !important;
+  text-transform: none !important;
+  border-radius: 999px !important;
+}
+
+.project-hero .chip {
+  display: inline-block !important;
+  min-height: auto !important;
+  padding: 0.3rem 0.75rem !important;
+  font-size: 0.75rem !important;
+  letter-spacing: 0.01em !important;
+  text-transform: none !important;
+  border-radius: 999px !important;
+  flex-direction: row !important;
+  animation: none !important;
+  will-change: auto !important;
+}
+
 .chip:hover, .builder-tags span:hover {
   background: rgba(0,0,0,0.08) !important;
   color: #111 !important;
@@ -371,17 +506,18 @@ p.lead {
 .site-footer {
   background: #ffffff !important; /* Solid bright white */
   border-top: 1px solid rgba(0,0,0,0.05) !important;
-  padding: 8rem 2rem 4rem !important;
+  padding: 5rem 2rem 3rem !important;
   position: relative;
   z-index: 10;
   box-shadow: 0 -20px 40px rgba(0,0,0,0.01) !important;
-  margin-top: 5rem !important;
+  margin-top: 3rem !important;
 }
 
 /* Footer layout to match full-width container */
 .footer-content {
-  max-width: 100% !important;
-  padding: 0 4vw !important;
+  max-width: var(--page-max) !important;
+  margin: 0 auto !important;
+  padding: 0 1.2rem !important;
 }
 
 .footer-grid {
@@ -441,6 +577,14 @@ p.lead {
 }
 
 @media (max-width: 1024px) {
+  .project-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .builders-grid {
+    grid-template-columns: 1fr !important;
+  }
+
   .footer-grid {
     grid-template-columns: 1fr 1fr !important;
     gap: 3rem;
@@ -448,6 +592,10 @@ p.lead {
 }
 
 @media (max-width: 768px) {
+  .project-grid {
+    grid-template-columns: 1fr !important;
+  }
+
   .footer-grid {
     grid-template-columns: 1fr !important;
   }
