@@ -580,6 +580,13 @@ body.home-page .builders-section {
   width: 100%;
 }
 
+/* Keep the builders block visible even if AOS init/order fails. */
+body.home-page .builders-section[data-aos] {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
 body.home-page .builders-head {
   display: flex;
   justify-content: center;
@@ -616,6 +623,16 @@ body.home-page .builder-card {
   min-height: 0 !important;
   padding: 2rem 1.6rem !important;
   animation: none !important;
+}
+
+body.home-page .builder-card[data-aos="scale-in"] {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+body.home-page .builder-card[data-aos="scale-in"].aos-animate {
+  animation: scaleIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
 body.home-page .builder-card:hover {
