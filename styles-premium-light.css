@@ -1,6 +1,6 @@
 /* =========================================================================
-   ELITEDEVS CLEAN TECH UI — FULL MICRO-GLASS EDITION
-   Transparent, sharp UI for Stats, Builders, Projects, and CTA.
+   ELITEDEVS CLEAN TECH UI — REVERTED + TARGETED BLUR EDITION
+   Clean solid cards with blurred protection only for requested headers.
    ========================================================================= */
 
 :root {
@@ -11,18 +11,11 @@
   --color-blue: #3b82f6;
   --color-purple: #8b5cf6;
   --color-orange: #f59e0b;
-  --color-green: #10b981;
-
-  /* THE MICRO-GLASS TOKEN: 3px blur for a very subtle, clear look */
-  --glass-bg: rgba(255, 255, 255, 0.25); 
-  --glass-border: rgba(255, 255, 255, 0.4);
-  --glass-blur: blur(3px);
-  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.02);
 
   --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* ─── 1. BASE STYLES & GRID ────────────────────────────────────────────── */
+/* ─── 1. BASE STYLES & TECHNICAL GRID ──────────────────────────────────── */
 * { box-sizing: border-box; }
 
 body {
@@ -45,10 +38,9 @@ body {
 /* ─── 2. NAVIGATION ────────────────────────────────────────────────────── */
 .site-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: rgba(255, 255, 255, 0.7); 
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  border-bottom: 1px solid rgba(226, 232, 240, 0.5);
+  background: rgba(255, 255, 255, 0.8); 
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid #f1f5f9;
 }
 .nav-container {
   display: flex; justify-content: space-between; align-items: center;
@@ -62,7 +54,7 @@ body {
 .nav-menu a { color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: color 0.3s; }
 .nav-menu a:hover, .nav-menu a.active { color: var(--color-blue); }
 
-/* ─── 3. HERO SECTION (MICRO-GLASS) ────────────────────────────────────── */
+/* ─── 3. HERO SECTION (MICRO-GLASS GHOST SQUARE) ────────────────────────── */
 .site-header {
   min-height: 95vh; display: flex; align-items: center; justify-content: center;
   padding: 8rem 2rem 2rem; text-align: center;
@@ -70,10 +62,10 @@ body {
 
 .hero-content { 
   max-width: 880px; position: relative; z-index: 10; 
-  background: var(--glass-bg); 
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.2); 
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 24px; padding: 5rem 3.5rem; 
 }
 
@@ -86,7 +78,6 @@ body {
   max-width: 680px; margin: 0 auto 3rem; font-weight: 500;
 }
 
-/* Animations */
 .fade-up-1 { animation: introFade 1s var(--ease-smooth) 0.1s both; }
 .fade-up-2 { animation: introFade 1s var(--ease-smooth) 0.2s both; }
 .fade-up-3 { animation: introFade 1s var(--ease-smooth) 0.3s both; }
@@ -96,41 +87,44 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* ─── 4. STATS (NOW MICRO-GLASS) ───────────────────────────────────────── */
+/* ─── 4. STATS & BUILDERS (SOLID WHITE CARDS - NO BLUR) ────────────────── */
 .stats-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; max-width: 1200px; margin: 0 auto 10rem; padding: 0 2rem; }
 .stat-box { 
-    background: var(--glass-bg); 
-    backdrop-filter: var(--glass-blur);
-    -webkit-backdrop-filter: var(--glass-blur);
-    border: 1px solid var(--glass-border);
-    border-radius: 24px; padding: 3.5rem 2rem; text-align: center; 
-    transition: transform 0.4s var(--ease-smooth); 
+    background: white; border: 1px solid #f1f5f9; border-radius: 24px; padding: 3.5rem 2rem; text-align: center; 
+    transition: transform 0.4s var(--ease-smooth); box-shadow: 0 4px 20px rgba(0,0,0,0.02);
 }
 .stat-box:hover { transform: translateY(-8px); border-color: var(--color-blue); }
 .stat-box span { display: block; font-size: 4rem; font-weight: 800; color: var(--color-blue); margin-bottom: 0.5rem; line-height: 1; letter-spacing: -0.02em;}
 .stat-box p { margin: 0; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.85rem; }
 
-/* ─── 5. BUILDERS (NOW MICRO-GLASS) ────────────────────────────────────── */
-.builders-section { margin-bottom: 12rem; }
-.section-heading { text-align: center; max-width: 750px; margin: 0 auto 5rem; padding: 0 2rem; }
-.section-heading h2 { font-size: 3rem; font-weight: 800; letter-spacing: -0.03em; margin: 0 0 1.2rem; }
-
+.builders-section { margin-bottom: 12rem; text-align: center; }
 .builders-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 3rem; max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
 .builder-card { 
-    background: var(--glass-bg); 
-    backdrop-filter: var(--glass-blur);
-    -webkit-backdrop-filter: var(--glass-blur);
-    border: 1px solid var(--glass-border);
-    border-radius: 28px; padding: 3.5rem; transition: transform 0.4s var(--ease-smooth); 
+    background: white; border: 1px solid #f1f5f9; border-radius: 28px; padding: 3.5rem; 
+    transition: transform 0.4s var(--ease-smooth); box-shadow: 0 4px 20px rgba(0,0,0,0.02);
 }
 .builder-card:hover { transform: translateY(-8px); border-color: var(--color-blue); }
 
-.builder-info { display: flex; align-items: center; gap: 1.8rem; margin-bottom: 2rem; }
+.builder-info { display: flex; align-items: center; gap: 1.8rem; margin-bottom: 2rem; text-align: left;}
 .builder-avatar { width: 80px; height: 80px; border-radius: 20px; color: white; font-weight: 800; font-size: 1.6rem; display: flex; align-items: center; justify-content: center; }
 .dh-avatar { background: linear-gradient(135deg, var(--color-blue), var(--color-purple)); }
-.builder-avatar.zoande { background: linear-gradient(135deg, var(--color-green), var(--color-blue)); }
+.builder-avatar.zoande { background: linear-gradient(135deg, #10b981, var(--color-blue)); }
 
-/* ─── 6. PROJECT GRID (THIN GLASS) ─────────────────────────────────────── */
+/* ─── 5. TARGETED SECTION HEADERS (BLURRED GLASS PILLS) ────────────────── */
+/* This protects "The Architects" and "Live Project Deck" from overlapping cubes */
+.section-heading { 
+    text-align: center; max-width: 750px; margin: 0 auto 5rem; padding: 2rem 3rem; 
+    background: rgba(255, 255, 255, 0.4); 
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+}
+.section-heading h2 { font-size: 3rem; font-weight: 800; letter-spacing: -0.03em; margin: 0 0 1rem; }
+.section-heading p { color: var(--text-muted); font-size: 1.2rem; line-height: 1.6; margin: 0; font-weight: 500;}
+
+/* ─── 6. PROJECT GRID (SOLID WHITE GLASS) ──────────────────────────────── */
 .projects-section { margin-bottom: 12rem; max-width: 1500px; margin-left: auto; margin-right: auto;}
 .project-grid {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); 
@@ -139,40 +133,37 @@ body {
 
 .project-card {
   display: flex; flex-direction: column; 
-  background: var(--glass-bg) !important; 
-  backdrop-filter: var(--glass-blur) !important;
-  -webkit-backdrop-filter: var(--glass-blur) !important;
-  border: 1px solid var(--glass-border) !important;
+  background: white !important; 
+  border: 1px solid #f1f5f9 !important;
   border-radius: 28px !important; padding: 3rem !important; 
   transition: transform 0.4s var(--ease-smooth), box-shadow 0.4s var(--ease-smooth) !important;
   height: 100%;
 }
-.project-card:hover { transform: translateY(-10px) scale(1.02) !important; }
+.project-card:hover { transform: translateY(-10px) scale(1.02) !important; box-shadow: 0 30px 60px rgba(0,0,0,0.05) !important; }
 
 .project-card h3 { margin: 0 0 1.2rem; font-size: 1.8rem; font-weight: 800; }
-.project-card .summary { margin: 0 0 2.5rem; color: var(--text-dark); line-height: 1.7; font-size: 1.1rem; flex-grow: 1; font-weight: 500;}
+.project-card .summary { margin: 0 0 2.5rem; color: var(--text-muted); line-height: 1.7; font-size: 1.1rem; flex-grow: 1; }
 
 .chip-row, .builder-tags { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-bottom: 2.5rem; }
 .chip, .builder-tags span {
-  background: rgba(255, 255, 255, 0.4); color: var(--text-dark);
-  border: 1px solid rgba(255, 255, 255, 0.5); padding: 0.6rem 1.1rem; 
+  background: #f8fafc; color: var(--text-dark);
+  border: 1px solid #e2e8f0; padding: 0.6rem 1.1rem; 
   border-radius: 10px; font-size: 0.85rem; font-weight: 700; white-space: nowrap;
 }
 
 .card-actions { display: flex; gap: 1.2rem; margin-top: auto; }
 .card-actions .button { flex: 1; padding: 1rem; }
 
-/* ─── 7. READY TO COLLABORATE (NOW MICRO-GLASS) ────────────────────────── */
+/* ─── 7. READY TO COLLABORATE (TRANSPARENT BLURRED BOX) ────────────────── */
 .cta-section { max-width: 1200px; margin: 0 auto 10rem; padding: 0 2rem; }
 .cta-content { 
     border-radius: 32px; padding: 6rem 3rem; text-align: center; 
-    /* CHANGED FROM DARK TO MICRO-GLASS */
-    background: var(--glass-bg); 
-    backdrop-filter: var(--glass-blur);
-    -webkit-backdrop-filter: var(--glass-blur);
-    border: 1px solid var(--glass-border);
+    background: rgba(255, 255, 255, 0.4); 
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.7);
     color: var(--text-dark);
-    box-shadow: var(--glass-shadow);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.03);
 }
 .cta-content h2 { margin: 0 0 1.2rem; font-size: 3rem; font-weight: 800; letter-spacing: -0.03em; }
 .cta-content p { color: var(--text-muted); max-width: 600px; margin: 0 auto 3rem; line-height: 1.7; font-size: 1.2rem; font-weight: 500;}
@@ -185,19 +176,28 @@ body {
   display: inline-flex; align-items: center; justify-content: center;
   border: 1px solid transparent; cursor: pointer;
 }
-.button:hover { transform: translateY(-3px); box-shadow: 0 12px 24px rgba(0,0,0,0.12); background: #000; }
-.button.ghost { background: rgba(255,255,255,0.4); color: var(--text-dark); border-color: rgba(0,0,0,0.1); }
+.button:hover { transform: translateY(-3px); box-shadow: 0 12px 24px rgba(0,0,0,0.12); }
+.button.ghost { background: rgba(255,255,255,0.6); color: var(--text-dark); border-color: #e2e8f0; }
 
-/* ─── 9. FOOTER ────────────────────────────────────────────────────────── */
-.site-footer { padding: 6rem 2rem 4rem; text-align: center; background: transparent; border-top: 1px solid rgba(226, 232, 240, 0.5);}
+/* ─── 9. PROJECT DETAILS PAGE (FIXES AOS GLITCH) ───────────────────────── */
+.project-layout, .project-layout *[data-aos] {
+  opacity: 1 !important; transform: none !important; visibility: visible !important; animation: none !important;
+}
+.project-layout { max-width: 1200px; margin: 10rem auto 10rem; display: grid; gap: 3rem; padding: 0 2rem; animation: projectFadeIn 0.6s var(--ease-smooth) forwards; }
+@keyframes projectFadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.project-hero { border-radius: 32px; padding: 5rem; background: white; border: 1px solid #f1f5f9; box-shadow: 0 10px 40px rgba(0,0,0,0.03); }
+.project-grid-two { display: grid; grid-template-columns: repeat(2, 1fr); gap: 3rem; }
+.panel { padding: 3.5rem; border-radius: 32px; background: white; border: 1px solid #f1f5f9; box-shadow: 0 10px 40px rgba(0,0,0,0.03); }
+
+/* ─── 10. FOOTER ───────────────────────────────────────────────────────── */
+.site-footer { padding: 6rem 2rem 4rem; text-align: center; background: white; border-top: 1px solid #f1f5f9;}
 .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 4rem; max-width: 1200px; margin: 0 auto 4rem; text-align: left; }
 .footer-column h4 { margin: 0 0 1.5rem; font-size: 1.1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em;}
-.footer-column p { color: var(--text-muted); font-size: 1rem; line-height: 1.7; }
 .footer-column a { display: block; color: var(--text-muted); text-decoration: none; margin-bottom: 1rem; font-size: 1rem; font-weight: 600; }
-.footer-column a:hover { color: var(--color-blue); }
 
-/* ─── 10. RESPONSIVE ───────────────────────────────────────────────────── */
+/* ─── 11. RESPONSIVE ───────────────────────────────────────────────────── */
 @media (max-width: 768px) {
   .hero-content { padding: 4rem 2rem; }
+  .section-heading { padding: 2rem 1.5rem; }
   .stats-container, .builders-grid, .project-grid { grid-template-columns: 1fr; }
 }
