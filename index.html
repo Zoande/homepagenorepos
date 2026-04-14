@@ -3,28 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EliteDevs</title>
+    <title>EliteDevs | High-Performance Engineering</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&family=Bebas+Neue&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <!-- Animate.css for smooth animations -->
-    <link 
-      rel="stylesheet" 
-      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-    />
-    <!-- AOS (Animate On Scroll) for scroll-triggered animations -->
-    <link 
-      rel="stylesheet" 
-      href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
-    />
-    <!-- Three.js for stunning 3D effects -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
     <link rel="stylesheet" href="styles-premium-light.css" />
+    <!-- Three.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   </head>
   <body class="home-page">
+
+    <!-- The Lag-Free Hardware-Accelerated 3D Canvas -->
+    <canvas id="webgl-canvas"></canvas>
+
     <!-- Navigation -->
     <nav class="site-nav">
       <div class="nav-container">
@@ -38,151 +33,104 @@
       </div>
     </nav>
 
-    <!-- Decorative Shapes -->
-    <!-- Animated 3D CSS Cubes -->
-    <div class="cube-container" style="top: 15%; left: 10%; width: 250px; height: 250px;">
-      <div class="cube large">
-        <div class="cube-face front"></div>
-        <div class="cube-face back"></div>
-        <div class="cube-face right"></div>
-        <div class="cube-face left"></div>
-        <div class="cube-face top"></div>
-        <div class="cube-face bottom"></div>
-      </div>
-    </div>
-    
-    <div class="cube-container" style="top: 40%; right: 15%; width: 100px; height: 100px;">
-      <div class="cube small">
-        <div class="cube-face front"></div>
-        <div class="cube-face back"></div>
-        <div class="cube-face right"></div>
-        <div class="cube-face left"></div>
-        <div class="cube-face top"></div>
-        <div class="cube-face bottom"></div>
-      </div>
-    </div>
-
-    <div class="cube-container" style="bottom: 20%; left: 20%; width: 180px; height: 180px;">
-      <div class="cube medium">
-        <div class="cube-face front"></div>
-        <div class="cube-face back"></div>
-        <div class="cube-face right"></div>
-        <div class="cube-face left"></div>
-        <div class="cube-face top"></div>
-        <div class="cube-face bottom"></div>
-      </div>
-    </div>
-
-    <!-- Premium glassmorphic elements -->
-    <div class="premium-shape p1"></div>
-    <div class="premium-shape p2"></div>
-    <div class="premium-shape p3"></div>
-    <div class="premium-shape p4"></div>
-
-    <!-- 3D Hero Canvas -->
-    <div id="canvas-3d" class="canvas-3d-container"></div>
-
+    <!-- Sleek Hero Section -->
     <header class="site-header">
-      <div class="hero-middle">
-        <div class="hero-text-3d">
-          <p class="eyebrow" data-aos="fade-up" data-aos-duration="500">Building the Future</p>
-          <h1 data-aos="fade-up" data-aos-duration="500" data-aos-delay="100">Advanced Projects Showcase</h1>
-          <p class="lead" data-aos="fade-up" data-aos-duration="500" data-aos-delay="200">
-            A collection of ambitious, transformative projects pushing the boundaries of technology. From algorithmic trading systems and procedurally-generated worlds to real-time multiplayer platforms—these are focused builds with measurable product impact.
-          </p>
+      <div class="hero-content">
+        <p class="eyebrow fade-up-1">Building the Future</p>
+        <h1 class="fade-up-2">Advanced Projects<br/>Showcase</h1>
+        <p class="lead fade-up-3">
+          A collection of ambitious, transformative projects pushing the boundaries of technology. 
+          From algorithmic trading systems to real-time multiplayer platforms.
+        </p>
+        <div class="hero-actions fade-up-4">
+          <a href="#projects" class="button">Explore Projects</a>
+          <a href="about.html" class="button ghost">Meet the Team</a>
         </div>
-      </div>
-
-      <div class="hero-bottom">
-        <div class="stats stat-band" data-aos="fade-up" data-aos-duration="500" data-aos-delay="300">
-          <article>
-            <span id="project-total">0</span>
-            <p>Active Projects</p>
-          </article>
-          <article>
-            <span id="project-owners">0</span>
-            <p>Builders</p>
-          </article>
-          <article>
-            <span>∞</span>
-            <p>Potential</p>
-          </article>
-        </div>
-
-        <section class="signal-ribbon" data-aos="fade-up" data-aos-duration="500" data-aos-delay="350">
-          <article>
-            <h3>Systems-First</h3>
-            <p>Architecture is mapped before polish, so scaling does not become a rewrite.</p>
-          </article>
-          <article>
-            <h3>Fast Iteration</h3>
-            <p>Short loops, visible progress, and feedback-driven releases keep momentum high.</p>
-          </article>
-          <article>
-            <h3>Pixel + Perf</h3>
-            <p>We pair strong visual direction with smooth rendering and practical UX choices.</p>
-          </article>
-        </section>
-
-        <!-- Builders Section -->
-        <section class="builders-section depth-glow" data-aos="fade-up" data-aos-duration="500" data-aos-delay="400">
-        <div class="builders-head">
-          <h3 class="section-subtitle">Meet the Builders</h3>
-          <p>Two focused teams balancing product design, systems thinking, and execution speed.</p>
-        </div>
-        <div class="builders-grid">
-          <div class="builder-card" data-aos="scale-in" data-aos-duration="500" data-aos-delay="500">
-            <div class="builder-avatar">
-              <div class="avatar-placeholder">DH</div>
-            </div>
-            <h4>DH4410</h4>
-            <p class="builder-role">Full-Stack Innovator</p>
-            <p class="builder-bio">Building premium experiences with modern tech stacks. Specialized in trading systems, UI frameworks, and procedural generation.</p>
-            <div class="builder-tags">
-              <span>React</span>
-              <span>Vite</span>
-              <span>3D Graphics</span>
-            </div>
-          </div>
-
-          <div class="builder-card" data-aos="scale-in" data-aos-duration="500" data-aos-delay="550">
-            <div class="builder-avatar zoande">
-              <div class="avatar-placeholder">ZD</div>
-            </div>
-            <h4>Zoande</h4>
-            <p class="builder-role">Creative Technologist</p>
-            <p class="builder-bio">Crafting immersive worlds and intelligent systems. Expert in game development, AI integration, and real-time multiplayer platforms.</p>
-            <div class="builder-tags">
-              <span>Three.js</span>
-              <span>Game Dev</span>
-              <span>AI/ML</span>
-            </div>
-          </div>
-        </div>
-      </section>
       </div>
     </header>
 
     <main>
-      <!-- Projects Section -->
-      <section id="projects" class="section-title-wrap" data-parallax="0.2" data-aos="fade-up" data-aos-duration="500" style="margin-top: 5rem;">
-        <h2>Live Project Deck</h2>
-        <p>Open any build to explore architecture, development status, and technical decisions.</p>
+      <!-- Stats -->
+      <section class="stats-container" data-aos="fade-up">
+        <div class="glass-card stat-box">
+          <span id="project-total">13</span>
+          <p>Active Projects</p>
+        </div>
+        <div class="glass-card stat-box">
+          <span id="project-owners">2</span>
+          <p>Lead Builders</p>
+        </div>
+        <div class="glass-card stat-box">
+          <span>∞</span>
+          <p>Potential Scale</p>
+        </div>
       </section>
-      <section id="project-grid" class="project-grid" aria-live="polite" data-parallax="0.15"></section>
+
+      <!-- Meet the Builders -->
+      <section class="builders-section">
+        <div class="section-heading" data-aos="fade-up">
+          <h2>The Architects</h2>
+          <p>Two focused developers balancing product design, systems thinking, and execution speed.</p>
+        </div>
+        
+        <div class="builders-grid">
+          <div class="glass-card builder-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="builder-info">
+              <div class="builder-avatar dh-avatar">DH</div>
+              <div>
+                <h4>DH4410</h4>
+                <p class="builder-role">Full-Stack Innovator</p>
+              </div>
+            </div>
+            <p class="builder-bio">Specialized in trading systems, UI frameworks, and high-performance modern tech stacks.</p>
+            <div class="builder-tags">
+              <span>Next.js</span>
+              <span>Trading Algos</span>
+              <span>Architecture</span>
+            </div>
+          </div>
+
+          <div class="glass-card builder-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="builder-info">
+              <div class="builder-avatar zoande">ZD</div>
+              <div>
+                <h4>Zoande</h4>
+                <p class="builder-role">Creative Technologist</p>
+              </div>
+            </div>
+            <p class="builder-bio">Crafting immersive worlds, AI integrations, and real-time multiplayer networking.</p>
+            <div class="builder-tags">
+              <span>Three.js</span>
+              <span>Game Dev</span>
+              <span>AI / ML</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects Section -->
+      <section id="projects" class="projects-section">
+        <div class="section-heading" data-aos="fade-up">
+          <h2>Live Project Deck</h2>
+          <p>Open any build to explore architecture, development status, and technical decisions.</p>
+        </div>
+        <!-- Projects Grid Container -->
+        <div id="project-grid" class="project-grid" aria-live="polite"></div>
+      </section>
 
       <!-- CTA Section -->
-      <section class="cta-section" data-aos="fade-up" data-aos-duration="500">
-        <h2>Ready to Collaborate?</h2>
-        <p>Explore our portfolio, get inspired by our work, and let's build something extraordinary together.</p>
-        <div class="cta-actions">
-          <a href="contact.html" class="button">Start a Project</a>
-          <a href="about.html" class="button secondary">Learn More</a>
+      <section class="cta-section" data-aos="fade-up">
+        <div class="glass-card cta-content">
+          <h2>Ready to Collaborate?</h2>
+          <p>Explore our portfolio, get inspired by our work, and let's build something extraordinary together.</p>
+          <div class="cta-actions">
+            <a href="contact.html" class="button">Start a Project</a>
+          </div>
         </div>
       </section>
     </main>
 
-    <footer class="site-footer">
+    <footer class="site-footer glass-card" style="border-radius: 0; border-bottom: none; border-left: none; border-right: none;">
       <div class="footer-content">
         <div class="footer-grid">
           <div class="footer-column">
@@ -202,87 +150,191 @@
             <a href="https://twitter.com" target="_blank">Twitter</a>
             <a href="https://linkedin.com" target="_blank">LinkedIn</a>
           </div>
-          <div class="footer-column">
-            <h4>Resources</h4>
-            <a href="#privacy">Privacy Policy</a>
-            <a href="#terms">Terms of Service</a>
-            <a href="contact.html">Get Support</a>
-          </div>
         </div>
         <div class="footer-bottom">
-          <p>&copy; 2026 EliteDevs. Crafted with premium attention to detail. | elitedevs.org</p>
+          <p>&copy; 2026 EliteDevs. Crafted with precision.</p>
         </div>
       </div>
     </footer>
 
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script>
-      AOS.init({
-        duration: 600,
-        easing: 'ease-in-out-expo',
-        once: false,
-        mirror: true,
-        offset: 80,
-        delay: 0
-      });
-
-      // Add smooth page transitions
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-          e.preventDefault();
-          const target = document.querySelector(this.getAttribute('href'));
-          if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
+      AOS.init({ duration: 800, easing: 'ease-out-quart', once: true, offset: 60 });
+      document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+          const target = document.querySelector(a.getAttribute('href'));
+          if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
         });
       });
-
-      // Update active nav link
-      function updateActiveNav() {
-        const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('.nav-item a');
-        
-        window.addEventListener('scroll', () => {
-          let current = '';
-          sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            if (scrollY >= sectionTop - 200) {
-              current = section.getAttribute('id');
-            }
-          });
-          
-          navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === '#' + current) {
-              link.classList.add('active');
-            }
-          });
-        });
-      }
-      updateActiveNav();
     </script>
     <script src="data/projects.js"></script>
     <script src="scripts/home.js"></script>
-    <!-- 3D Effects Scripts -->
-    <script src="scripts/3d-hero.js"></script>
-    <script src="scripts/3d-effects.js"></script>
-    <!-- Premium Mouse Glow -->
-    <div id="mouse-glow" style="position: fixed; width: 400px; height: 400px; background: radial-gradient(circle, rgba(0, 255, 255, 0.25) 0%, transparent 60%); border-radius: 50%; pointer-events: none; z-index: 9998; top: 0; left: 0; transform: translate3d(calc(var(--mouseX, 0) - 50%), calc(var(--mouseY, 0) - 50%), 0); will-change: transform; transition: opacity 0.3s ease; opacity: 0;"></div>
+
+    <!-- IMMERSIVE, SLOW WIREFRAME WEBGL SCRIPT -->
     <script>
-      const glow = document.getElementById('mouse-glow');
-      let isVisible = false;
-      document.addEventListener('mousemove', (e) => {
-        if (!isVisible) {
-          glow.style.opacity = '1';
-          isVisible = true;
-        }
-        glow.style.setProperty('--mouseX', e.clientX + 'px');
-        glow.style.setProperty('--mouseY', e.clientY + 'px');
-      }, { passive: true });
-      document.addEventListener('mouseleave', () => {
-        glow.style.opacity = '0';
-        isVisible = false;
+      const canvas = document.getElementById('webgl-canvas');
+      const scene = new THREE.Scene();
+      
+      // Camera Setup (Z=45 to allow objects to fly right past the screen)
+      const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+      camera.position.z = 45;
+
+      const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true, powerPreference: "high-performance" });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      // 1. CENTERED GIANT GRID SPHERE (Slowly rotating in background)
+      const sphereGeometry = new THREE.IcosahedronGeometry(28, 3);
+      // Update this line inside your index.html script
+      // Update this line inside your index.html script
+const sphereMaterial = new THREE.MeshBasicMaterial({ 
+  color: 0x3b82f6, // Crisp Tech Blue
+  wireframe: true, 
+  transparent: true, 
+  opacity: 0.15 
+});
+      const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+      sphere.position.set(0, 0, -30); 
+      scene.add(sphere);
+
+      // 2. HARDWARE INSTANCING (Big, colorful, SLOW wireframe shapes)
+      const colors = [0x3b82f6, 0xf59e0b, 0x8b5cf6, 0x10b981, 0xec4899]; 
+      
+      // Wireframe Material (Lines instead of faces)
+      const shapeMaterial = new THREE.MeshBasicMaterial({ 
+        color: 0xffffff, 
+        wireframe: true,      // ONLY lines
+        transparent: true, 
+        opacity: 0.5          // Make the lines pop
       });
+
+      // Geometries for variety (Cubes and Triangles/Pyramids)
+      const geoBox = new THREE.BoxGeometry(1, 1, 1);
+      const geoTetra = new THREE.TetrahedronGeometry(1.2);
+      const geoOcta = new THREE.OctahedronGeometry(1.2);
+
+      // Helper function to create an instanced group
+      function createInstancedGroup(geometry, count) {
+        const mesh = new THREE.InstancedMesh(geometry, shapeMaterial, count);
+        const dummy = new THREE.Object3D();
+        const color = new THREE.Color();
+        
+        const data = {
+          mesh: mesh,
+          count: count,
+          dummy: dummy,
+          speeds: new Float32Array(count),
+          radii: new Float32Array(count),
+          angles: new Float32Array(count),
+          yOffsets: new Float32Array(count),
+          scales: new Float32Array(count)
+        };
+
+        for(let i = 0; i < count; i++) {
+          // HUGE radius so shapes fly around and past the camera
+          const radius = 10 + Math.random() * 150; 
+          const angle = Math.random() * Math.PI * 2;
+          const y = (Math.random() - 0.5) * 150;
+
+          // BIGGER SCALES (Less clutter, more impressive)
+          const scale = 2.0 + Math.random() * 4.5; 
+          
+          dummy.position.set(Math.cos(angle) * radius, y, Math.sin(angle) * radius);
+          dummy.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI);
+          dummy.scale.set(scale, scale, scale);
+          dummy.updateMatrix();
+          
+          mesh.setMatrixAt(i, dummy.matrix);
+          
+          // Apply random color from our vibrant palette
+          color.setHex(colors[Math.floor(Math.random() * colors.length)]);
+          mesh.setColorAt(i, color);
+
+          // EXTREMELY SLOW speeds for elegant majestic floating
+          data.speeds[i] = (Math.random() - 0.5) * 0.0008; 
+          data.radii[i] = radius;
+          data.angles[i] = angle;
+          data.yOffsets[i] = y;
+          data.scales[i] = scale;
+        }
+        scene.add(mesh);
+        return data;
+      }
+
+      // Create 45 of each shape (135 total) -> Perfect balance of detail and cleanliness
+      const shapeGroups = [
+        createInstancedGroup(geoBox, 45),
+        createInstancedGroup(geoTetra, 45),
+        createInstancedGroup(geoOcta, 45)
+      ];
+
+      // 3. MOUSE PARALLAX
+      let mouseX = 0, mouseY = 0;
+      let targetX = 0, targetY = 0;
+
+      document.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX - window.innerWidth / 2) * 0.001;
+        mouseY = (e.clientY - window.innerHeight / 2) * 0.001;
+      });
+
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+
+      // 4. ANIMATION LOOP
+      function animate() {
+        requestAnimationFrame(animate);
+
+        // Smooth Camera Parallax
+        targetX = mouseX * 8;
+        targetY = mouseY * 8;
+        camera.position.x += (targetX - camera.position.x) * 0.05;
+        camera.position.y += (-targetY - camera.position.y) * 0.05;
+        camera.lookAt(scene.position);
+
+        // Rotate giant center sphere very slowly
+        sphere.rotation.x += 0.0003;
+        sphere.rotation.y += 0.0006;
+
+        // Animate shapes gracefully
+        shapeGroups.forEach(group => {
+          for(let i = 0; i < group.count; i++) {
+            // Very slow orbital movement
+            group.angles[i] += group.speeds[i] * 0.5; 
+            
+            // Very slow vertical drift
+            group.yOffsets[i] += group.speeds[i] * 2; 
+            
+            // Loop vertical drift if they float too high/low
+            if(group.yOffsets[i] > 100) group.yOffsets[i] = -100;
+            if(group.yOffsets[i] < -100) group.yOffsets[i] = 100;
+
+            group.dummy.position.set(
+              Math.cos(group.angles[i]) * group.radii[i], 
+              group.yOffsets[i], 
+              Math.sin(group.angles[i]) * group.radii[i]
+            );
+            
+            // Apply extremely gentle rotation
+            group.dummy.rotation.x += group.speeds[i] * 1.5;
+            group.dummy.rotation.y += group.speeds[i] * 2.5;
+            
+            // Reapply stored scale
+            const s = group.scales[i];
+            group.dummy.scale.set(s, s, s);
+            
+            group.dummy.updateMatrix();
+            group.mesh.setMatrixAt(i, group.dummy.matrix);
+          }
+          group.mesh.instanceMatrix.needsUpdate = true;
+        });
+
+        renderer.render(scene, camera);
+      }
+      animate();
     </script>
   </body>
 </html>
