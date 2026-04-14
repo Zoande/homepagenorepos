@@ -24,7 +24,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <link rel="stylesheet" href="styles-premium-light.css" />
   </head>
-  <body>
+  <body class="home-page">
     <!-- Navigation -->
     <nav class="site-nav">
       <div class="nav-container">
@@ -83,37 +83,55 @@
     <div id="canvas-3d" class="canvas-3d-container"></div>
 
     <header class="site-header">
-      <div class="hero-text-3d">
-        <p class="eyebrow" data-aos="fade-up" data-aos-duration="500">Building the Future</p>
-        <h1 data-aos="fade-up" data-aos-duration="500" data-aos-delay="100">Advanced Projects Showcase</h1>
-        <p class="lead" data-aos="fade-up" data-aos-duration="500" data-aos-delay="200">
-          A collection of ambitious, transformative projects pushing the boundaries of technology. From algorithmic trading systems and procedurally-generated worlds to real-time multiplayer platforms—these aren't just applications, they're solutions reshaping how we interact with software.
-        </p>
-      </div>
-      <div class="stats" data-aos="fade-up" data-aos-duration="500" data-aos-delay="300">
-        <article>
-          <span id="project-total">0</span>
-          <p>Active Projects</p>
-        </article>
-        <article>
-          <span id="project-owners">0</span>
-          <p>Builders</p>
-        </article>
-        <article>
-          <span>∞</span>
-          <p>Potential</p>
-        </article>
-      </div>
-      <div class="cta-actions" style="margin-top: 3rem; justify-content: center; gap: 1.5rem;" data-aos="fade-up" data-aos-duration="500" data-aos-delay="400">
-        <a href="#projects" class="button">Explore Projects</a>
-        <a href="contact.html" class="button ghost">Get In Touch</a>
+      <div class="hero-middle">
+        <div class="hero-text-3d">
+          <p class="eyebrow" data-aos="fade-up" data-aos-duration="500">Building the Future</p>
+          <h1 data-aos="fade-up" data-aos-duration="500" data-aos-delay="100">Advanced Projects Showcase</h1>
+          <p class="lead" data-aos="fade-up" data-aos-duration="500" data-aos-delay="200">
+            A collection of ambitious, transformative projects pushing the boundaries of technology. From algorithmic trading systems and procedurally-generated worlds to real-time multiplayer platforms—these are focused builds with measurable product impact.
+          </p>
+        </div>
       </div>
 
-      <!-- Builders Section -->
-      <section class="builders-section depth-glow" data-aos="fade-up" data-aos-duration="500" data-aos-delay="500">
-        <h3 class="section-subtitle">Meet the Builders</h3>
+      <div class="hero-bottom">
+        <div class="stats stat-band" data-aos="fade-up" data-aos-duration="500" data-aos-delay="300">
+          <article>
+            <span id="project-total">0</span>
+            <p>Active Projects</p>
+          </article>
+          <article>
+            <span id="project-owners">0</span>
+            <p>Builders</p>
+          </article>
+          <article>
+            <span>∞</span>
+            <p>Potential</p>
+          </article>
+        </div>
+
+        <section class="signal-ribbon" data-aos="fade-up" data-aos-duration="500" data-aos-delay="350">
+          <article>
+            <h3>Systems-First</h3>
+            <p>Architecture is mapped before polish, so scaling does not become a rewrite.</p>
+          </article>
+          <article>
+            <h3>Fast Iteration</h3>
+            <p>Short loops, visible progress, and feedback-driven releases keep momentum high.</p>
+          </article>
+          <article>
+            <h3>Pixel + Perf</h3>
+            <p>We pair strong visual direction with smooth rendering and practical UX choices.</p>
+          </article>
+        </section>
+
+        <!-- Builders Section -->
+        <section class="builders-section depth-glow" data-aos="fade-up" data-aos-duration="500" data-aos-delay="400">
+        <div class="builders-head">
+          <h3 class="section-subtitle">Meet the Builders</h3>
+          <p>Two focused teams balancing product design, systems thinking, and execution speed.</p>
+        </div>
         <div class="builders-grid">
-          <div class="builder-card" data-aos="scale-in" data-aos-duration="500" data-aos-delay="550">
+          <div class="builder-card" data-aos="scale-in" data-aos-duration="500" data-aos-delay="500">
             <div class="builder-avatar">
               <div class="avatar-placeholder">DH</div>
             </div>
@@ -127,7 +145,7 @@
             </div>
           </div>
 
-          <div class="builder-card" data-aos="scale-in" data-aos-duration="500" data-aos-delay="600">
+          <div class="builder-card" data-aos="scale-in" data-aos-duration="500" data-aos-delay="550">
             <div class="builder-avatar zoande">
               <div class="avatar-placeholder">ZD</div>
             </div>
@@ -142,13 +160,14 @@
           </div>
         </div>
       </section>
+      </div>
     </header>
 
     <main>
       <!-- Projects Section -->
       <section id="projects" class="section-title-wrap" data-parallax="0.2" data-aos="fade-up" data-aos-duration="500" style="margin-top: 5rem;">
-        <h2>Featured Projects</h2>
-        <p>Click into any project to see its architecture, current status, and technical foundation.</p>
+        <h2>Live Project Deck</h2>
+        <p>Open any build to explore architecture, development status, and technical decisions.</p>
       </section>
       <section id="project-grid" class="project-grid" aria-live="polite" data-parallax="0.15"></section>
 
@@ -199,11 +218,12 @@
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script>
       AOS.init({
-        duration: 500,
-        easing: 'ease-in-out-cubic',
+        duration: 600,
+        easing: 'ease-in-out-expo',
         once: false,
         mirror: true,
-        offset: 100
+        offset: 80,
+        delay: 0
       });
 
       // Add smooth page transitions
