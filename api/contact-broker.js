@@ -52,6 +52,35 @@ function parseBody(req) {
   return {};
 }
 
+function normalizeOrigin(value) {
+  if (typeof value !== "string") {
+    return "";
+  }
+
+  const trimmed = value.trim();
+  if (!trimmed) {
+    return "";
+  }
+
+  try {
+    return new URL(trimmed).origin.toLowerCase();
+  } catch {
+    return trimmed.replace(/\/+$/, "").toLowerCase();
+  }
+}
+
+function getAllowedOrigins() {
+  const configured = process.env.ALLOWED_ORIGINS || process.env.ALLOWED_ORIGIN || "";
+  if (!configured) {
+    return [];
+  }
+
+  return configured
+    .split(",")
+    .map((value) => normalizeOrigin(value))
+    .filter(Boolean);
+}
+
 function normalizePayload(raw) {
   return {
     name: String(raw.name || "").trim(),
@@ -137,9 +166,9 @@ module.exports = async function handler(req, res) {
     });
   }
 
-  const allowedOrigin = process.env.ALLOWED_ORIGIN || "";
-  const requestOrigin = req.headers.origin || "";
-  if (allowedOrigin && requestOrigin && requestOrigin !== allowedOrigin) {
+  const allowedOrigins = getAllowedOrigins();
+  const requestOrigin = normalizeOrigin(req.headers.origin || "");
+  if (allowedOrigins.length > 0 && !allowedOrigins.includes(requestOrigin)) {
     return res.status(403).json({
       error: "origin_not_allowed",
       message: "Request origin is not allowed.",

@@ -55,10 +55,11 @@ The broker performs request validation and rate limiting, then forwards payloads
 Required environment variables:
 
 - `RECEIVER_CONTACT_URL`: public receiver endpoint, for example `https://ingest-dev.yourdomain.com/api/contact`
-- `ALLOWED_ORIGIN`: your website origin, for example `https://elitedevs.org`
+- `ALLOWED_ORIGINS`: comma-separated origin allowlist, for example `https://elitedevs.org,https://www.elitedevs.org`
 
 Optional environment variables:
 
+- `ALLOWED_ORIGIN`: single-origin fallback (backward compatibility)
 - `RECEIVER_TOKEN`: shared token sent as `x-receiver-token`
 - `BROKER_RATE_LIMIT_MAX`: requests per IP in one window (default `6`)
 - `BROKER_RATE_LIMIT_WINDOW_MS`: rate-limit window duration (default `60000`)
