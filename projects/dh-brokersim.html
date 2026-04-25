@@ -708,12 +708,9 @@
       <section class="broker-hero broker-card reveal">
         <article>
           <p class="broker-hero-meta">DH4410 / Browser Simulation / Playable Vertical Slice</p>
-          <h1>BrokerSIM became a full desk-to-warehouse experience by solving one hard challenge at a time.</h1>
+          <h1>How a simple "buy low, sell high" idea became a full trading simulation—by wrestling with six core problems.</h1>
           <p class="broker-hero-lead">
-            The original idea was simple: let players broker high-value deals. The real build challenge was turning that
-            into a believable loop where pricing, trust, shipping risk, client personality, and physical fulfillment all
-            push against each other. This page tells the build story in sequence, including where friction appeared and
-            how each issue was resolved.
+            BrokerSIM started as a straightforward trading game, but making it *feel* real required building a whole interconnected system. Pricing, trust, shipping delays, buyer psychology, warehouse logistics—everything has to interact in ways players can understand and exploit. This is the build story: what broke first, how we fixed it, and why those fixes mattered.
           </p>
 
           <div class="broker-chip-row">
@@ -763,8 +760,7 @@
       <section class="broker-flow broker-card reveal">
         <h2>The End-To-End Gameplay Loop</h2>
         <p>
-          BrokerSIM is designed so each step commits you to consequences in the next step. Good outcomes come from balanced
-          decision chains, not one lucky click.
+          Every choice ripples forward. Pick a cheap supplier with dodgy track record? That gamble hits you during negotiation. Rush a delivery to close faster? Delays cascade into disputes. The game works because you can't "game" each phase in isolation—you have to think three moves ahead.
         </p>
         <div class="broker-flow-grid">
           <article class="broker-flow-step">
@@ -793,25 +789,22 @@
       <section class="broker-story">
         <article class="broker-section reveal" id="chapter-1">
           <div class="broker-section-text broker-card">
-            <p class="broker-kicker">Challenge 01</p>
-            <h3>Making sourcing decisions feel meaningful, not random</h3>
+            <p class="broker-kicker">Problem 01</p>
+            <h3>Supplier choices were boring and all led to the same place</h3>
             <p>
-              Early versions felt flat because supplier choices looked different but behaved similarly in outcomes.
-              Without tangible risk distinctions, players naturally defaulted to the cheapest offer and ignored the rest.
+              Early playtests showed one brutal pattern: players just picked the cheapest supplier every time. Why? Because all suppliers produced the same game outcome. Sure, they had different names and prices, but the actual *consequences* were identical. Nobody thinks hard about a choice that doesn't matter.
             </p>
             <p>
-              The fix was to model each offer with a practical set of tradeoff attributes: list price, inbound shipping
-              cost, inbound damage risk, condition score, and supplier trust. This turned sourcing into a risk-managed
-              investment choice rather than a cosmetic menu.
+              The fix was real tradeoffs. Each supplier now carries actual risk: a sketchy vendor is cheap but arrives damaged; a premium brand costs more but arrives pristine; mid-tier options offer different failure modes. Suddenly sourcing became an *investment decision* where you're calculating odds, not just picking a number.
             </p>
             <div class="broker-split-notes">
               <div class="broker-note">
-                <strong>What was hard</strong>
-                <p>Cheap paths dominated too often and erased the intended strategic depth.</p>
+                <strong>The problem</strong>
+                <p>Cost dominated strategy because quality, trust, and shipping differences didn't actually matter yet.</p>
               </div>
               <div class="broker-note">
-                <strong>How it was solved</strong>
-                <p>Offer values now combine into downstream effects that alter negotiation confidence and final margin.</p>
+                <strong>The fix</strong>
+                <p>Each supplier's profile (cost, damage risk, trust, condition) now creates different downstream problems. You're not picking a deal; you're picking which risks to absorb.</p>
               </div>
             </div>
           </div>
@@ -831,25 +824,22 @@
 
         <article class="broker-section reverse reveal" id="chapter-2">
           <div class="broker-section-text broker-card">
-            <p class="broker-kicker">Challenge 02</p>
-            <h3>Avoiding robotic negotiation responses</h3>
+            <p class="broker-kicker">Problem 02</p>
+            <h3>Buyers felt like random chatbots, not negotiating partners</h3>
             <p>
-              Plain random dialogue made buyers feel fake and disconnected from the numbers. Players could not form a
-              reliable strategy because similar input produced inconsistent social outcomes.
+              Negotiation was supposedly important, but talking to a buyer gave zero feedback. You'd offer the same price twice and get wildly different responses—one accepts, one walks away. Players couldn't learn anything, so they just stopped trying to negotiate and posted fixed prices instead.
             </p>
             <p>
-              The conversation system was shifted to intent detection plus personality-aware response pools. Inputs like
-              discount requests, trust asks, shipping urgency, walk-away language, and threats now map to mood/leverage
-              effects that vary by Friendly, Analytical, and Aggressive profiles.
+              Real fix: buyers now have *personalities*. The aggressive broker responds differently to boldness; the analytical type wants math; the friendly one builds trust slowly. When you understand who you're dealing with, your communication style becomes a real lever. Same offer can succeed or fail based on *how* you frame it.
             </p>
             <div class="broker-split-notes">
               <div class="broker-note">
-                <strong>What changed</strong>
-                <p>Negotiation moved from flavor text to a tactical system with predictable, learnable behavior.</p>
+                <strong>The problem</strong>
+                <p>Dialogue felt random because it was. Negotiation wasn't a system—it was flavor text rolling dice.</p>
               </div>
               <div class="broker-note">
-                <strong>Player impact</strong>
-                <p>Communication style now matters as much as numeric offer values in closing high-quality deals.</p>
+                <strong>The fix</strong>
+                <p>Each buyer type responds predictably to different tactics. Now negotiation is a skill you can develop, not just hope works.</p>
               </div>
             </div>
           </div>
@@ -869,24 +859,22 @@
 
         <article class="broker-section reveal" id="chapter-3">
           <div class="broker-section-text broker-card">
-            <p class="broker-kicker">Challenge 03</p>
-            <h3>Connecting desk strategy to physical fulfillment</h3>
+            <p class="broker-kicker">Problem 03</p>
+            <h3>The 3D warehouse felt tacked on, not connected</h3>
             <p>
-              A major risk was disjointed gameplay: if the 3D warehouse felt detached, the project would seem like two
-              separate demos stitched together. The goal was continuity, not mode novelty.
+              Early builds switched to the warehouse and players' brains broke. "Wait, why am I moving boxes? Wasn't I trading?" The 2D deal phase and the 3D warehouse were like two different games glued together. Making deals was all strategy; warehouse work was all busywork. No connection meant no consequence.
             </p>
             <p>
-              The resolution was to carry one deal-state pipeline across phases: browsing, negotiating, warehousing,
-              and completed. That state continuity keeps player context intact and makes dispatch completion feel earned.
+              Solution: one deal flows through the entire chain. You negotiate a specific order, then *you* physically dispatch it. That pallet you're moving is the actual profit you just closed. Mess up the logistics and you lose margin. This turns the warehouse from "mandatory side quest" into "the physical reality of your business decision."
             </p>
             <div class="broker-split-notes">
               <div class="broker-note">
-                <strong>Pipeline win</strong>
-                <p>One deal context survives every phase transition instead of restarting with synthetic UI state.</p>
+                <strong>The problem</strong>
+                <p>Modes felt separated. Trading wasn't tied to fulfillment; fulfillment was just UI busywork.</p>
               </div>
               <div class="broker-note">
-                <strong>Design result</strong>
-                <p>The warehouse segment reinforces business decisions instead of interrupting them.</p>
+                <strong>The fix</strong>
+                <p>Same deal state persists across phases. Every successful negotiation *becomes* a fulfillment task. Your desk decisions directly control warehouse work.</p>
               </div>
             </div>
           </div>
@@ -906,25 +894,22 @@
 
         <article class="broker-section reverse reveal" id="chapter-4">
           <div class="broker-section-text broker-card">
-            <p class="broker-kicker">Challenge 04</p>
-            <h3>Keeping outcomes dynamic without making them feel unfair</h3>
+            <p class="broker-kicker">Problem 04</p>
+            <h3>Days were either too predictable or felt completely rigged</h3>
             <p>
-              Deterministic days became repetitive quickly, but heavy randomness made skill feel irrelevant.
-              The design needed pressure and volatility without removing player agency.
+              First version had zero randomness—every day played the same, so optimization became trivial. Add too much chaos and suddenly careful plays don't matter; you just hope dice roll in your favor. The sweet spot is *turbulence you can read*.
             </p>
             <p>
-              Daily events and challenge modifiers were added as transparent external pressures. Demand spikes,
-              shipping slowdowns, and fraud-related risk shifts now alter the tactical landscape while preserving
-              understandable cause-and-effect.
+              Daily events now inject real pressure: shipping delays, demand spikes, fraud alerts. But they're announced upfront and transparent. You know *why* the market shifted; you're not blindsided. Smart players adapt by changing shipping tiers, renegotiating harder, or playing conservative. Skill still wins; luck just changes the playing field.
             </p>
             <div class="broker-split-notes">
               <div class="broker-note">
-                <strong>Tuning focus</strong>
-                <p>Events should change strategy, not invalidate careful planning.</p>
+                <strong>The problem</strong>
+                <p>Pure randomness felt unfair; pure determinism was boring.</p>
               </div>
               <div class="broker-note">
-                <strong>Current behavior</strong>
-                <p>Players can adapt through shipping, trust management, and negotiation posture choices.</p>
+                <strong>The fix</strong>
+                <p>Events are transparent pressures. They change *how* to win, not whether you can win. Skill adapts to the day's circumstances.</p>
               </div>
             </div>
           </div>
@@ -944,24 +929,22 @@
 
         <article class="broker-section reveal" id="chapter-5">
           <div class="broker-section-text broker-card">
-            <p class="broker-kicker">Challenge 05</p>
-            <h3>Telling the player why a day succeeded or failed</h3>
+            <p class="broker-kicker">Problem 05</p>
+            <h3>Players couldn't see *why* they won or lost</h3>
             <p>
-              Another issue in early loops was weak post-run clarity. Players could see totals, but not the chain of
-              reasons that produced those totals. Without that feedback, improvement across days was slower.
+              End-of-day screen just showed numbers: profit, trust, challenges. But the *causality* was buried. Why'd that deal fail? Was it the supplier quality, a shipping delay, or bad negotiation? Without clear cause-and-effect, players couldn't learn patterns. They'd just retry blindly instead of iterating with intent.
             </p>
             <p>
-              Outcome summaries now emphasize the core drivers: profit quality, delays, disputes, trust movement, and
-              challenge completion. This tightens the learn loop and gives each new day a strategic purpose.
+              Now the day summary breaks down exactly what happened: which deals made money, which ones tanked and why, which trust shifts came from negotiation versus disputes, which challenges you nailed or missed. It's coaching, not just accounting. Players can see the chain of decisions that produced the outcome, so they improve with *direction*.
             </p>
             <div class="broker-split-notes">
               <div class="broker-note">
-                <strong>Feedback design</strong>
-                <p>Post-day summary is treated as coaching, not just accounting.</p>
+                <strong>The problem</strong>
+                <p>High-level stats don't teach. Players saw profit but not the path that created it.</p>
               </div>
               <div class="broker-note">
-                <strong>Why it matters</strong>
-                <p>Clear causality helps players iterate with intent instead of guessing.</p>
+                <strong>The fix</strong>
+                <p>Every outcome is traced back to specific decisions. Clear feedback loops let players actually learn and adapt their strategy.</p>
               </div>
             </div>
           </div>
@@ -981,37 +964,36 @@
       </section>
 
       <section class="broker-roadmap broker-card reveal" id="roadmap">
-        <h2>Current State And Next Milestones</h2>
+        <h2>Where We Are And What's Next</h2>
         <p style="margin: 0.65rem 0 0; color: var(--text-muted); max-width: 72ch; line-height: 1.68;">
-          The project is currently a coherent playable vertical slice. The next stage is depth: persistence, broader
-          event variety, and stronger multi-day consequences so player behavior compounds over time.
+          Right now, BrokerSIM is a tight, self-contained day loop. Everything connects. The next push is building on that foundation: career persistence so your reputation follows you across multiple trading days, richer event variety to keep the market feeling alive, and consequences that snowball. Early wins compound; early losses hurt in ways that matter next week.
         </p>
 
         <div class="broker-roadmap-grid">
           <article class="broker-roadmap-card">
-            <h3>Shipping now</h3>
+            <h3>Shipping (playable now)</h3>
             <ul>
-              <li>End-to-end day loop from sourcing through dispatch completion.</li>
-              <li>Intent-sensitive personality negotiation with tactical outcomes.</li>
-              <li>Integrated 3D warehouse completion phase in the same flow.</li>
+              <li>Full day cycle: source → negotiate → dispatch → results</li>
+              <li>Buyer personalities matter; your tone changes outcomes</li>
+              <li>3D warehouse integrated, not bolted on</li>
             </ul>
           </article>
 
           <article class="broker-roadmap-card">
-            <h3>In progress</h3>
+            <h3>Actively building</h3>
             <ul>
-              <li>Balance tuning for risk, trust influence, and challenge pressure.</li>
-              <li>Expanded buyer and event content to increase replay variability.</li>
-              <li>Sharper telemetry for explaining deal failures in detail.</li>
+              <li>Fine-tuning risk balance so all supplier types stay viable</li>
+              <li>More buyer archetypes and daily event variety</li>
+              <li>Better post-game analysis so losses are learning moments</li>
             </ul>
           </article>
 
           <article class="broker-roadmap-card">
-            <h3>Next major push</h3>
+            <h3>Future: career mode</h3>
             <ul>
-              <li>Persistent profile progression across cash, trust, and streaks.</li>
-              <li>Long-run reputation effects on supplier and client behavior.</li>
-              <li>Replace all screenshot slots with final in-game captures.</li>
+              <li>Career persistence—your reputation and cash carry forward</li>
+              <li>Long-term supplier and buyer relationships that evolve</li>
+              <li>Real screenshots replacing all the placeholder boxes above</li>
             </ul>
           </article>
         </div>
