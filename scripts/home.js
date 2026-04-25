@@ -10,7 +10,7 @@
 
   // Pick most important projects to display (6 total)
   const featuredIds = [
-    "zoande-brokersim",
+    "dh-brokersim",
     "dh-swapspot",
     "dh-citybuilder",
     "dh-typing-platformer",

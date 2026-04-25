@@ -103,6 +103,7 @@
   const techEl = document.getElementById("project-tech");
   const detailsEl = document.getElementById("project-details");
   const stepsEl = document.getElementById("project-steps");
+  const screenshotsEl = document.getElementById("project-screenshots");
   const repoLinkEl = document.getElementById("project-repo");
   const repoLinkEl2 = document.getElementById("project-repo-link");
   const localPathEl = document.getElementById("project-local-path");
@@ -136,6 +137,14 @@
 
   if (stepsEl) {
     stepsEl.innerHTML = project.deliverableSteps.map((item) => `<li>${item}</li>`).join("");
+  }
+
+  if (screenshotsEl) {
+    const screenshots = Array.isArray(project.screenshots) ? project.screenshots : [];
+    screenshotsEl.innerHTML = screenshots.map((item) => `<li>${item}</li>`).join("");
+    if (screenshotsEl.parentElement) {
+      screenshotsEl.parentElement.style.display = screenshots.length ? "block" : "none";
+    }
   }
 
   if (launch && actionsWrap) {

@@ -1,32 +1,449 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Project | Project Hub</title>
+    <title>BrokerSIM Development Story | EliteDevs</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&family=Bebas+Neue&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <!-- Animate.css for smooth animations -->
-    <link 
-      rel="stylesheet" 
-      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-    />
-    <!-- AOS (Animate On Scroll) for scroll-triggered animations -->
-    <link 
-      rel="stylesheet" 
-      href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
-    />
     <link rel="stylesheet" href="../styles-premium-light.css" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Space Grotesk", "Sora", sans-serif;
+      }
+
+      .broker-page {
+        max-width: 1320px;
+        margin: 8.8rem auto 6rem;
+        padding: 0 2rem;
+        display: grid;
+        gap: 2rem;
+      }
+
+      .broker-back-link {
+        text-decoration: none;
+        color: var(--color-blue);
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        width: fit-content;
+      }
+
+      .broker-back-link:hover {
+        text-decoration: underline;
+      }
+
+      .broker-card {
+        background: white;
+        border: 1px solid #f1f5f9;
+        border-radius: 28px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+      }
+
+      .broker-hero {
+        display: grid;
+        grid-template-columns: 1.2fr 0.9fr;
+        gap: 1.6rem;
+        padding: 2rem;
+      }
+
+      .broker-hero-meta {
+        margin: 0;
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--color-blue);
+      }
+
+      .broker-hero h1 {
+        margin: 0.75rem 0 1rem;
+        font-family: "Sora", sans-serif;
+        font-size: clamp(2.05rem, 4vw, 3.3rem);
+        line-height: 1.08;
+        letter-spacing: -0.03em;
+        max-width: 16ch;
+      }
+
+      .broker-hero-lead {
+        margin: 0;
+        max-width: 62ch;
+        color: var(--text-muted);
+        font-size: 1.06rem;
+        line-height: 1.72;
+      }
+
+      .broker-chip-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        margin: 1.3rem 0 1.35rem;
+      }
+
+      .broker-chip {
+        padding: 0.55rem 0.9rem;
+        border-radius: 12px;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        font-weight: 800;
+        font-size: 0.82rem;
+        color: var(--text-dark);
+        white-space: nowrap;
+      }
+
+      .broker-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+      }
+
+      .broker-actions .button {
+        padding: 1rem 1.35rem;
+      }
+
+      .broker-quick-facts {
+        border-radius: 22px;
+        border: 1px solid #e2e8f0;
+        background: #f8fbff;
+        padding: 1rem;
+      }
+
+      .broker-quick-facts h2 {
+        margin: 0 0 0.7rem;
+        font-size: 1.1rem;
+        font-family: "Sora", sans-serif;
+      }
+
+      .broker-fact-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.65rem;
+      }
+
+      .broker-fact {
+        border: 1px solid #dbe9fb;
+        border-radius: 14px;
+        background: white;
+        padding: 0.72rem;
+      }
+
+      .broker-fact strong {
+        display: block;
+        font-size: 1.35rem;
+        line-height: 1;
+        font-family: "Sora", sans-serif;
+      }
+
+      .broker-fact span {
+        margin-top: 0.32rem;
+        display: block;
+        color: var(--text-muted);
+        font-size: 0.8rem;
+      }
+
+      .broker-shot {
+        border: 1px solid #e2e8f0;
+        border-radius: 18px;
+        overflow: hidden;
+        background: white;
+      }
+
+      .broker-shot-frame {
+        aspect-ratio: 16 / 9;
+        border-bottom: 1px solid #e2e8f0;
+        background:
+          radial-gradient(circle at top right, rgba(59, 130, 246, 0.17), rgba(59, 130, 246, 0) 55%),
+          radial-gradient(circle at left bottom, rgba(139, 92, 246, 0.12), rgba(139, 92, 246, 0) 55%),
+          repeating-linear-gradient(
+            -45deg,
+            rgba(59, 130, 246, 0.08),
+            rgba(59, 130, 246, 0.08) 16px,
+            rgba(245, 158, 11, 0.08) 16px,
+            rgba(245, 158, 11, 0.08) 32px
+          );
+        display: grid;
+        place-items: center;
+        text-align: center;
+        padding: 0.8rem;
+      }
+
+      .broker-shot-frame p {
+        margin: 0;
+      }
+
+      .broker-shot-slot {
+        color: var(--color-blue);
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+      }
+
+      .broker-shot-title {
+        margin-top: 0.4rem;
+        font-family: "Sora", sans-serif;
+        font-size: 1.08rem;
+      }
+
+      .broker-shot-size {
+        margin-top: 0.28rem;
+        color: var(--text-muted);
+        font-size: 0.82rem;
+      }
+
+      .broker-shot figcaption {
+        padding: 0.7rem 0.8rem 0.82rem;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+      }
+
+      .broker-flow {
+        padding: 1.6rem;
+      }
+
+      .broker-flow h2,
+      .broker-roadmap h2 {
+        margin: 0;
+        font-family: "Sora", sans-serif;
+        font-size: 1.62rem;
+        letter-spacing: -0.02em;
+      }
+
+      .broker-flow p {
+        color: var(--text-muted);
+        margin: 0.65rem 0 1rem;
+      }
+
+      .broker-flow-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 0.75rem;
+      }
+
+      .broker-flow-step {
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+        background: #fbfdff;
+        padding: 0.85rem;
+      }
+
+      .broker-flow-step .step-label {
+        margin: 0;
+        font-size: 0.76rem;
+        font-weight: 600;
+        color: var(--color-blue);
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+      }
+
+      .broker-flow-step h3 {
+        margin: 0.35rem 0 0;
+        font-size: 1.02rem;
+      }
+
+      .broker-flow-step p {
+        margin: 0.45rem 0 0;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        line-height: 1.55;
+      }
+
+      .broker-story {
+        display: grid;
+        gap: 1.2rem;
+      }
+
+      .broker-section {
+        display: grid;
+        grid-template-columns: 1.25fr 0.95fr;
+        gap: 1.1rem;
+        align-items: stretch;
+      }
+
+      .broker-section.reverse {
+        grid-template-columns: 0.95fr 1.25fr;
+      }
+
+      .broker-section.reverse .broker-section-text {
+        order: 2;
+      }
+
+      .broker-section.reverse .broker-shot {
+        order: 1;
+      }
+
+      .broker-section-text {
+        padding: 1.35rem;
+      }
+
+      .broker-kicker {
+        margin: 0 0 0.45rem;
+        color: var(--color-blue);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: 0.75rem;
+        font-weight: 800;
+      }
+
+      .broker-section h3 {
+        margin: 0;
+        font-family: "Sora", sans-serif;
+        font-size: 1.4rem;
+        letter-spacing: -0.02em;
+      }
+
+      .broker-section p {
+        margin: 0.68rem 0 0;
+        color: var(--text-muted);
+        line-height: 1.68;
+      }
+
+      .broker-split-notes {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+        margin-top: 0.9rem;
+      }
+
+      .broker-note {
+        border: 1px solid #e2e8f0;
+        border-radius: 14px;
+        padding: 0.74rem;
+        background: #f8fbff;
+      }
+
+      .broker-note strong {
+        display: block;
+        margin-bottom: 0.28rem;
+        font-size: 0.82rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--color-blue);
+      }
+
+      .broker-note p {
+        margin: 0;
+        font-size: 0.87rem;
+        line-height: 1.5;
+        color: var(--text-muted);
+      }
+
+      .broker-roadmap {
+        padding: 1.4rem;
+      }
+
+      .broker-roadmap-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        margin-top: 0.95rem;
+      }
+
+      .broker-roadmap-card {
+        flex: 1 1 250px;
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+        background: #fbfdff;
+        padding: 0.88rem;
+      }
+
+      .broker-roadmap-card h3 {
+        margin: 0;
+        font-size: 1.04rem;
+      }
+
+      .broker-roadmap-card ul {
+        margin: 0.56rem 0 0;
+        padding-left: 1rem;
+        color: var(--text-muted);
+      }
+
+      .broker-roadmap-card li + li {
+        margin-top: 0.36rem;
+      }
+
+      .broker-footer-note {
+        margin: 0;
+        text-align: center;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+
+      .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (max-width: 1100px) {
+        .broker-hero,
+        .broker-section,
+        .broker-section.reverse {
+          grid-template-columns: 1fr;
+        }
+
+        .broker-section.reverse .broker-section-text,
+        .broker-section.reverse .broker-shot {
+          order: initial;
+        }
+
+        .broker-flow-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 760px) {
+        .broker-page {
+          margin-top: 7.8rem;
+          padding: 0 1rem;
+        }
+
+        .broker-hero,
+        .broker-flow,
+        .broker-section-text,
+        .broker-roadmap {
+          padding: 1rem;
+        }
+
+        .broker-flow-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .broker-split-notes {
+          grid-template-columns: 1fr;
+        }
+
+        .broker-fact-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .reveal,
+        .reveal.is-visible {
+          transition: none;
+          transform: none;
+          opacity: 1;
+        }
+      }
+    </style>
   </head>
-  <body data-project-id="dh-brokersim">
-    <!-- Navigation -->
+  <body>
     <nav class="site-nav">
       <div class="nav-container">
-        <a href="../index.html" class="nav-logo">PORTFOLIO</a>
+        <a href="../index.html" class="nav-logo">ELITEDEVS</a>
         <ul class="nav-menu">
           <li class="nav-item"><a href="../index.html">Home</a></li>
           <li class="nav-item"><a href="../index.html#projects">Projects</a></li>
@@ -36,65 +453,347 @@
       </div>
     </nav>
 
-    <div class="bg-shape s1"></div>
-    <div class="bg-shape s2"></div>
-    <div class="bg-shape s3"></div>
-    <div class="bg-shape s4"></div>
-    <div class="bg-shape s5"></div>
+    <main class="broker-page">
+      <a class="broker-back-link" href="../index.html#projects">&larr; Back to all projects</a>
 
-    <main id="project-page" class="project-layout">
-      <a class="back-link" href="../index.html">Back to all projects</a>
+      <section class="broker-hero broker-card reveal">
+        <article>
+          <p class="broker-hero-meta">DH4410 / Browser Simulation / Playable Vertical Slice</p>
+          <h1>BrokerSIM became a full desk-to-warehouse experience by solving one hard challenge at a time.</h1>
+          <p class="broker-hero-lead">
+            The original idea was simple: let players broker high-value deals. The real build challenge was turning that
+            into a believable loop where pricing, trust, shipping risk, client personality, and physical fulfillment all
+            push against each other. This page tells the build story in sequence, including where friction appeared and
+            how each issue was resolved.
+          </p>
 
-      <section class="project-hero">
-        <p class="owner" id="project-owner"></p>
-        <h1 id="project-title"></h1>
-        <p id="project-summary"></p>
-        <div id="project-tech" class="chip-row" style="margin-top: 1.2rem"></div>
-        <div class="actions">
-          <a id="project-repo" class="button" href="#" target="_blank" rel="noopener noreferrer">Open GitHub Repo</a>
-          <a class="button ghost" href="../index.html">View All Projects</a>
+          <div class="broker-chip-row">
+            <span class="broker-chip">React 19</span>
+            <span class="broker-chip">TypeScript</span>
+            <span class="broker-chip">Vite</span>
+            <span class="broker-chip">Three.js</span>
+            <span class="broker-chip">WebGL</span>
+            <span class="broker-chip">GLTF Models</span>
+          </div>
+
+          <div class="broker-actions">
+            <a class="button" href="../play/dh-brokersim/" target="_blank" rel="noopener noreferrer">Play Project</a>
+            <a class="button ghost" href="https://github.com/DH4410/BrokerSIM" target="_blank" rel="noopener noreferrer"
+              >Open GitHub Repo</a
+            >
+            <a class="button ghost" href="../index.html#projects">View All Projects</a>
+          </div>
+        </article>
+
+        <aside>
+          <section class="broker-quick-facts">
+            <h2>Build Snapshot</h2>
+            <div class="broker-fact-grid">
+              <div class="broker-fact"><strong>4</strong><span>Connected gameplay phases</span></div>
+              <div class="broker-fact"><strong>3</strong><span>Buyer personality profiles</span></div>
+              <div class="broker-fact"><strong>3</strong><span>Shipping tiers with risk curves</span></div>
+              <div class="broker-fact"><strong>Daily</strong><span>Event/challenge modifiers</span></div>
+            </div>
+          </section>
+
+          <figure class="broker-shot" style="margin-top: 0.85rem;">
+            <div class="broker-shot-frame">
+              <div>
+                <p class="broker-shot-slot">Screenshot Slot 01</p>
+                <p class="broker-shot-title">Hero Capture: Core Deal Desk</p>
+                <p class="broker-shot-size">Suggested capture: 1600x900 PNG</p>
+              </div>
+            </div>
+            <figcaption>
+              Use a high-signal opening frame: supplier cards, client target constraints, and a visible profit estimate.
+            </figcaption>
+          </figure>
+        </aside>
+      </section>
+
+      <section class="broker-flow broker-card reveal">
+        <h2>The End-To-End Gameplay Loop</h2>
+        <p>
+          BrokerSIM is designed so each step commits you to consequences in the next step. Good outcomes come from balanced
+          decision chains, not one lucky click.
+        </p>
+        <div class="broker-flow-grid">
+          <article class="broker-flow-step">
+            <p class="step-label">Step 01</p>
+            <h3>Source inventory</h3>
+            <p>Compare supplier offers using trust, inbound risk, condition, and cost before committing capital.</p>
+          </article>
+          <article class="broker-flow-step">
+            <p class="step-label">Step 02</p>
+            <h3>Negotiate with clients</h3>
+            <p>Respond to live intent signals while preserving enough margin to survive logistics outcomes.</p>
+          </article>
+          <article class="broker-flow-step">
+            <p class="step-label">Step 03</p>
+            <h3>Fulfill in 3D warehouse</h3>
+            <p>Transition into movement-based handling and complete physical dispatch steps in a spatial scene.</p>
+          </article>
+          <article class="broker-flow-step">
+            <p class="step-label">Step 04</p>
+            <h3>Resolve day outcomes</h3>
+            <p>Settle delay/dispute impact, profit, trust movement, and challenge completion at the end of cycle.</p>
+          </article>
         </div>
       </section>
 
-      <section class="project-grid-two">
-        <article class="panel">
-          <h3>Current Status</h3>
-          <p id="project-stage"></p>
-          <hr style="margin: 1rem 0; border: none; border-top: 1px solid var(--border); opacity: 0.3;" />
-          <p id="project-status"></p>
+      <section class="broker-story">
+        <article class="broker-section reveal">
+          <div class="broker-section-text broker-card">
+            <p class="broker-kicker">Challenge 01</p>
+            <h3>Making sourcing decisions feel meaningful, not random</h3>
+            <p>
+              Early versions felt flat because supplier choices looked different but behaved similarly in outcomes.
+              Without tangible risk distinctions, players naturally defaulted to the cheapest offer and ignored the rest.
+            </p>
+            <p>
+              The fix was to model each offer with a practical set of tradeoff attributes: list price, inbound shipping
+              cost, inbound damage risk, condition score, and supplier trust. This turned sourcing into a risk-managed
+              investment choice rather than a cosmetic menu.
+            </p>
+            <div class="broker-split-notes">
+              <div class="broker-note">
+                <strong>What was hard</strong>
+                <p>Cheap paths dominated too often and erased the intended strategic depth.</p>
+              </div>
+              <div class="broker-note">
+                <strong>How it was solved</strong>
+                <p>Offer values now combine into downstream effects that alter negotiation confidence and final margin.</p>
+              </div>
+            </div>
+          </div>
+          <figure class="broker-shot broker-card">
+            <div class="broker-shot-frame">
+              <div>
+                <p class="broker-shot-slot">Screenshot Slot 02</p>
+                <p class="broker-shot-title">Supplier Risk Comparison View</p>
+                <p class="broker-shot-size">Capture moment: before selecting offer</p>
+              </div>
+            </div>
+            <figcaption>
+              Show at least 3 suppliers side-by-side with clearly different trust/risk/cost profiles.
+            </figcaption>
+          </figure>
         </article>
 
-        <article class="panel">
-          <h3>Source Code</h3>
-          <p class="small-note">Local path</p>
-          <p id="project-local-path" style="font-family: 'Courier New', monospace; font-size: 0.9rem; color: var(--accent); word-break: break-all;"></p>
-          <p class="small-note" style="margin-top: 1rem;">GitHub</p>
-          <a id="project-repo-link" class="button ghost" href="#" target="_blank" rel="noopener noreferrer" style="margin-top: 0.5rem; width: fit-content;">Visit Repository →</a>
+        <article class="broker-section reverse reveal">
+          <div class="broker-section-text broker-card">
+            <p class="broker-kicker">Challenge 02</p>
+            <h3>Avoiding robotic negotiation responses</h3>
+            <p>
+              Plain random dialogue made buyers feel fake and disconnected from the numbers. Players could not form a
+              reliable strategy because similar input produced inconsistent social outcomes.
+            </p>
+            <p>
+              The conversation system was shifted to intent detection plus personality-aware response pools. Inputs like
+              discount requests, trust asks, shipping urgency, walk-away language, and threats now map to mood/leverage
+              effects that vary by Friendly, Analytical, and Aggressive profiles.
+            </p>
+            <div class="broker-split-notes">
+              <div class="broker-note">
+                <strong>What changed</strong>
+                <p>Negotiation moved from flavor text to a tactical system with predictable, learnable behavior.</p>
+              </div>
+              <div class="broker-note">
+                <strong>Player impact</strong>
+                <p>Communication style now matters as much as numeric offer values in closing high-quality deals.</p>
+              </div>
+            </div>
+          </div>
+          <figure class="broker-shot broker-card">
+            <div class="broker-shot-frame">
+              <div>
+                <p class="broker-shot-slot">Screenshot Slot 03</p>
+                <p class="broker-shot-title">Negotiation Intent Moment</p>
+                <p class="broker-shot-size">Capture moment: mid-chat with leverage shift</p>
+              </div>
+            </div>
+            <figcaption>
+              Capture a message exchange where intent classification clearly drives a visible response direction.
+            </figcaption>
+          </figure>
         </article>
 
-        <article class="panel">
-          <h3>Architecture & Features</h3>
-          <ul id="project-details"></ul>
+        <article class="broker-section reveal">
+          <div class="broker-section-text broker-card">
+            <p class="broker-kicker">Challenge 03</p>
+            <h3>Connecting desk strategy to physical fulfillment</h3>
+            <p>
+              A major risk was disjointed gameplay: if the 3D warehouse felt detached, the project would seem like two
+              separate demos stitched together. The goal was continuity, not mode novelty.
+            </p>
+            <p>
+              The resolution was to carry one deal-state pipeline across phases: browsing, negotiating, warehousing,
+              and completed. That state continuity keeps player context intact and makes dispatch completion feel earned.
+            </p>
+            <div class="broker-split-notes">
+              <div class="broker-note">
+                <strong>Pipeline win</strong>
+                <p>One deal context survives every phase transition instead of restarting with synthetic UI state.</p>
+              </div>
+              <div class="broker-note">
+                <strong>Design result</strong>
+                <p>The warehouse segment reinforces business decisions instead of interrupting them.</p>
+              </div>
+            </div>
+          </div>
+          <figure class="broker-shot broker-card">
+            <div class="broker-shot-frame">
+              <div>
+                <p class="broker-shot-slot">Screenshot Slot 04</p>
+                <p class="broker-shot-title">Warehouse Dispatch Transition</p>
+                <p class="broker-shot-size">Capture moment: moving package toward dispatch</p>
+              </div>
+            </div>
+            <figcaption>
+              Show HUD/control context so readers can see this is integrated gameplay, not a disconnected scene.
+            </figcaption>
+          </figure>
         </article>
 
-        <article class="panel">
-          <h3>Roadmap</h3>
-          <ul id="project-steps"></ul>
+        <article class="broker-section reverse reveal">
+          <div class="broker-section-text broker-card">
+            <p class="broker-kicker">Challenge 04</p>
+            <h3>Keeping outcomes dynamic without making them feel unfair</h3>
+            <p>
+              Deterministic days became repetitive quickly, but heavy randomness made skill feel irrelevant.
+              The design needed pressure and volatility without removing player agency.
+            </p>
+            <p>
+              Daily events and challenge modifiers were added as transparent external pressures. Demand spikes,
+              shipping slowdowns, and fraud-related risk shifts now alter the tactical landscape while preserving
+              understandable cause-and-effect.
+            </p>
+            <div class="broker-split-notes">
+              <div class="broker-note">
+                <strong>Tuning focus</strong>
+                <p>Events should change strategy, not invalidate careful planning.</p>
+              </div>
+              <div class="broker-note">
+                <strong>Current behavior</strong>
+                <p>Players can adapt through shipping, trust management, and negotiation posture choices.</p>
+              </div>
+            </div>
+          </div>
+          <figure class="broker-shot broker-card">
+            <div class="broker-shot-frame">
+              <div>
+                <p class="broker-shot-slot">Screenshot Slot 05</p>
+                <p class="broker-shot-title">Daily Event / Challenge Overlay</p>
+                <p class="broker-shot-size">Capture moment: start-of-day modifier context</p>
+              </div>
+            </div>
+            <figcaption>
+              Capture event and challenge text near relevant stats to show clear strategic implications.
+            </figcaption>
+          </figure>
+        </article>
+
+        <article class="broker-section reveal">
+          <div class="broker-section-text broker-card">
+            <p class="broker-kicker">Challenge 05</p>
+            <h3>Telling the player why a day succeeded or failed</h3>
+            <p>
+              Another issue in early loops was weak post-run clarity. Players could see totals, but not the chain of
+              reasons that produced those totals. Without that feedback, improvement across days was slower.
+            </p>
+            <p>
+              Outcome summaries now emphasize the core drivers: profit quality, delays, disputes, trust movement, and
+              challenge completion. This tightens the learn loop and gives each new day a strategic purpose.
+            </p>
+            <div class="broker-split-notes">
+              <div class="broker-note">
+                <strong>Feedback design</strong>
+                <p>Post-day summary is treated as coaching, not just accounting.</p>
+              </div>
+              <div class="broker-note">
+                <strong>Why it matters</strong>
+                <p>Clear causality helps players iterate with intent instead of guessing.</p>
+              </div>
+            </div>
+          </div>
+          <figure class="broker-shot broker-card">
+            <div class="broker-shot-frame">
+              <div>
+                <p class="broker-shot-slot">Screenshot Slot 06</p>
+                <p class="broker-shot-title">End-Of-Day Outcome Summary</p>
+                <p class="broker-shot-size">Capture moment: after dispatch resolution</p>
+              </div>
+            </div>
+            <figcaption>
+              Show the complete wrap-up panel including delays, disputes, trust changes, and net profitability.
+            </figcaption>
+          </figure>
         </article>
       </section>
+
+      <section class="broker-roadmap broker-card reveal">
+        <h2>Current State And Next Milestones</h2>
+        <p style="margin: 0.65rem 0 0; color: var(--text-muted); max-width: 72ch; line-height: 1.68;">
+          The project is currently a coherent playable vertical slice. The next stage is depth: persistence, broader
+          event variety, and stronger multi-day consequences so player behavior compounds over time.
+        </p>
+
+        <div class="broker-roadmap-grid">
+          <article class="broker-roadmap-card">
+            <h3>Shipping now</h3>
+            <ul>
+              <li>End-to-end day loop from sourcing through dispatch completion.</li>
+              <li>Intent-sensitive personality negotiation with tactical outcomes.</li>
+              <li>Integrated 3D warehouse completion phase in the same flow.</li>
+            </ul>
+          </article>
+
+          <article class="broker-roadmap-card">
+            <h3>In progress</h3>
+            <ul>
+              <li>Balance tuning for risk, trust influence, and challenge pressure.</li>
+              <li>Expanded buyer and event content to increase replay variability.</li>
+              <li>Sharper telemetry for explaining deal failures in detail.</li>
+            </ul>
+          </article>
+
+          <article class="broker-roadmap-card">
+            <h3>Next major push</h3>
+            <ul>
+              <li>Persistent profile progression across cash, trust, and streaks.</li>
+              <li>Long-run reputation effects on supplier and client behavior.</li>
+              <li>Replace all screenshot slots with final in-game captures.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <p class="broker-footer-note">Local path: repos/DH4410__BrokerSIM</p>
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script>
-      AOS.init({
-        duration: 700,
-        easing: 'ease-in-out-cubic',
-        once: false,
-        mirror: true,
-        offset: 100
-      });
+      (function () {
+        const targets = document.querySelectorAll(".reveal");
+
+        if (!("IntersectionObserver" in window)) {
+          targets.forEach((target) => target.classList.add("is-visible"));
+          return;
+        }
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.14 }
+        );
+
+        targets.forEach((target) => observer.observe(target));
+      })();
     </script>
-    <script src="../data/projects.js"></script>
-    <script src="../scripts/project.js"></script>
   </body>
 </html>
