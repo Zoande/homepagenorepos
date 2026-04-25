@@ -16,8 +16,62 @@
         box-sizing: border-box;
       }
 
+      html {
+        scroll-behavior: smooth;
+      }
+
       body {
         font-family: "Space Grotesk", "Sora", sans-serif;
+        line-height: 1.55;
+        color: var(--text-dark);
+      }
+
+      .broker-fx {
+        position: fixed;
+        border-radius: 999px;
+        filter: blur(55px);
+        z-index: -1;
+        pointer-events: none;
+        opacity: 0.3;
+        animation: brokerFloat 17s ease-in-out infinite;
+      }
+
+      .broker-fx-blue {
+        width: 320px;
+        height: 320px;
+        background: radial-gradient(circle at center, rgba(59, 130, 246, 0.32), rgba(59, 130, 246, 0));
+        top: 120px;
+        left: -80px;
+      }
+
+      .broker-fx-purple {
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle at center, rgba(139, 92, 246, 0.26), rgba(139, 92, 246, 0));
+        right: -80px;
+        top: 280px;
+        animation-delay: -5s;
+      }
+
+      .broker-fx-amber {
+        width: 260px;
+        height: 260px;
+        background: radial-gradient(circle at center, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0));
+        bottom: 60px;
+        left: 35%;
+        animation-delay: -9s;
+      }
+
+      @keyframes brokerFloat {
+        0% {
+          transform: translateY(0) translateX(0);
+        }
+        50% {
+          transform: translateY(-24px) translateX(12px);
+        }
+        100% {
+          transform: translateY(0) translateX(0);
+        }
       }
 
       .broker-page {
@@ -40,11 +94,67 @@
         text-decoration: underline;
       }
 
+      .broker-reading-rail {
+        padding: 1rem 1.2rem;
+        display: grid;
+        gap: 0.65rem;
+      }
+
+      .broker-reading-label {
+        margin: 0;
+        color: var(--color-blue);
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        font-size: 0.76rem;
+        font-weight: 800;
+      }
+
+      .broker-rail-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.55rem;
+      }
+
+      .broker-rail-links a {
+        text-decoration: none;
+        color: var(--text-dark);
+        border: 1px solid #dce6f5;
+        background: linear-gradient(180deg, #ffffff 0%, #f6fafe 100%);
+        padding: 0.45rem 0.72rem;
+        border-radius: 999px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        transition: transform 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+      }
+
+      .broker-rail-links a:hover {
+        transform: translateY(-2px);
+        border-color: var(--color-blue);
+        color: var(--color-blue);
+      }
+
       .broker-card {
         background: white;
         border: 1px solid #f1f5f9;
         border-radius: 28px;
         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+      }
+
+      .broker-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(145deg, rgba(59, 130, 246, 0.06), rgba(59, 130, 246, 0) 44%);
+        pointer-events: none;
+      }
+
+      .broker-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+        border-color: #d9e7ff;
       }
 
       .broker-hero {
@@ -52,6 +162,10 @@
         grid-template-columns: 1.2fr 0.9fr;
         gap: 1.6rem;
         padding: 2rem;
+        background:
+          radial-gradient(circle at 18% -20%, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0) 50%),
+          radial-gradient(circle at 92% 115%, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0) 48%),
+          #ffffff;
       }
 
       .broker-hero-meta {
@@ -90,12 +204,18 @@
       .broker-chip {
         padding: 0.55rem 0.9rem;
         border-radius: 12px;
-        background: #f8fafc;
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
         border: 1px solid #e2e8f0;
         font-weight: 800;
         font-size: 0.82rem;
         color: var(--text-dark);
         white-space: nowrap;
+        transition: border-color 0.25s ease, transform 0.25s ease;
+      }
+
+      .broker-chip:hover {
+        border-color: #c9defe;
+        transform: translateY(-2px);
       }
 
       .broker-actions {
@@ -111,7 +231,7 @@
       .broker-quick-facts {
         border-radius: 22px;
         border: 1px solid #e2e8f0;
-        background: #f8fbff;
+        background: linear-gradient(180deg, #fbfdff 0%, #f4f9ff 100%);
         padding: 1rem;
       }
 
@@ -130,8 +250,13 @@
       .broker-fact {
         border: 1px solid #dbe9fb;
         border-radius: 14px;
-        background: white;
+        background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
         padding: 0.72rem;
+        transition: border-color 0.25s ease;
+      }
+
+      .broker-fact:hover {
+        border-color: #bfd9ff;
       }
 
       .broker-fact strong {
@@ -153,6 +278,13 @@
         border-radius: 18px;
         overflow: hidden;
         background: white;
+        transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+      }
+
+      .broker-shot:hover {
+        transform: translateY(-4px);
+        border-color: #c9defe;
+        box-shadow: 0 12px 34px rgba(37, 99, 235, 0.12);
       }
 
       .broker-shot-frame {
@@ -172,6 +304,24 @@
         place-items: center;
         text-align: center;
         padding: 0.8rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .broker-shot-frame::after {
+        content: "";
+        position: absolute;
+        inset: -40%;
+        background: linear-gradient(120deg, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.45) 50%, rgba(255, 255, 255, 0) 70%);
+        transform: translateX(-62%) rotate(8deg);
+        animation: shotSweep 8s linear infinite;
+        pointer-events: none;
+      }
+
+      @keyframes shotSweep {
+        to {
+          transform: translateX(62%) rotate(8deg);
+        }
       }
 
       .broker-shot-frame p {
@@ -232,6 +382,12 @@
         border-radius: 16px;
         background: #fbfdff;
         padding: 0.85rem;
+        transition: transform 0.28s ease, border-color 0.28s ease;
+      }
+
+      .broker-flow-step:hover {
+        transform: translateY(-3px);
+        border-color: #bfd9ff;
       }
 
       .broker-flow-step .step-label {
@@ -258,6 +414,17 @@
       .broker-story {
         display: grid;
         gap: 1.2rem;
+        position: relative;
+      }
+
+      .broker-story::before {
+        content: "";
+        position: absolute;
+        left: 10px;
+        top: 14px;
+        bottom: 14px;
+        width: 2px;
+        background: linear-gradient(180deg, rgba(59, 130, 246, 0.45), rgba(139, 92, 246, 0.4), rgba(245, 158, 11, 0.35));
       }
 
       .broker-section {
@@ -265,6 +432,22 @@
         grid-template-columns: 1.25fr 0.95fr;
         gap: 1.1rem;
         align-items: stretch;
+        position: relative;
+        padding-left: 1.35rem;
+      }
+
+      .broker-section::before {
+        content: "";
+        position: absolute;
+        left: 4px;
+        top: 1.4rem;
+        width: 14px;
+        height: 14px;
+        border-radius: 999px;
+        border: 2px solid #ffffff;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        background: var(--color-blue);
+        z-index: 2;
       }
 
       .broker-section.reverse {
@@ -281,6 +464,21 @@
 
       .broker-section-text {
         padding: 1.35rem;
+        transition: transform 0.3s ease;
+      }
+
+      .broker-section:hover .broker-section-text {
+        transform: translateY(-2px);
+      }
+
+      .broker-story .broker-section:nth-child(odd) .broker-section-text {
+        background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+        border-color: #dceafe;
+      }
+
+      .broker-story .broker-section:nth-child(even) .broker-section-text {
+        background: linear-gradient(180deg, #ffffff 0%, #faf7ff 100%);
+        border-color: #e6dcff;
       }
 
       .broker-kicker {
@@ -290,6 +488,13 @@
         letter-spacing: 0.08em;
         font-size: 0.75rem;
         font-weight: 800;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        border: 1px solid #d3e5ff;
+        background: #eef5ff;
+        border-radius: 999px;
+        padding: 0.28rem 0.62rem;
       }
 
       .broker-section h3 {
@@ -316,7 +521,7 @@
         border: 1px solid #e2e8f0;
         border-radius: 14px;
         padding: 0.74rem;
-        background: #f8fbff;
+        background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
       }
 
       .broker-note strong {
@@ -337,6 +542,9 @@
 
       .broker-roadmap {
         padding: 1.4rem;
+        background:
+          radial-gradient(circle at 90% 10%, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0) 40%),
+          #ffffff;
       }
 
       .broker-roadmap-grid {
@@ -350,8 +558,14 @@
         flex: 1 1 250px;
         border: 1px solid #e2e8f0;
         border-radius: 16px;
-        background: #fbfdff;
+        background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
         padding: 0.88rem;
+        transition: transform 0.28s ease, border-color 0.28s ease;
+      }
+
+      .broker-roadmap-card:hover {
+        transform: translateY(-3px);
+        border-color: #bfd9ff;
       }
 
       .broker-roadmap-card h3 {
@@ -394,6 +608,15 @@
           grid-template-columns: 1fr;
         }
 
+        .broker-story::before,
+        .broker-section::before {
+          display: none;
+        }
+
+        .broker-section {
+          padding-left: 0;
+        }
+
         .broker-section.reverse .broker-section-text,
         .broker-section.reverse .broker-shot {
           order: initial;
@@ -410,7 +633,12 @@
           padding: 0 1rem;
         }
 
+        .broker-fx {
+          opacity: 0.2;
+        }
+
         .broker-hero,
+        .broker-reading-rail,
         .broker-flow,
         .broker-section-text,
         .broker-roadmap {
@@ -437,6 +665,11 @@
           transform: none;
           opacity: 1;
         }
+
+        .broker-fx,
+        .broker-shot-frame::after {
+          animation: none;
+        }
       }
     </style>
   </head>
@@ -453,8 +686,24 @@
       </div>
     </nav>
 
+    <div class="broker-fx broker-fx-blue" aria-hidden="true"></div>
+    <div class="broker-fx broker-fx-purple" aria-hidden="true"></div>
+    <div class="broker-fx broker-fx-amber" aria-hidden="true"></div>
+
     <main class="broker-page">
       <a class="broker-back-link" href="../index.html#projects">&larr; Back to all projects</a>
+
+      <section class="broker-reading-rail broker-card reveal">
+        <p class="broker-reading-label">Story Path</p>
+        <div class="broker-rail-links">
+          <a href="#chapter-1">01 Sourcing Risk</a>
+          <a href="#chapter-2">02 Dialogue System</a>
+          <a href="#chapter-3">03 2D To 3D Flow</a>
+          <a href="#chapter-4">04 Event Fairness</a>
+          <a href="#chapter-5">05 Outcome Clarity</a>
+          <a href="#roadmap">Next Milestones</a>
+        </div>
+      </section>
 
       <section class="broker-hero broker-card reveal">
         <article>
@@ -477,7 +726,7 @@
           </div>
 
           <div class="broker-actions">
-            <a class="button" href="../play/dh-brokersim/" target="_blank" rel="noopener noreferrer">Play Project</a>
+            <a class="button" href="https://broker-sim-beige.vercel.app/" target="_blank" rel="noopener noreferrer">Play Project</a>
             <a class="button ghost" href="https://github.com/DH4410/BrokerSIM" target="_blank" rel="noopener noreferrer"
               >Open GitHub Repo</a
             >
@@ -542,7 +791,7 @@
       </section>
 
       <section class="broker-story">
-        <article class="broker-section reveal">
+        <article class="broker-section reveal" id="chapter-1">
           <div class="broker-section-text broker-card">
             <p class="broker-kicker">Challenge 01</p>
             <h3>Making sourcing decisions feel meaningful, not random</h3>
@@ -580,7 +829,7 @@
           </figure>
         </article>
 
-        <article class="broker-section reverse reveal">
+        <article class="broker-section reverse reveal" id="chapter-2">
           <div class="broker-section-text broker-card">
             <p class="broker-kicker">Challenge 02</p>
             <h3>Avoiding robotic negotiation responses</h3>
@@ -618,7 +867,7 @@
           </figure>
         </article>
 
-        <article class="broker-section reveal">
+        <article class="broker-section reveal" id="chapter-3">
           <div class="broker-section-text broker-card">
             <p class="broker-kicker">Challenge 03</p>
             <h3>Connecting desk strategy to physical fulfillment</h3>
@@ -655,7 +904,7 @@
           </figure>
         </article>
 
-        <article class="broker-section reverse reveal">
+        <article class="broker-section reverse reveal" id="chapter-4">
           <div class="broker-section-text broker-card">
             <p class="broker-kicker">Challenge 04</p>
             <h3>Keeping outcomes dynamic without making them feel unfair</h3>
@@ -693,7 +942,7 @@
           </figure>
         </article>
 
-        <article class="broker-section reveal">
+        <article class="broker-section reveal" id="chapter-5">
           <div class="broker-section-text broker-card">
             <p class="broker-kicker">Challenge 05</p>
             <h3>Telling the player why a day succeeded or failed</h3>
@@ -731,7 +980,7 @@
         </article>
       </section>
 
-      <section class="broker-roadmap broker-card reveal">
+      <section class="broker-roadmap broker-card reveal" id="roadmap">
         <h2>Current State And Next Milestones</h2>
         <p style="margin: 0.65rem 0 0; color: var(--text-muted); max-width: 72ch; line-height: 1.68;">
           The project is currently a coherent playable vertical slice. The next stage is depth: persistence, broader
