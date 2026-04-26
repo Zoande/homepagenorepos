@@ -394,7 +394,7 @@
             listEl.innerHTML = count === 0 ? '<p style="color:#94a3b8; font-size:0.8rem;">Pick 6 subjects</p>' : 
                 Array.from(selection.entries()).map(([id, lvl]) => {
                     const name = document.querySelector(`[data-subject="${id}"] .subject-name`).innerText;
-                    return `<div style="font-size:0.85rem; margin-bottom:4px;">${name} <span style="color:#64748b">— ${lvl}</span></div>`;
+                    return `<div style="font-size:0.85rem; margin-bottom:4px;">${name} <span style="color:#64748b">- ${lvl}</span></div>`;
                 }).join('');
 
             const groups = new Set();
