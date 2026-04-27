@@ -2,7 +2,7 @@ window.PROJECTS = [
   {
     id: "zoande-brokersim",
     title: "BrokerSIM",
-    owner: "Zoande",
+    owner: "Pablo",
     repoUrl: "https://github.com/Zoande/BrokerSIM",
     localPath: "repos/Zoande__BrokerSIM",
     tech: ["TypeScript", "Vite", "Browser Game"],
@@ -25,7 +25,7 @@ window.PROJECTS = [
   {
     id: "zoande-ahhh",
     title: "Space Strategy Prototype (ahhh)",
-    owner: "Zoande",
+    owner: "Pablo",
     repoUrl: "https://github.com/Zoande/ahhh",
     localPath: "repos/Zoande__ahhh",
     tech: ["TypeScript", "Vite", "Babylon.js"],
@@ -48,7 +48,7 @@ window.PROJECTS = [
   {
     id: "zoande-onlineagent",
     title: "onlineagent",
-    owner: "Zoande",
+    owner: "Pablo",
     repoUrl: "https://github.com/Zoande/onlineagent",
     localPath: "repos/Zoande__onlineagent",
     tech: ["Node.js", "Express", "WebSocket", "Dashboard UI"],
@@ -71,7 +71,7 @@ window.PROJECTS = [
   {
     id: "zoande-call-of-idk",
     title: "Call-of-idk",
-    owner: "Zoande",
+    owner: "Pablo",
     repoUrl: "https://github.com/Zoande/Call-of-idk",
     localPath: "repos/Zoande__Call-of-idk",
     tech: ["TypeScript", "Vite", "PixiJS", "Map Pipeline"],
@@ -94,7 +94,7 @@ window.PROJECTS = [
   {
     id: "dh-polymarket-bot",
     title: "Polymarket-Bot",
-    owner: "DH4410",
+    owner: "Dima",
     repoUrl: "https://github.com/DH4410/Polymarket-Bot",
     localPath: "repos/DH4410__Polymarket-Bot",
     tech: ["React", "Vite", "JavaScript"],
@@ -117,7 +117,7 @@ window.PROJECTS = [
   {
     id: "dh-typing-platformer",
     title: "typing-platformer",
-    owner: "DH4410",
+    owner: "Dima",
     repoUrl: "https://github.com/DH4410/typing-platformer",
     localPath: "repos/DH4410__typing-platformer",
     tech: ["Next.js", "TypeScript", "Canvas"],
@@ -140,7 +140,7 @@ window.PROJECTS = [
   {
     id: "dh-brokersim",
     title: "BrokerSIM",
-    owner: "DH4410",
+    owner: "Dima",
     repoUrl: "https://github.com/DH4410/BrokerSIM",
     localPath: "repos/DH4410__BrokerSIM",
     tech: ["React 19", "TypeScript", "Vite", "Three.js", "WebGL", "GLTF Assets"],
@@ -173,7 +173,7 @@ window.PROJECTS = [
   {
     id: "dh-citybuilder",
     title: "CityBuilder",
-    owner: "DH4410",
+    owner: "Dima",
     repoUrl: "https://github.com/DH4410/CityBuilder",
     localPath: "repos/DH4410__CityBuilder",
     tech: ["Vanilla JS", "HTML5 Canvas", "CSS"],
@@ -196,7 +196,7 @@ window.PROJECTS = [
   {
     id: "dh-task-sorter-app",
     title: "task-sorter-app",
-    owner: "DH4410",
+    owner: "Dima",
     repoUrl: "https://github.com/DH4410/task-sorter-app",
     localPath: "repos/DH4410__task-sorter-app",
     tech: ["Next.js", "TypeScript", "Tailwind", "shadcn/ui"],
@@ -219,7 +219,7 @@ window.PROJECTS = [
   {
     id: "dh-isrlo-ibdp-subject",
     title: "ISRLO-IBDP-subject",
-    owner: "DH4410",
+    owner: "Dima",
     repoUrl: "https://github.com/DH4410/ISRLO-IBDP-subject",
     localPath: "repos/DH4410__ISRLO-IBDP-subject",
     tech: ["HTML", "CSS", "Vanilla JS"],
@@ -242,7 +242,7 @@ window.PROJECTS = [
   {
     id: "dh-sticky-notes-app",
     title: "sticky-notes-app",
-    owner: "DH4410",
+    owner: "Dima",
     repoUrl: "https://github.com/DH4410/sticky-notes-app",
     localPath: "repos/DH4410__sticky-notes-app",
     tech: ["Next.js", "TypeScript", "Tailwind"],
@@ -265,7 +265,7 @@ window.PROJECTS = [
   {
     id: "dh-studymaster",
     title: "studymaster",
-    owner: "DH4410",
+    owner: "Dima",
     repoUrl: "https://github.com/DH4410/studymaster",
     localPath: "repos/DH4410__studymaster",
     tech: ["React", "Vite", "Tailwind"],
@@ -288,7 +288,7 @@ window.PROJECTS = [
   {
     id: "dh-swapspot",
     title: "Swapspot",
-    owner: "DH4410",
+    owner: "Dima",
     repoUrl: "https://github.com/DH4410/Swapspot",
     localPath: "repos/DH4410__Swapspot",
     tech: ["React", "TypeScript", "Vite", "Tailwind"],
@@ -306,6 +306,73 @@ window.PROJECTS = [
       "Add session persistence and leaderboard storage.",
       "Finalize balancing across higher difficulty tiers.",
       "Add touch-first controls and QA for mobile."
+    ]
+  },
+  {
+    id: "dima-tab-sorter-pro",
+    title: "Tab Sorter Pro",
+    owner: "Dima",
+    extUrl: "https://microsoftedge.microsoft.com/addons/detail/tab-sorter-pro/knijhblmdgkokapjnghamplmlpmiohpm",
+    tech: ["Browser Extension", "TypeScript", "Edge"],
+    stage: "Published & Live",
+    summary:
+      "Powerful Microsoft Edge extension for smart tab management with automatic sorting, grouping, and productivity features used by 64+ active users across 22 countries.",
+    details: [
+      "Automatic tab organization and intelligent grouping system.",
+      "One-click sorting and cleaning for cluttered workspaces.",
+      "Active user base spanning Australia, Brazil, Canada, China, Czechia, France, Germany, Hong Kong SAR, Hungary, India, Indonesia, Japan, Korea, Malaysia, Netherlands, Philippines, Singapore, Sweden, Switzerland, United Kingdom, United States, and Vietnam.",
+      "125+ total installs with consistent 4+ star ratings.",
+      "Lightweight, fast extension that integrates seamlessly with Edge browser workflows."
+    ],
+    highlights: {
+      activeUsers: "64+",
+      totalInstalls: "125+",
+      countries: 22,
+      countryList: "Australia, Brazil, Canada, China, Czechia, France, Germany, Hong Kong SAR, Hungary, India, Indonesia, Japan, Korea, Malaysia, Netherlands, Philippines, Singapore, Sweden, Switzerland, United Kingdom, United States, Vietnam"
+    },
+    status:
+      "Production-ready extension in Microsoft Edge Add-ons store with continuous user growth and international reach.",
+    features: [
+      "Smart Auto-Sort: Intelligently organize tabs by domain and purpose",
+      "Group Management: Create and manage tab groups with custom colors",
+      "One-Click Cleanup: Remove duplicates and inactive tabs instantly",
+      "Tab Search: Quick find any tab across your browser session",
+      "Keyboard Shortcuts: Power user shortcuts for speed",
+      "Sync Across Devices: Keep your organization synchronized"
+    ]
+  },
+  {
+    id: "pablo-focus-blocker",
+    title: "Focus Blocker - DNR Redirect",
+    owner: "Pablo",
+    extUrl: "https://microsoftedge.microsoft.com/addons/detail/focus-blocker-dnr-redire/blbdfgcopalolnckkhfbdnnfpmaillpl",
+    tech: ["Browser Extension", "Declarative Net Request", "Edge"],
+    stage: "Published & Live",
+    summary:
+      "Privacy-focused Microsoft Edge extension that blocks distracting websites and redirects using Declarative Net Request with 50+ downloads and 113+ active installations across 22 countries.",
+    details: [
+      "Uses Microsoft Edge's Declarative Net Request API for efficient blocking.",
+      "Customizable blocklist with preset categories and custom rules.",
+      "Users across 22 countries benefit from distraction-free browsing.",
+      "Active in Australia, Brazil, Canada, China, Czechia, France, Germany, Hong Kong SAR, Hungary, India, Indonesia, Japan, Korea, Malaysia, Netherlands, Philippines, Singapore, Sweden, Switzerland, United Kingdom, United States, and Vietnam.",
+      "Privacy-first design with no data collection or tracking.",
+      "Lightweight implementation for minimal resource usage."
+    ],
+    highlights: {
+      downloads: "50+",
+      installations: "113+",
+      countries: 22,
+      countryList: "Australia, Brazil, Canada, China, Czechia, France, Germany, Hong Kong SAR, Hungary, India, Indonesia, Japan, Korea, Malaysia, Netherlands, Philippines, Singapore, Sweden, Switzerland, United Kingdom, United States, Vietnam"
+    },
+    status:
+      "Live and actively used across the globe with a growing international user base seeking privacy and focus.",
+    features: [
+      "Efficient Blocking: Uses Edge's Declarative Net Request for zero-lag performance",
+      "Customizable Rules: Create specific blocklists for work, study, or relaxation modes",
+      "Preset Categories: Pre-configured categories for social media, news, gaming, etc.",
+      "Redirect Support: Intelligently redirect blocked sites to focus pages",
+      "No Data Collection: Your browsing habits stay private",
+      "Cross-Device Sync: Sync your preferences across Windows, Mac, and Linux"
     ]
   }
 ];
