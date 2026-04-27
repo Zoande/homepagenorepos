@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Focus Blocker - DNR Redirect | EliteDevs Browser Extension</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+    <link rel="stylesheet" href="../styles-premium-light.css" />
+    <style>
+      body {
+        background: linear-gradient(-45deg, #f8f9fa, #eef2f5, #e0e7ee, #f3f0f5);
+        background-size: 400% 400%;
+        animation: gradientBG 15s ease infinite;
+      }
+
+      @keyframes gradientBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      .project-header {
+        min-height: 60vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 4rem 2rem;
+        background: linear-gradient(135deg, rgba(217, 118, 52, 0.1), rgba(139, 92, 246, 0.1));
+        position: relative;
+        overflow: hidden;
+      }
+
+      .project-header::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: 
+          linear-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
+        background-size: 40px 40px;
+        z-index: 1;
+      }
+
+      .project-header-content {
+        max-width: 900px;
+        z-index: 2;
+        position: relative;
+      }
+
+      .project-header h1 {
+        font-size: clamp(2.5rem, 8vw, 4rem);
+        font-weight: 800;
+        margin-bottom: 1rem;
+        background: linear-gradient(135deg, #D97634 0%, #8B5CF6 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .project-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 2rem;
+        margin: 3rem auto;
+        max-width: 800px;
+      }
+
+      .stat-badge {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(10px);
+        padding: 2rem 1.5rem;
+        border-radius: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.9);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+      }
+
+      .stat-badge .number {
+        font-size: 2.5rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, #D97634 0%, #8B5CF6 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .stat-badge .label {
+        font-size: 0.9rem;
+        color: #666;
+        margin-top: 0.5rem;
+        font-weight: 600;
+      }
+
+      .content-grid {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .section {
+        margin: 5rem 0;
+      }
+
+      .section h2 {
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        text-align: center;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin: 2rem 0;
+      }
+
+      .feature-card {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(10px);
+        padding: 2rem;
+        border-radius: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.9);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 40px rgba(217, 118, 52, 0.15);
+      }
+
+      .feature-card h3 {
+        margin-top: 0;
+        color: #D97634;
+        font-size: 1.3rem;
+      }
+
+      .countries-section {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(10px);
+        padding: 3rem;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.9);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+        margin: 3rem 0;
+      }
+
+      .countries-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+
+      .country-badge {
+        background: linear-gradient(135deg, #D97634, #8B5CF6);
+        color: white;
+        padding: 1rem;
+        border-radius: 10px;
+        text-align: center;
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
+
+      .cta-section {
+        text-align: center;
+        margin: 4rem 0;
+        padding: 3rem;
+        background: linear-gradient(135deg, rgba(217, 118, 52, 0.1), rgba(139, 92, 246, 0.1));
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.9);
+      }
+
+      .cta-button {
+        display: inline-block;
+        background: linear-gradient(135deg, #D97634, #8B5CF6);
+        color: white;
+        padding: 1rem 2.5rem;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 700;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        margin: 1rem;
+        border: none;
+        cursor: pointer;
+      }
+
+      .cta-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 40px rgba(217, 118, 52, 0.3);
+      }
+
+      .nav-back {
+        max-width: 1100px;
+        margin: 2rem auto;
+        padding: 0 2rem;
+      }
+
+      .nav-back a {
+        color: #D97634;
+        text-decoration: none;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .nav-back a:hover {
+        text-decoration: underline;
+      }
+
+      .highlight-box {
+        background: linear-gradient(135deg, rgba(217, 118, 52, 0.1), rgba(139, 92, 246, 0.1));
+        padding: 2rem;
+        border-radius: 15px;
+        border-left: 4px solid #D97634;
+        margin: 2rem 0;
+      }
+
+      .highlight-box p {
+        margin: 0;
+        font-size: 1.1rem;
+        line-height: 1.8;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="site-nav">
+      <div class="nav-container">
+        <a href="../index.html" class="nav-logo">ELITEDEVS</a>
+        <ul class="nav-menu">
+          <li class="nav-item"><a href="../index.html">Home</a></li>
+          <li class="nav-item"><a href="../index.html#projects">Projects</a></li>
+          <li class="nav-item"><a href="../about.html">About</a></li>
+          <li class="nav-item"><a href="../contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="nav-back">
+      <a href="../index.html#projects">← Back to Projects</a>
+    </div>
+
+    <!-- Header -->
+    <header class="project-header">
+      <div class="project-header-content" data-aos="fade-up">
+        <h1>Focus Blocker - DNR Redirect</h1>
+        <p style="font-size: 1.2rem; color: #666; margin: 1rem 0;">
+          Privacy-first website blocking using Edge's Declarative Net Request. Reclaim your focus.
+        </p>
+        
+        <div class="project-stats">
+          <div class="stat-badge">
+            <div class="number">50+</div>
+            <div class="label">Downloads</div>
+          </div>
+          <div class="stat-badge">
+            <div class="number">113+</div>
+            <div class="label">Active Installations</div>
+          </div>
+          <div class="stat-badge">
+            <div class="number">22</div>
+            <div class="label">Countries</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="content-grid">
+      <!-- Overview Section -->
+      <section class="section" data-aos="fade-up">
+        <h2>Overview</h2>
+        <p style="font-size: 1.1rem; line-height: 1.8; text-align: center; max-width: 800px; margin: 0 auto;">
+          Focus Blocker is a privacy-focused Microsoft Edge extension that helps you regain control of your browsing experience. Using Edge's efficient Declarative Net Request API, it blocks distracting websites with zero lag, no data collection, and no compromise on your privacy.
+        </p>
+        
+        <div class="highlight-box">
+          <p><strong>🎯 Why Focus Blocker?</strong> In a world of infinite distractions, maintaining focus is the ultimate competitive advantage. Focus Blocker makes it effortless.</p>
+        </div>
+      </section>
+
+      <!-- Privacy Section -->
+      <section class="section" data-aos="fade-up">
+        <h2>Privacy First</h2>
+        <div class="features-grid">
+          <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+            <h3>🔒 No Tracking</h3>
+            <p>We never collect, store, or analyze your browsing data. Your privacy is protected by design.</p>
+          </div>
+          <div class="feature-card" data-aos="fade-up" data-aos-delay="150">
+            <h3>⚡ Zero Latency</h3>
+            <p>Uses Edge's Declarative Net Request for instant blocking with minimal performance impact.</p>
+          </div>
+          <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+            <h3>🛡️ Local Only</h3>
+            <p>All settings are stored locally on your device. Nothing is transmitted to external servers.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features Section -->
+      <section class="section" data-aos="fade-up">
+        <h2>Powerful Features</h2>
+        <div class="features-grid">
+          <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+            <h3>📋 Customizable Rules</h3>
+            <p>Create specific blocklists for different contexts: work mode, study mode, or pure relaxation mode.</p>
+          </div>
+          <div class="feature-card" data-aos="fade-up" data-aos-delay="150">
+            <h3>🎨 Preset Categories</h3>
+            <p>Pre-configured blocklists for social media, news sites, gaming, and other distraction categories. One click to enable.</p>
+          </div>
+          <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+            <h3>🔄 Smart Redirects</h3>
+            <p>Intelligently redirect blocked sites to productive alternatives. Transform distraction into motivation.</p>
+          </div>
+          <div class="feature-card" data-aos="fade-up" data-aos-delay="250">
+            <h3>⏰ Schedule Blocking</h3>
+            <p>Set time-based blocking rules. Auto-enable focus mode during work hours, automatically disable during breaks.</p>
+          </div>
+          <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+            <h3>📊 No Analytics</h3>
+            <p>No telemetry, no tracking, no analytics. We literally cannot see what you're blocking or when.</p>
+          </div>
+          <div class="feature-card" data-aos="fade-up" data-aos-delay="350">
+            <h3>☁️ Cross-Device Sync</h3>
+            <p>Sync your blocklists across Windows, Mac, and Linux. Consistent focus everywhere you work.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Global Reach Section -->
+      <section class="section" data-aos="fade-up">
+        <h2>Global Community</h2>
+        <p style="text-align: center; font-size: 1.1rem; margin-bottom: 2rem;">
+          Join developers, students, and professionals in <strong>22 countries</strong> who've taken back control of their focus.
+        </p>
+        <div class="countries-section">
+          <div class="countries-grid">
+            <div class="country-badge">🇦🇺 Australia</div>
+            <div class="country-badge">🇧🇷 Brazil</div>
+            <div class="country-badge">🇨🇦 Canada</div>
+            <div class="country-badge">🇨🇳 China</div>
+            <div class="country-badge">🇨🇿 Czechia</div>
+            <div class="country-badge">🇫🇷 France</div>
+            <div class="country-badge">🇩🇪 Germany</div>
+            <div class="country-badge">🇭🇰 Hong Kong SAR</div>
+            <div class="country-badge">🇭🇺 Hungary</div>
+            <div class="country-badge">🇮🇳 India</div>
+            <div class="country-badge">🇮🇩 Indonesia</div>
+            <div class="country-badge">🇯🇵 Japan</div>
+            <div class="country-badge">🇰🇷 Korea</div>
+            <div class="country-badge">🇲🇾 Malaysia</div>
+            <div class="country-badge">🇳🇱 Netherlands</div>
+            <div class="country-badge">🇵🇭 Philippines</div>
+            <div class="country-badge">🇸🇬 Singapore</div>
+            <div class="country-badge">🇸🇪 Sweden</div>
+            <div class="country-badge">🇨🇭 Switzerland</div>
+            <div class="country-badge">🇬🇧 United Kingdom</div>
+            <div class="country-badge">🇺🇸 United States</div>
+            <div class="country-badge">🇻🇳 Vietnam</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Technical Section -->
+      <section class="section" data-aos="fade-up">
+        <h2>Built With Modern Technology</h2>
+        <p style="text-align: center; font-size: 1.1rem; margin-bottom: 2rem;">
+          Engineered for performance and privacy.
+        </p>
+        <div class="features-grid">
+          <div class="feature-card">
+            <h3>DNR API</h3>
+            <p>Microsoft Edge's Declarative Net Request for efficient, privacy-preserving blocking.</p>
+          </div>
+          <div class="feature-card">
+            <h3>Lightweight</h3>
+            <p>Minimal memory footprint. Doesn't slow down your browsing.</p>
+          </div>
+          <div class="feature-card">
+            <h3>Zero Cloud</h3>
+            <p>Everything runs locally. No external dependencies or cloud services.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Use Cases Section -->
+      <section class="section" data-aos="fade-up">
+        <h2>Perfect For</h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <h3>👨‍💻 Developers</h3>
+            <p>Stay in the flow. Block news, social media, and other distractions while maintaining focus on code.</p>
+          </div>
+          <div class="feature-card">
+            <h3>📚 Students</h3>
+            <p>Create study modes that block entertainment sites during exam prep and project deadlines.</p>
+          </div>
+          <div class="feature-card">
+            <h3>🏢 Professionals</h3>
+            <p>Maximize productivity during work hours. Automatically reclaim focus during peak productivity times.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="cta-section" data-aos="fade-up">
+        <h2 style="margin-top: 0;">Reclaim Your Focus</h2>
+        <p style="font-size: 1.1rem; margin: 1rem 0;">
+          Join 113+ active users worldwide. Free to download and completely privacy-respecting.
+        </p>
+        <a href="https://microsoftedge.microsoft.com/addons/detail/focus-blocker-dnr-redire/blbdfgcopalolnckkhfbdnnfpmaillpl" target="_blank" class="cta-button">
+          Install on Microsoft Edge
+        </a>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-content">
+        <div class="footer-grid">
+          <div class="footer-column">
+            <h4>EliteDevs</h4>
+            <p>Two developers building high-performance software.</p>
+          </div>
+          <div class="footer-column">
+            <h4>Quick Links</h4>
+            <a href="../index.html">Home</a>
+            <a href="../index.html#projects">Projects</a>
+            <a href="../about.html">About</a>
+            <a href="../contact.html">Contact</a>
+          </div>
+          <div class="footer-column">
+            <h4>Connect</h4>
+            <a href="https://github.com" target="_blank">GitHub</a>
+            <a href="https://twitter.com" target="_blank">Twitter</a>
+            <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 EliteDevs. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 600,
+        easing: 'ease-out-cubic',
+        once: true,
+        offset: 50
+      });
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const links = document.querySelectorAll('a[href]');
+        links.forEach(link => {
+          link.addEventListener('click', function(e) {
+            const target = this.getAttribute('href');
+            if(target && !target.startsWith('#') && target.indexOf('http') === -1 && target.indexOf('mailto') === -1) {
+              e.preventDefault();
+              document.body.style.transition = 'opacity 0.3s ease-out';
+              document.body.style.opacity = '0';
+              setTimeout(() => {
+                window.location.href = target;
+              }, 300);
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
