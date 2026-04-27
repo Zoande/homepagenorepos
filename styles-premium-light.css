@@ -51,38 +51,54 @@ body {
   animation-delay: 0.8s;
 }
 
-.loading-content {
-  text-align: center;
+.loader {
   position: relative;
+  width: 80px;
+  height: 80px;
 }
 
-.loading-circle {
-  width: 60px;
-  height: 60px;
-  border: 3px solid #f0f0f0;
-  border-top: 3px solid #3b82f6;
+.orbit {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 2px solid;
   border-radius: 50%;
-  margin: 0 auto 2rem;
-  animation: spinLoading 1s linear infinite;
+  animation: rotateOrbit 3s linear infinite;
 }
 
-.loading-text {
-  font-size: 1.8rem;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  color: #3b82f6;
-  margin: 0;
-  text-transform: uppercase;
-  animation: pulseLoading 1.5s ease-in-out infinite;
+.orbit-1 {
+  border-color: #3b82f6;
+  animation-duration: 3s;
 }
 
-@keyframes spinLoading {
-  to { transform: rotate(360deg); }
+.orbit-2 {
+  border-color: #8b5cf6;
+  animation-duration: 4s;
+  animation-direction: reverse;
+  opacity: 0.7;
+  width: 70%;
+  height: 70%;
+  top: 15%;
+  left: 15%;
 }
 
-@keyframes pulseLoading {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.6; }
+.orbit-3 {
+  border-color: #f59e0b;
+  animation-duration: 5s;
+  opacity: 0.5;
+  width: 50%;
+  height: 50%;
+  top: 25%;
+  left: 25%;
+}
+
+@keyframes rotateOrbit {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes fadeOutLoading {
