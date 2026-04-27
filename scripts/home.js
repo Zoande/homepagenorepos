@@ -1,8 +1,6 @@
 (function () {
   const projects = window.PROJECTS || [];
   const grid = document.getElementById("project-grid");
-  const totalEl = document.getElementById("project-total");
-  const ownersEl = document.getElementById("project-owners");
 
   if (!grid) {
     return;
@@ -19,14 +17,6 @@
   ];
   
   const displayedProjects = projects.filter(p => featuredIds.includes(p.id));
-  const owners = Array.from(new Set(projects.map((p) => p.owner)));
-  
-  if (totalEl) {
-    totalEl.textContent = String(projects.length);
-  }
-  if (ownersEl) {
-    ownersEl.textContent = String(owners.length);
-  }
 
   grid.innerHTML = displayedProjects
     .map((project, index) => {

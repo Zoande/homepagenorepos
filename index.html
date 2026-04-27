@@ -17,18 +17,26 @@
   </head>
   <body class="home-page">
 
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+      <div class="loading-content">
+        <div class="loading-circle"></div>
+        <p class="loading-text">EliteDevs</p>
+      </div>
+    </div>
+
     <!-- 3D Background Canvas -->
     <canvas id="webgl-canvas"></canvas>
 
     <!-- Navigation -->
     <nav class="site-nav">
       <div class="nav-container">
-        <a href="index.html" class="nav-logo">ELITEDEVS</a>
+        <a href="/" class="nav-logo">ELITEDEVS</a>
         <ul class="nav-menu">
-          <li class="nav-item"><a href="index.html" class="active">Home</a></li>
+          <li class="nav-item"><a href="/" class="active">Home</a></li>
           <li class="nav-item"><a href="#projects">Projects</a></li>
-          <li class="nav-item"><a href="about.html">About</a></li>
-          <li class="nav-item"><a href="contact.html">Contact</a></li>
+          <li class="nav-item"><a href="/about.html">About</a></li>
+          <li class="nav-item"><a href="/contact.html">Contact</a></li>
         </ul>
       </div>
     </nav>
@@ -42,7 +50,7 @@
           We build custom software that works great. Whether it's websites, games, trading tools, or anything else, we make solutions that fit your needs. We use proven, reliable technologies to create products that really work.
         <div class="hero-actions fade-up-4">
           <a href="#projects" class="button">Explore Projects</a>
-          <a href="about.html" class="button ghost">Meet the Team</a>
+          <a href="/about.html" class="button ghost">Meet the Team</a>
         </div>
       </div>
     </header>
@@ -51,16 +59,16 @@
       <!-- Stats -->
       <section class="stats-container" data-aos="fade-up">
         <div class="glass-card stat-box">
-          <span id="project-total">15</span>
-          <p>Active Projects</p>
+          <span>150+</span>
+          <p>Satisfied Clients</p>
         </div>
         <div class="glass-card stat-box">
-          <span id="project-owners">2</span>
-          <p>Lead Builders</p>
+          <span>20+</span>
+          <p>Countries Served</p>
         </div>
         <div class="glass-card stat-box">
           <span>∞</span>
-          <p>Potential</p>
+          <p>Possibilities</p>
         </div>
       </section>
 
@@ -132,7 +140,7 @@
           <h2>Ready to Collaborate?</h2>
           <p>Explore our portfolio, get inspired by our work, and let's build something extraordinary together.</p>
           <div class="cta-actions">
-            <a href="contact.html" class="button">Start a Project</a>
+            <a href="/contact.html" class="button">Start a Project</a>
           </div>
         </div>
       </section>
@@ -147,10 +155,10 @@
           </div>
           <div class="footer-column">
             <h4>Quick Links</h4>
-            <a href="index.html">Home</a>
-            <a href="#projects">Projects</a>
-            <a href="about.html">About</a>
-            <a href="contact.html">Contact</a>
+            <a href="/">Home</a>
+            <a href="/#projects">Projects</a>
+            <a href="/about.html">About</a>
+            <a href="/contact.html">Contact</a>
           </div>
           <div class="footer-column">
             <h4>Connect</h4>
@@ -343,6 +351,15 @@ const sphereMaterial = new THREE.MeshBasicMaterial({
         renderer.render(scene, camera);
       }
       animate();
+    </script>
+
+    <!-- Loading Screen Script -->
+    <script>
+      // The loading screen will automatically fade out and hide after 1.8 seconds
+      // (0.8s delay + 1s animation) thanks to the CSS animation
+      window.addEventListener('load', () => {
+        // Optional: you could add additional logic here if needed
+      });
     </script>
   </body>
 </html>

@@ -35,6 +35,67 @@ body {
   background: radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.1) 0%, transparent 75%);
 }
 
+/* ─── LOADING SCREEN ──────────────────────────────────────────────────── */
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeOutLoading 1.2s ease-in-out forwards;
+  animation-delay: 0.8s;
+}
+
+.loading-content {
+  text-align: center;
+  position: relative;
+}
+
+.loading-circle {
+  width: 60px;
+  height: 60px;
+  border: 3px solid #f0f0f0;
+  border-top: 3px solid #3b82f6;
+  border-radius: 50%;
+  margin: 0 auto 2rem;
+  animation: spinLoading 1s linear infinite;
+}
+
+.loading-text {
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: #3b82f6;
+  margin: 0;
+  text-transform: uppercase;
+  animation: pulseLoading 1.5s ease-in-out infinite;
+}
+
+@keyframes spinLoading {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulseLoading {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes fadeOutLoading {
+  0% {
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
 /* ─── 2. NAVIGATION ────────────────────────────────────────────────────── */
 .site-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -56,8 +117,8 @@ body {
 
 /* ─── 3. HERO SECTION (MICRO-GLASS GHOST SQUARE) ────────────────────────── */
 .site-header {
-  min-height: 95vh; display: flex; align-items: center; justify-content: center;
-  padding: 8rem 2rem 2rem; text-align: center;
+  min-height: 65vh; display: flex; align-items: center; justify-content: center;
+  padding: 6rem 2rem 1rem; text-align: center;
 }
 
 .hero-content { 
@@ -66,16 +127,16 @@ body {
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 24px; padding: 5rem 3.5rem; 
+  border-radius: 24px; padding: 3.5rem 2.5rem; 
 }
 
 .hero-content h1 {
-  font-size: clamp(3.5rem, 7.5vw, 5.2rem); line-height: 1.05; font-weight: 800;
-  letter-spacing: -0.04em; color: var(--text-dark); margin: 0 0 1.8rem;
+  font-size: clamp(2.8rem, 6vw, 4.2rem); line-height: 1.1; font-weight: 800;
+  letter-spacing: -0.04em; color: var(--text-dark); margin: 0 0 1.2rem;
 }
 .hero-content .lead {
-  font-size: 1.25rem; line-height: 1.7; color: var(--text-dark);
-  max-width: 680px; margin: 0 auto 3rem; font-weight: 500;
+  font-size: 1.05rem; line-height: 1.6; color: var(--text-dark);
+  max-width: 680px; margin: 0 auto 2rem; font-weight: 500;
 }
 
 .fade-up-1 { animation: introFade 1s var(--ease-smooth) 0.1s both; }
